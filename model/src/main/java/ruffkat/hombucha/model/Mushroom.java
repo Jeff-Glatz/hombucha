@@ -7,7 +7,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Date;
 
 @Entity
 public class Mushroom implements Serializable, Sourced {
@@ -73,5 +72,9 @@ public class Mushroom implements Serializable, Sourced {
         result = 31 * result + (source != null ? source.hashCode() : 0);
         result = 31 * result + (received != null ? received.hashCode() : 0);
         return result;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

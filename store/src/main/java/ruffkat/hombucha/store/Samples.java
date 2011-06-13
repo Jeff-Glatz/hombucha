@@ -15,5 +15,5 @@ public interface Samples {
     Sample<Volume> volume(Ferment ferment);
     Sample<Temperature> temperature(Ferment ferment);
     <Q extends Quantity> Sample<Q> load(Long id);
-    void delete(Long id);
+    <Q extends Quantity> void delete(Sample<Q> sample);
 }

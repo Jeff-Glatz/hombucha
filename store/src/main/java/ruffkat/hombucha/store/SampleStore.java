@@ -51,7 +51,7 @@ public class SampleStore extends AbstractStore implements Samples {
     }
 
     @Override
-    public void delete(Long id) {
-        entityManager.remove(id);
+    public <Q extends Quantity> void delete(Sample<Q> sample) {
+        entityManager.remove(sample);
     }
 }

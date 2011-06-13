@@ -38,23 +38,13 @@
         </property>
     </bean>
 
-    <tx:advice id="transactionManagerAdvice" transaction-manager="transactionManager">
-        <tx:attributes>
-            <tx:method name="*" propagation="REQUIRED"/>
-        </tx:attributes>
-    </tx:advice>
-
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <bean id="samples"
           class="ruffkat.hombucha.store.SampleStore"/>
 
-    <aop:config>
-        <aop:pointcut id="samplesAop"
-                      expression="execution(* ruffkat.hombucha.store.SampleStore.*(..))"/>
-        <aop:advisor advice-ref="transactionManagerAdvice"
-                     pointcut-ref="samplesAop"/>
-    </aop:config>
+    <bean id="mushrooms"
+          class="ruffkat.hombucha.store.MushroomStore"/>
 
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 
