@@ -2,14 +2,22 @@ package ruffkat.hombucha.model;
 
 import javax.measure.Measure;
 import javax.measure.quantity.Volume;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 
+@Entity
 public class Reactor implements Serializable, Sourced {
+    @Id
+    @GeneratedValue
     private Long id;
     private String name;
+    @Transient
     private Source source;
-    private Date received;
+    private Calendar received;
     private Measure<Volume> volume;
 
     public String getName() {
@@ -28,11 +36,11 @@ public class Reactor implements Serializable, Sourced {
         this.source = source;
     }
 
-    public Date getReceived() {
+    public Calendar getReceived() {
         return received;
     }
 
-    public void setReceived(Date received) {
+    public void setReceived(Calendar received) {
         this.received = received;
     }
 

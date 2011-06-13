@@ -2,10 +2,16 @@ package ruffkat.hombucha.model;
 
 import javax.measure.Measure;
 import javax.measure.quantity.Quantity;
+import javax.persistence.Embeddable;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import java.io.Serializable;
 
+@Embeddable
 public class Ingredient<Q extends Quantity> implements Serializable {
+    @OneToOne
     private Item item;
+    @Transient
     private Measure<Q> amount;
     private String instructions;
 

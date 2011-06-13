@@ -2,13 +2,24 @@ package ruffkat.hombucha.model;
 
 import javax.measure.Measure;
 import javax.measure.quantity.Volume;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
 import java.util.Calendar;
 
+@Entity
 public class Ferment implements Serializable {
+    @Id
+    @GeneratedValue
     private Long id;
+    @ManyToOne
     private Recipe recipe;
+    @OneToOne
     private Mushroom mushroom;
+    @OneToOne
     private Reactor reactor;
     private Measure<Volume> volume;
     private Method method;

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0"
+             xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+             http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+    <persistence-unit name="hombucha" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <class>ruffkat.hombucha.model.Ferment</class>
+        <class>ruffkat.hombucha.model.Friend</class>
+        <class>ruffkat.hombucha.model.Item</class>
+        <class>ruffkat.hombucha.model.Ingredient</class>
+        <class>ruffkat.hombucha.model.Mushroom</class>
+        <class>ruffkat.hombucha.model.Online</class>
+        <class>ruffkat.hombucha.model.Reactor</class>
+        <class>ruffkat.hombucha.model.Recipe</class>
+        <class>ruffkat.hombucha.model.Sample</class>
+        <properties>
+            <property name="hibernate.connection.autocommit" value="false"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.generate_statistics" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect"/>
+        </properties>
+    </persistence-unit>
+</persistence>

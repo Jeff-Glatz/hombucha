@@ -1,13 +1,21 @@
 package ruffkat.hombucha.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 
+@Entity
 public class Item implements Serializable, Sourced {
+    @Id
+    @GeneratedValue
     private Long id;
     private String name;
+    @Transient
     private Source source;
-    private Date received;
+    private Calendar received;
 
     public String getName() {
         return name;
@@ -25,11 +33,11 @@ public class Item implements Serializable, Sourced {
         this.source = source;
     }
 
-    public Date getReceived() {
+    public Calendar getReceived() {
         return received;
     }
 
-    public void setReceived(Date received) {
+    public void setReceived(Calendar received) {
         this.received = received;
     }
 

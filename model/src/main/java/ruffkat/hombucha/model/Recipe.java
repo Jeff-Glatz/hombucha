@@ -1,14 +1,24 @@
 package ruffkat.hombucha.model;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
+@Entity
 public class Recipe implements Serializable, Sourced {
+    @Id
+    @GeneratedValue
     private Long id;
     private String name;
+    @Transient
     private Source source;
-    private Date received;
+    private Calendar received;
+    @ElementCollection
     private List<Ingredient<?>> ingredients;
     private String instructions;
 
@@ -28,11 +38,11 @@ public class Recipe implements Serializable, Sourced {
         this.source = source;
     }
 
-    public Date getReceived() {
+    public Calendar getReceived() {
         return received;
     }
 
-    public void setReceived(Date received) {
+    public void setReceived(Calendar received) {
         this.received = received;
     }
 

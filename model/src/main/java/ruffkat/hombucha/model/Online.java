@@ -1,11 +1,27 @@
 package ruffkat.hombucha.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.io.Serializable;
 import java.net.URL;
 
-public class Online implements Source {
+@Entity
+public class Online implements Serializable, Source {
+    @Id
+    @GeneratedValue
     private Long id;
     private String name;
     private URL url;
+
+    public Online() {
+        this(null, null);
+    }
+
+    public Online(String name, URL url) {
+        this.name = name;
+        this.url = url;
+    }
 
     public String getName() {
         return name;

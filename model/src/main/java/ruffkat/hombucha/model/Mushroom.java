@@ -1,13 +1,24 @@
 package ruffkat.hombucha.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
+@Entity
 public class Mushroom implements Serializable, Sourced {
+    @Id
+    @GeneratedValue
     private Long id;
     private String name;
+    @Transient
     private Source source;
-    private Date received;
+    private Calendar received;
+    @ManyToOne
     private Mushroom mother;
 
     public String getName() {
@@ -26,11 +37,11 @@ public class Mushroom implements Serializable, Sourced {
         this.source = source;
     }
 
-    public Date getReceived() {
+    public Calendar getReceived() {
         return received;
     }
 
-    public void setReceived(Date received) {
+    public void setReceived(Calendar received) {
         this.received = received;
     }
 

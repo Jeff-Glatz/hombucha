@@ -2,13 +2,23 @@ package ruffkat.hombucha.model;
 
 import javax.measure.Measure;
 import javax.measure.quantity.Quantity;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Calendar;
 
+@Entity
 public class Sample<Q extends Quantity> implements Serializable {
+    @Id
+    @GeneratedValue
     private Long id;
+    @OneToOne
     private Ferment ferment;
     private Calendar takenAt;
+    @Transient
     private Measure<Q> measurement;
 
     public Ferment getFerment() {

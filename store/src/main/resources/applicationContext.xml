@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+    <context:annotation-config/>
+
+    <context:component-scan base-package="ruffkat.hombucha.store"/>
+
+    <bean id="dataSource"
+          class="org.apache.derby.jdbc.EmbeddedDataSource">
+        <property name="createDatabase" value="create"/>
+        <property name="databaseName" value="/Users/jeff/HombuchaDB"/>
+        <property name="user" value="hombucha"/>
+        <property name="password" value="hombucha"/>
+    </bean>
+
+    <bean id="entityManagerFactory"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="hombucha"/>
+        <property name="persistenceXmlLocation" value="classpath*:META-INF/persistence.xml"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </property>
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaDialect">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
+        </property>
+    </bean>
+
+    <tx:advice id="transactionManagerAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="samples"
+          class="ruffkat.hombucha.store.SampleStore"/>
+
+    <aop:config>
+        <aop:pointcut id="samplesAop"
+                      expression="execution(* ruffkat.hombucha.store.SampleStore.*(..))"/>
+        <aop:advisor advice-ref="transactionManagerAdvice"
+                     pointcut-ref="samplesAop"/>
+    </aop:config>
+
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+
+</beans>
