@@ -8,5 +8,5 @@ public interface Ferments {
     Ferment create();
     Ferment load(Long id);
     void delete(Long id);
-    Set<Ferment> activeFerments();
+    Set<Ferment> active();
 }
