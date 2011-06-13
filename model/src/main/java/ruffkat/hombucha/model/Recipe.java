@@ -9,7 +9,7 @@ public class Recipe implements Serializable, Sourced {
     private String name;
     private Source source;
     private Date received;
-    private List<Ingredient<?>> items;
+    private List<Ingredient<?>> ingredients;
     private String instructions;
 
     public String getName() {
@@ -36,12 +36,12 @@ public class Recipe implements Serializable, Sourced {
         this.received = received;
     }
 
-    public List<Ingredient<?>> getItems() {
-        return items;
+    public List<Ingredient<?>> getIngredients() {
+        return ingredients;
     }
 
-    public void setItems(List<Ingredient<?>> items) {
-        this.items = items;
+    public void setIngredients(List<Ingredient<?>> ingredients) {
+        this.ingredients = ingredients;
     }
 
     public String getInstructions() {
@@ -59,7 +59,7 @@ public class Recipe implements Serializable, Sourced {
 
         Recipe recipe = (Recipe) o;
 
-        if (items != null ? !items.equals(recipe.items) : recipe.items != null) return false;
+        if (ingredients != null ? !ingredients.equals(recipe.ingredients) : recipe.ingredients != null) return false;
         if (instructions != null ? !instructions.equals(recipe.instructions) : recipe.instructions != null)
             return false;
         if (name != null ? !name.equals(recipe.name) : recipe.name != null) return false;
@@ -74,7 +74,7 @@ public class Recipe implements Serializable, Sourced {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (source != null ? source.hashCode() : 0);
         result = 31 * result + (received != null ? received.hashCode() : 0);
-        result = 31 * result + (items != null ? items.hashCode() : 0);
+        result = 31 * result + (ingredients != null ? ingredients.hashCode() : 0);
         result = 31 * result + (instructions != null ? instructions.hashCode() : 0);
         return result;
     }
