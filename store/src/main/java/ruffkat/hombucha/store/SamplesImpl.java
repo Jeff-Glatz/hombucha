@@ -5,6 +5,7 @@ import ruffkat.hombucha.model.Molarity;
 import ruffkat.hombucha.model.Sample;
 
 import javax.measure.quantity.Dimensionless;
+import javax.measure.quantity.Temperature;
 import javax.measure.quantity.Volume;
 import java.util.Calendar;
 
@@ -20,10 +21,10 @@ public class SamplesImpl implements Samples {
 
     @Override
     public Sample<Dimensionless> specificGravity(Ferment ferment) {
-        Sample<Dimensionless> sg = new Sample<Dimensionless>();
-        sg.setFerment(ferment);
-        sg.setTakenAt(Calendar.getInstance());
-        return sg;
+        Sample<Dimensionless> specificGravity = new Sample<Dimensionless>();
+        specificGravity.setFerment(ferment);
+        specificGravity.setTakenAt(Calendar.getInstance());
+        return specificGravity;
     }
 
     @Override
@@ -32,5 +33,14 @@ public class SamplesImpl implements Samples {
         volume.setFerment(ferment);
         volume.setTakenAt(Calendar.getInstance());
         return volume;
+    }
+
+    @Override
+    public Sample<Temperature> temperature(Ferment ferment) {
+        Sample<Temperature> temperature = new Sample<Temperature>();
+        temperature.setFerment(ferment);
+        temperature.setTakenAt(Calendar.getInstance());
+        return temperature;
+
     }
 }
