@@ -8,6 +8,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -21,25 +23,23 @@ public class Ferment implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @Transient
-//    @ManyToOne(optional = true)
+    @ManyToOne
     private Recipe recipe;
 
-    @Transient
-//    @OneToOne(optional = true)
+    @OneToOne
     private Mushroom mushroom;
 
-    @Transient
-//    @OneToOne(optional = true)
+    @OneToOne
     private Reactor reactor;
 
     @Transient
     private Measure<Volume> volume;
 
+    @Basic
     @Enumerated(EnumType.STRING)
     private Method method;
 
-    @Basic(optional = false)
+    @Basic
     @Temporal(TemporalType.TIMESTAMP)
     private Date startTime;
 
