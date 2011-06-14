@@ -20,6 +20,11 @@ public class Mushroom implements Serializable, Sourced {
     @ManyToOne
     private Mushroom mother;
 
+
+    public Long getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }
@@ -72,9 +77,5 @@ public class Mushroom implements Serializable, Sourced {
         result = 31 * result + (source != null ? source.hashCode() : 0);
         result = 31 * result + (received != null ? received.hashCode() : 0);
         return result;
-    }
-
-    public Long getId() {
-        return id;
     }
 }
