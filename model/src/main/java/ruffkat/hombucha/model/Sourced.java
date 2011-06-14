@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @MappedSuperclass
-public abstract class Component
+public abstract class Sourced
         implements Serializable {
 
     @Id
@@ -59,9 +59,9 @@ public abstract class Component
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Component)) return false;
+        if (!(o instanceof Sourced)) return false;
 
-        Component that = (Component) o;
+        Sourced that = (Sourced) o;
 
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (received != null ? !received.equals(that.received) : that.received != null) return false;

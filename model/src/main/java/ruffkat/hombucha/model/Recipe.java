@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 public class Recipe
-        extends Component {
+        extends Sourced {
 
     @ElementCollection
     private List<Ingredient<?>> ingredients;

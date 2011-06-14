@@ -4,5 +4,5 @@ import javax.persistence.Entity;
 
 @Entity
 public class Item
-        extends Component {
+        extends Sourced {
 }

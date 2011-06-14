@@ -7,7 +7,7 @@ import javax.persistence.Transient;
 
 @Entity
 public class Container
-        extends Component {
+        extends Sourced {
 
     @Transient
     private Measure<Volume> volume;

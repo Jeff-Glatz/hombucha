@@ -5,7 +5,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Mushroom
-        extends Component {
+        extends Sourced {
 
     @ManyToOne
     private Mushroom mother;
