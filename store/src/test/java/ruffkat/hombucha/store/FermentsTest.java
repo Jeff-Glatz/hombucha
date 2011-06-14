@@ -24,7 +24,7 @@ public class FermentsTest extends FunctionalTest {
     @Rollback(false)
     public void testSaveAndLoad() {
         Ferment ferment = ferments.create();
-        ferment.setProcessing(Processing.BATCH);
+        ferment.setProcessing(Processing.SECONDARY);
         ferment.setStartTime(CalendarUtils.date(Calendar.MAY, 12, 2011));
         ferment.setEndTime(CalendarUtils.date(Calendar.MAY, 24, 2011));
 
@@ -40,7 +40,7 @@ public class FermentsTest extends FunctionalTest {
     @Rollback(false)
     public void testSaveAndDelete() {
         Ferment ferment = ferments.create();
-        ferment.setProcessing(Processing.BATCH);
+        ferment.setProcessing(Processing.CONTINUOUS);
         ferment.setStartTime(CalendarUtils.date(Calendar.MAY, 12, 2011));
         ferment.setEndTime(CalendarUtils.date(Calendar.MAY, 24, 2011));
 
