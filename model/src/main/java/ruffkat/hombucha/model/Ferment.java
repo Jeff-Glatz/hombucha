@@ -17,7 +17,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Ferment implements Serializable {
+public class Ferment
+        implements Serializable {
 
     @Id
     @GeneratedValue

@@ -16,6 +16,9 @@ public class Friend implements Serializable, Source {
     @Basic
     private String name;
 
+    @Basic
+    public String email;
+
     public Friend() {
         this(null);
     }
@@ -36,6 +39,14 @@ public class Friend implements Serializable, Source {
         this.name = name;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,6 +54,7 @@ public class Friend implements Serializable, Source {
 
         Friend friend = (Friend) o;
 
+        if (email != null ? !email.equals(friend.email) : friend.email != null) return false;
         if (id != null ? !id.equals(friend.id) : friend.id != null) return false;
         if (name != null ? !name.equals(friend.name) : friend.name != null) return false;
 
@@ -53,6 +65,7 @@ public class Friend implements Serializable, Source {
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
     }
 }
