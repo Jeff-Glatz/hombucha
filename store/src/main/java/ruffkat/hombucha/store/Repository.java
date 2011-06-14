@@ -3,13 +3,13 @@ package ruffkat.hombucha.store;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-public abstract class AbstractStore<T> {
+public abstract class Repository<T> {
     private final Class<T> type;
 
     @PersistenceContext(name = "hombucha")
     protected EntityManager entityManager;
 
-    protected AbstractStore(Class<T> type) {
+    protected Repository(Class<T> type) {
         this.type = type;
     }
 

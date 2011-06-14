@@ -8,7 +8,7 @@ import javax.measure.quantity.Quantity;
 import java.util.Calendar;
 
 public class SamplesImpl
-        extends AbstractStore<Sample>
+        extends Repository<Sample>
         implements Samples {
 
     public SamplesImpl() {

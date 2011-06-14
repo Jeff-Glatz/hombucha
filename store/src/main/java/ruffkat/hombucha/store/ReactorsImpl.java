@@ -3,7 +3,7 @@ package ruffkat.hombucha.store;
 import ruffkat.hombucha.model.Reactor;
 
 public class ReactorsImpl
-        extends AbstractStore<Reactor>
+        extends Repository<Reactor>
         implements Reactors {
 
     public ReactorsImpl() {
