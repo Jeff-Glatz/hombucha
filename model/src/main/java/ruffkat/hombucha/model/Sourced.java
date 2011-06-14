@@ -1,9 +1,9 @@
 package ruffkat.hombucha.model;
 
-import java.util.Calendar;
+import java.util.Date;
 
 public interface Sourced {
     String getName();
     Source getSource();
-    Calendar getReceived();
+    Date getReceived();
 }

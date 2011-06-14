@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Calendar;
@@ -18,9 +20,14 @@ public class Sample<Q extends Quantity>
     private Long id;
     @OneToOne
     private Ferment ferment;
+    @Temporal(TemporalType.TIMESTAMP)
     private Calendar takenAt;
     @Transient
     private Measure<Q> measurement;
+
+    public Long getId() {
+        return id;
+    }
 
     public Ferment getFerment() {
         return ferment;

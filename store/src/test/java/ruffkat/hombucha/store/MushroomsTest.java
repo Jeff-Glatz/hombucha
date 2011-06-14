@@ -19,7 +19,7 @@ public class MushroomsTest extends FunctionalTest {
 
     @Test
     @Rollback(false)
-    public void testSaveAndLoadMushroom() {
+    public void testSaveAndLoad() {
         Mushroom mushroom = mushrooms.create();
         mushroom.setName("SCOBY DO");
         mushroom.setReceived(CalendarUtils.date(Calendar.MAY, 12, 2011));
@@ -34,7 +34,7 @@ public class MushroomsTest extends FunctionalTest {
 
     @Test
     @Rollback(false)
-    public void testSaveAndDeleteMushroom() {
+    public void testSaveAndDelete() {
         Mushroom mushroom = mushrooms.create();
         mushroom.setName("SCOBY DO");
         mushroom.setReceived(CalendarUtils.date(Calendar.MAY, 12, 2011));

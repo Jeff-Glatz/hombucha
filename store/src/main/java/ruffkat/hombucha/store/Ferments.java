@@ -7,6 +7,6 @@ import java.util.Set;
 public interface Ferments {
     Ferment create();
     Ferment load(Long id);
-    void delete(Long id);
+    void delete(Ferment ferment);
     Set<Ferment> active();
 }

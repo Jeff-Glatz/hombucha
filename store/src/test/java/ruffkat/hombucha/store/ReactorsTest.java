@@ -19,7 +19,7 @@ public class ReactorsTest extends FunctionalTest {
 
     @Test
     @Rollback(false)
-    public void testSaveAndLoadMushroom() {
+    public void testSaveAndLoad() {
         Reactor reactor = reactors.create();
         reactor.setName("SCOBY DO");
         reactor.setReceived(CalendarUtils.date(Calendar.MAY, 12, 2011));
@@ -34,7 +34,7 @@ public class ReactorsTest extends FunctionalTest {
 
     @Test
     @Rollback(false)
-    public void testSaveAndDeleteMushroom() {
+    public void testSaveAndDelete() {
         Reactor reactor = reactors.create();
         reactor.setName("SCOBY DO");
         reactor.setReceived(CalendarUtils.date(Calendar.MAY, 12, 2011));

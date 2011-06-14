@@ -6,9 +6,11 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -20,11 +22,17 @@ public class Recipe
     private String name;
     @Transient
     private Source source;
-    private Calendar received;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date received;
     @ElementCollection
     private List<Ingredient<?>> ingredients;
     private String instructions;
+    @Transient
     private Measure<Volume> yields;
+
+    public Long getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
@@ -42,11 +50,11 @@ public class Recipe
         this.source = source;
     }
 
-    public Calendar getReceived() {
+    public Date getReceived() {
         return received;
     }
 
-    public void setReceived(Calendar received) {
+    public void setReceived(Date received) {
         this.received = received;
     }
 

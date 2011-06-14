@@ -47,6 +47,8 @@
           class="ruffkat.hombucha.store.MushroomStore"/>
     <bean id="reactors"
           class="ruffkat.hombucha.store.ReactorStore"/>
+    <bean id="ferments"
+          class="ruffkat.hombucha.store.FermentStore"/>
 
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 

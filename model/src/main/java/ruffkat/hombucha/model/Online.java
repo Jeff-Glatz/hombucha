@@ -23,6 +23,10 @@ public class Online implements Serializable, Source {
         this.url = url;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }
