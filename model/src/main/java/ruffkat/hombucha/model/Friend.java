@@ -1,5 +1,6 @@
 package ruffkat.hombucha.model;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -7,9 +8,12 @@ import java.io.Serializable;
 
 @Entity
 public class Friend implements Serializable, Source {
+
     @Id
     @GeneratedValue
     private Long id;
+
+    @Basic
     private String name;
 
     public Friend() {

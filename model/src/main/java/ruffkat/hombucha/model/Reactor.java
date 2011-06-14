@@ -2,6 +2,7 @@ package ruffkat.hombucha.model;
 
 import javax.measure.Measure;
 import javax.measure.quantity.Volume;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,15 +13,23 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Reactor implements Serializable, Sourced {
+public class Reactor
+        implements Serializable, Sourced {
+
     @Id
     @GeneratedValue
     private Long id;
+
+    @Basic
     private String name;
+
     @Transient
     private Source source;
+
+    @Basic
     @Temporal(TemporalType.TIMESTAMP)
     private Date received;
+
     @Transient
     private Measure<Volume> volume;
 

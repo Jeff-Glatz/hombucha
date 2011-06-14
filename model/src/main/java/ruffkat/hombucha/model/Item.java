@@ -1,5 +1,6 @@
 package ruffkat.hombucha.model;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,13 +11,20 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Item implements Serializable, Sourced {
+public class Item
+        implements Serializable, Sourced {
+
     @Id
     @GeneratedValue
     private Long id;
+
+    @Basic
     private String name;
+
     @Transient
     private Source source;
+
+    @Basic
     @Temporal(TemporalType.TIMESTAMP)
     private Date received;
 
