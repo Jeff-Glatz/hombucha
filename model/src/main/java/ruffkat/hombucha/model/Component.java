@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @MappedSuperclass
-public class Component
+public abstract class Component
         implements Serializable, Sourced {
 
     @Id
