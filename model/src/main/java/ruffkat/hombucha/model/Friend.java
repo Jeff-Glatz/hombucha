@@ -4,9 +4,11 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import java.io.Serializable;
 
 @Entity
+@Inheritance
 public class Friend implements Serializable, Source {
 
     @Id

@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import java.io.Serializable;
 import java.net.URL;
 
-@Entity
+
 public class Online
         implements Serializable, Source {
 

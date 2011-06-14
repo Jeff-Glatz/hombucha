@@ -2,65 +2,15 @@ package ruffkat.hombucha.model;
 
 import javax.measure.Measure;
 import javax.measure.quantity.Volume;
-import javax.persistence.Basic;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import java.io.Serializable;
-import java.util.Date;
 
 @Entity
 public class Container
-        implements Serializable, Sourced {
-
-    @Id
-    @GeneratedValue
-    private Long id;
-
-    @Basic
-    private String name;
-
-    @Transient
-    private Source source;
-
-    @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date received;
+        extends Component {
 
     @Transient
     private Measure<Volume> volume;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Source getSource() {
-        return source;
-    }
-
-    public void setSource(Source source) {
-        this.source = source;
-    }
-
-    public Date getReceived() {
-        return received;
-    }
-
-    public void setReceived(Date received) {
-        this.received = received;
-    }
 
     public Measure<Volume> getVolume() {
         return volume;
@@ -73,13 +23,11 @@ public class Container
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Container)) return false;
+        if (!super.equals(o)) return false;
 
         Container container = (Container) o;
 
-        if (name != null ? !name.equals(container.name) : container.name != null) return false;
-        if (received != null ? !received.equals(container.received) : container.received != null) return false;
-        if (source != null ? !source.equals(container.source) : container.source != null) return false;
         if (volume != null ? !volume.equals(container.volume) : container.volume != null) return false;
 
         return true;
@@ -87,9 +35,7 @@ public class Container
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (source != null ? source.hashCode() : 0);
-        result = 31 * result + (received != null ? received.hashCode() : 0);
+        int result = super.hashCode();
         result = 31 * result + (volume != null ? volume.hashCode() : 0);
         return result;
     }
