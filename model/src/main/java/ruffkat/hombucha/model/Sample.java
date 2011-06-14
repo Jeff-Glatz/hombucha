@@ -11,7 +11,8 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 @Entity
-public class Sample<Q extends Quantity> implements Serializable {
+public class Sample<Q extends Quantity>
+        implements Serializable {
     @Id
     @GeneratedValue
     private Long id;

@@ -5,12 +5,17 @@ import ruffkat.hombucha.model.Molarity;
 import ruffkat.hombucha.model.Sample;
 
 import javax.measure.quantity.Dimensionless;
-import javax.measure.quantity.Quantity;
 import javax.measure.quantity.Temperature;
 import javax.measure.quantity.Volume;
 import java.util.Calendar;
 
-public class SampleStore extends AbstractStore implements Samples {
+public class SampleStore
+        extends AbstractStore<Sample>
+        implements Samples {
+
+    public SampleStore() {
+        super(Sample.class);
+    }
 
     @Override
     public Sample<Molarity> ph(Ferment ferment) {
@@ -42,16 +47,5 @@ public class SampleStore extends AbstractStore implements Samples {
         temperature.setFerment(ferment);
         temperature.setTakenAt(Calendar.getInstance());
         return temperature;
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public <Q extends Quantity> Sample<Q> load(Long id) {
-        return (Sample<Q>) entityManager.getReference(Sample.class, id);
-    }
-
-    @Override
-    public <Q extends Quantity> void delete(Sample<Q> sample) {
-        entityManager.remove(sample);
     }
 }
