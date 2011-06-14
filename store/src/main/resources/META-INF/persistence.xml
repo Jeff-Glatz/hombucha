@@ -9,7 +9,7 @@
         <class>ruffkat.hombucha.model.Ingredient</class>
         <class>ruffkat.hombucha.model.Mushroom</class>
         <class>ruffkat.hombucha.model.Online</class>
-        <class>ruffkat.hombucha.model.Reactor</class>
+        <class>ruffkat.hombucha.model.Container</class>
         <class>ruffkat.hombucha.model.Recipe</class>
         <class>ruffkat.hombucha.model.Sample</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>

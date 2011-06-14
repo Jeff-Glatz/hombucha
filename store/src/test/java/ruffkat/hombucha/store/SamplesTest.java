@@ -5,12 +5,12 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import ruffkat.hombucha.model.CalendarUtils;
+import ruffkat.hombucha.model.Container;
 import ruffkat.hombucha.model.Ferment;
 import ruffkat.hombucha.model.Friend;
 import ruffkat.hombucha.model.Molarity;
 import ruffkat.hombucha.model.Mushroom;
 import ruffkat.hombucha.model.Online;
-import ruffkat.hombucha.model.Reactor;
 import ruffkat.hombucha.model.Sample;
 
 import javax.measure.Measure;
@@ -144,31 +144,31 @@ public class SamplesTest extends FunctionalTest {
         entityManager.persist(baby2);
 
         // Create a reactor to hold the brew
-        Reactor reactorA = new Reactor();
-        reactorA.setSource(new Online("Recycled Glass Dispenser",
+        Container containerA = new Container();
+        containerA.setSource(new Online("Recycled Glass Dispenser",
                 new URL("http://www.westelm.com")));
-        reactorA.setName("A");
-        reactorA.setReceived(CalendarUtils.date(Calendar.JUNE, 11, 2011));
-        entityManager.persist(reactorA);
+        containerA.setName("A");
+        containerA.setReceived(CalendarUtils.date(Calendar.JUNE, 11, 2011));
+        entityManager.persist(containerA);
 
         // Create another reactor to hold the brew
-        Reactor reactorB = new Reactor();
-        reactorB.setSource(new Online("Recycled Glass Dispenser",
+        Container containerB = new Container();
+        containerB.setSource(new Online("Recycled Glass Dispenser",
                 new URL("http://www.westelm.com")));
-        reactorB.setName("B");
-        reactorB.setReceived(CalendarUtils.date(Calendar.JUNE, 11, 2011));
-        entityManager.persist(reactorB);
+        containerB.setName("B");
+        containerB.setReceived(CalendarUtils.date(Calendar.JUNE, 11, 2011));
+        entityManager.persist(containerB);
 
 //        Ferment ancientPuErh2006 = new Ferment();
 //        ancientPuErh2006.setProcessing(Processing.BATCH);
-//        ancientPuErh2006.setReactor(reactorA);
+//        ancientPuErh2006.setContainer(containerA);
 //        ancientPuErh2006.setStartTime(CalendarUtils.date(Calendar.JUNE, 12, 2011));
 //        ancientPuErh2006.setEndTime(CalendarUtils.date(Calendar.JUNE, 26, 2011));
 //        entityManager.persist(ancientPuErh2006);
 //
 //        Ferment bloodOrangePuErh = new Ferment();
 //        bloodOrangePuErh.setProcessing(Processing.CONTINUOUS);
-//        bloodOrangePuErh.setReactor(reactorB);
+//        bloodOrangePuErh.setContainer(containerB);
 //        bloodOrangePuErh.setStartTime(CalendarUtils.date(Calendar.JUNE, 12, 2011));
 //        entityManager.persist(bloodOrangePuErh);
 //

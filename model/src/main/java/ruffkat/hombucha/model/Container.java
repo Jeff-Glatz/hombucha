@@ -13,7 +13,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Reactor
+public class Container
         implements Serializable, Sourced {
 
     @Id
@@ -75,12 +75,12 @@ public class Reactor
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Reactor reactor = (Reactor) o;
+        Container container = (Container) o;
 
-        if (name != null ? !name.equals(reactor.name) : reactor.name != null) return false;
-        if (received != null ? !received.equals(reactor.received) : reactor.received != null) return false;
-        if (source != null ? !source.equals(reactor.source) : reactor.source != null) return false;
-        if (volume != null ? !volume.equals(reactor.volume) : reactor.volume != null) return false;
+        if (name != null ? !name.equals(container.name) : container.name != null) return false;
+        if (received != null ? !received.equals(container.received) : container.received != null) return false;
+        if (source != null ? !source.equals(container.source) : container.source != null) return false;
+        if (volume != null ? !volume.equals(container.volume) : container.volume != null) return false;
 
         return true;
     }

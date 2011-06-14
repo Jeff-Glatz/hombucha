@@ -32,7 +32,7 @@ public class Ferment
     private Mushroom mushroom;
 
     @OneToOne
-    private Reactor reactor;
+    private Container container;
 
     @Transient
     private Measure<Volume> volume;
@@ -72,12 +72,12 @@ public class Ferment
         this.mushroom = mushroom;
     }
 
-    public Reactor getReactor() {
-        return reactor;
+    public Container getContainer() {
+        return container;
     }
 
-    public void setReactor(Reactor reactor) {
-        this.reactor = reactor;
+    public void setContainer(Container container) {
+        this.container = container;
     }
 
     public Measure<Volume> getVolume() {
@@ -122,7 +122,7 @@ public class Ferment
         if (endTime != null ? !endTime.equals(ferment.endTime) : ferment.endTime != null) return false;
         if (processing != ferment.processing) return false;
         if (mushroom != null ? !mushroom.equals(ferment.mushroom) : ferment.mushroom != null) return false;
-        if (reactor != null ? !reactor.equals(ferment.reactor) : ferment.reactor != null) return false;
+        if (container != null ? !container.equals(ferment.container) : ferment.container != null) return false;
         if (recipe != null ? !recipe.equals(ferment.recipe) : ferment.recipe != null) return false;
         if (startTime != null ? !startTime.equals(ferment.startTime) : ferment.startTime != null) return false;
         if (volume != null ? !volume.equals(ferment.volume) : ferment.volume != null) return false;
@@ -134,7 +134,7 @@ public class Ferment
     public int hashCode() {
         int result = recipe != null ? recipe.hashCode() : 0;
         result = 31 * result + (mushroom != null ? mushroom.hashCode() : 0);
-        result = 31 * result + (reactor != null ? reactor.hashCode() : 0);
+        result = 31 * result + (container != null ? container.hashCode() : 0);
         result = 31 * result + (volume != null ? volume.hashCode() : 0);
         result = 31 * result + (processing != null ? processing.hashCode() : 0);
         result = 31 * result + (startTime != null ? startTime.hashCode() : 0);
