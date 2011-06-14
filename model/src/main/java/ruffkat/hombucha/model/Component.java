@@ -12,7 +12,7 @@ import java.util.Date;
 
 @MappedSuperclass
 public abstract class Component
-        implements Serializable, Sourced {
+        implements Serializable {
 
     @Id
     @GeneratedValue
