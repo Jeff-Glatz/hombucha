@@ -5,5 +5,5 @@ import ruffkat.hombucha.model.Item;
 public interface Items {
     Item create();
     Item load(Long id);
-    void delete(Item id);
+    void delete(Item item);
 }

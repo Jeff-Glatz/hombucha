@@ -2,10 +2,10 @@ package ruffkat.hombucha.store;
 
 import ruffkat.hombucha.model.Item;
 
-public class ItemStore extends AbstractStore<Item>
+public class ItemsImpl extends AbstractStore<Item>
         implements Items {
 
-    public ItemStore() {
+    public ItemsImpl() {
         super(Item.class);
     }
 

@@ -2,11 +2,11 @@ package ruffkat.hombucha.store;
 
 import ruffkat.hombucha.model.Recipe;
 
-public class RecipeStore
+public class RecipesImpl
         extends AbstractStore<Recipe>
         implements Recipes {
 
-    public RecipeStore() {
+    public RecipesImpl() {
         super(Recipe.class);
     }
 

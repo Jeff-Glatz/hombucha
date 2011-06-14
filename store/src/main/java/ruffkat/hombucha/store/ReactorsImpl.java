@@ -2,11 +2,11 @@ package ruffkat.hombucha.store;
 
 import ruffkat.hombucha.model.Reactor;
 
-public class ReactorStore
+public class ReactorsImpl
         extends AbstractStore<Reactor>
         implements Reactors {
 
-    public ReactorStore() {
+    public ReactorsImpl() {
         super(Reactor.class);
     }
 

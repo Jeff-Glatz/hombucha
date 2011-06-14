@@ -6,11 +6,11 @@ import javax.persistence.TypedQuery;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FermentStore
+public class FermentsImpl
         extends AbstractStore<Ferment>
         implements Ferments {
 
-    protected FermentStore() {
+    protected FermentsImpl() {
         super(Ferment.class);
     }
 

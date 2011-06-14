@@ -42,17 +42,17 @@
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <bean id="items"
-          class="ruffkat.hombucha.store.ItemStore"/>
+          class="ruffkat.hombucha.store.ItemsImpl"/>
     <bean id="recipes"
-          class="ruffkat.hombucha.store.RecipeStore"/>
+          class="ruffkat.hombucha.store.RecipesImpl"/>
     <bean id="mushrooms"
-          class="ruffkat.hombucha.store.MushroomStore"/>
+          class="ruffkat.hombucha.store.MushroomsImpl"/>
     <bean id="reactors"
-          class="ruffkat.hombucha.store.ReactorStore"/>
+          class="ruffkat.hombucha.store.ReactorsImpl"/>
     <bean id="ferments"
-          class="ruffkat.hombucha.store.FermentStore"/>
+          class="ruffkat.hombucha.store.FermentsImpl"/>
     <bean id="samples"
-          class="ruffkat.hombucha.store.SampleStore"/>
+          class="ruffkat.hombucha.store.SamplesImpl"/>
 
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 

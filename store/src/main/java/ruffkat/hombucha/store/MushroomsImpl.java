@@ -2,11 +2,11 @@ package ruffkat.hombucha.store;
 
 import ruffkat.hombucha.model.Mushroom;
 
-public class MushroomStore
+public class MushroomsImpl
         extends AbstractStore<Mushroom>
         implements Mushrooms {
 
-    public MushroomStore() {
+    public MushroomsImpl() {
         super(Mushroom.class);
     }
 

@@ -7,11 +7,11 @@ import javax.measure.Measure;
 import javax.measure.quantity.Quantity;
 import java.util.Calendar;
 
-public class SampleStore
+public class SamplesImpl
         extends AbstractStore<Sample>
         implements Samples {
 
-    public SampleStore() {
+    public SamplesImpl() {
         super(Sample.class);
     }
 

@@ -5,5 +5,5 @@ import ruffkat.hombucha.model.Recipe;
 public interface Recipes {
     Recipe create();
     Recipe load(Long id);
-    void delete(Recipe id);
+    void delete(Recipe recipe);
 }
