@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import ruffkat.hombucha.model.CalendarUtils;
 import ruffkat.hombucha.model.Ferment;
-import ruffkat.hombucha.model.Method;
+import ruffkat.hombucha.model.Processing;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Calendar;
@@ -24,7 +24,7 @@ public class FermentsTest extends FunctionalTest {
     @Rollback(false)
     public void testSaveAndLoad() {
         Ferment ferment = ferments.create();
-        ferment.setMethod(Method.BATCH);
+        ferment.setProcessing(Processing.BATCH);
         ferment.setStartTime(CalendarUtils.date(Calendar.MAY, 12, 2011));
         ferment.setEndTime(CalendarUtils.date(Calendar.MAY, 24, 2011));
 
@@ -40,7 +40,7 @@ public class FermentsTest extends FunctionalTest {
     @Rollback(false)
     public void testSaveAndDelete() {
         Ferment ferment = ferments.create();
-        ferment.setMethod(Method.BATCH);
+        ferment.setProcessing(Processing.BATCH);
         ferment.setStartTime(CalendarUtils.date(Calendar.MAY, 12, 2011));
         ferment.setEndTime(CalendarUtils.date(Calendar.MAY, 24, 2011));
 
@@ -65,7 +65,7 @@ public class FermentsTest extends FunctionalTest {
         assertEquals(0, active.size());
 
         Ferment ferment = ferments.create();
-        ferment.setMethod(Method.BATCH);
+        ferment.setProcessing(Processing.BATCH);
         ferment.setStartTime(CalendarUtils.date(Calendar.MAY, 12, 2011));
         ferment.setEndTime(CalendarUtils.date(Calendar.MAY, 24, 2012));
 

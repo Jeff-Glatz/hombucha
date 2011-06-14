@@ -3,6 +3,7 @@ package ruffkat.hombucha.model;
 import javax.measure.Measure;
 import javax.measure.quantity.Volume;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -38,13 +39,15 @@ public class Ferment
 
     @Basic
     @Enumerated(EnumType.STRING)
-    private Method method;
+    private Processing processing;
 
     @Basic
+    @Column(name = "START_TIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date startTime;
 
     @Basic
+    @Column(name = "END_TIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date endTime;
 
@@ -85,12 +88,12 @@ public class Ferment
         this.volume = volume;
     }
 
-    public Method getMethod() {
-        return method;
+    public Processing getProcessing() {
+        return processing;
     }
 
-    public void setMethod(Method method) {
-        this.method = method;
+    public void setProcessing(Processing processing) {
+        this.processing = processing;
     }
 
     public Date getStartTime() {
@@ -117,7 +120,7 @@ public class Ferment
         Ferment ferment = (Ferment) o;
 
         if (endTime != null ? !endTime.equals(ferment.endTime) : ferment.endTime != null) return false;
-        if (method != ferment.method) return false;
+        if (processing != ferment.processing) return false;
         if (mushroom != null ? !mushroom.equals(ferment.mushroom) : ferment.mushroom != null) return false;
         if (reactor != null ? !reactor.equals(ferment.reactor) : ferment.reactor != null) return false;
         if (recipe != null ? !recipe.equals(ferment.recipe) : ferment.recipe != null) return false;
@@ -133,7 +136,7 @@ public class Ferment
         result = 31 * result + (mushroom != null ? mushroom.hashCode() : 0);
         result = 31 * result + (reactor != null ? reactor.hashCode() : 0);
         result = 31 * result + (volume != null ? volume.hashCode() : 0);
-        result = 31 * result + (method != null ? method.hashCode() : 0);
+        result = 31 * result + (processing != null ? processing.hashCode() : 0);
         result = 31 * result + (startTime != null ? startTime.hashCode() : 0);
         result = 31 * result + (endTime != null ? endTime.hashCode() : 0);
         return result;

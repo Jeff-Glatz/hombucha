@@ -3,6 +3,7 @@ package ruffkat.hombucha.model;
 import javax.measure.Measure;
 import javax.measure.quantity.Quantity;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -25,6 +26,7 @@ public class Sample<Q extends Quantity>
     private Ferment ferment;
 
     @Basic
+    @Column(name = "TAKEN_AT")
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar takenAt;
 

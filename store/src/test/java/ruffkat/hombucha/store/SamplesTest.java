@@ -160,14 +160,14 @@ public class SamplesTest extends FunctionalTest {
         entityManager.persist(reactorB);
 
 //        Ferment ancientPuErh2006 = new Ferment();
-//        ancientPuErh2006.setMethod(Method.BATCH);
+//        ancientPuErh2006.setProcessing(Processing.BATCH);
 //        ancientPuErh2006.setReactor(reactorA);
 //        ancientPuErh2006.setStartTime(CalendarUtils.date(Calendar.JUNE, 12, 2011));
 //        ancientPuErh2006.setEndTime(CalendarUtils.date(Calendar.JUNE, 26, 2011));
 //        entityManager.persist(ancientPuErh2006);
 //
 //        Ferment bloodOrangePuErh = new Ferment();
-//        bloodOrangePuErh.setMethod(Method.CONTINUOUS);
+//        bloodOrangePuErh.setProcessing(Processing.CONTINUOUS);
 //        bloodOrangePuErh.setReactor(reactorB);
 //        bloodOrangePuErh.setStartTime(CalendarUtils.date(Calendar.JUNE, 12, 2011));
 //        entityManager.persist(bloodOrangePuErh);

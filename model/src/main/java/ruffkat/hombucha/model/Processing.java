@@ -1,5 +1,5 @@
 package ruffkat.hombucha.model;
 
-public enum Method {
+public enum Processing {
     BATCH, CONTINUOUS, SECONDARY
 }
