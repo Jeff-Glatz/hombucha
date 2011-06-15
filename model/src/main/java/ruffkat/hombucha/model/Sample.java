@@ -19,7 +19,6 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 @Entity
-@TypeDef(name = "measure", typeClass = MeasureType.class)
 public class Sample<Q extends Quantity>
         implements Serializable {
 

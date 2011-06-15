@@ -12,7 +12,6 @@ import javax.persistence.Entity;
 import java.util.List;
 
 @Entity
-@TypeDef(name = "measure", typeClass = MeasureType.class)
 public class Recipe
         extends Sourced {
 

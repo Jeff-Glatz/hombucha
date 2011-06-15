@@ -9,7 +9,6 @@ import javax.measure.quantity.Volume;
 import javax.persistence.Entity;
 
 @Entity
-@TypeDef(name = "measure", typeClass = MeasureType.class)
 public class Container
         extends Sourced {
 

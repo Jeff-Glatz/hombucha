@@ -20,7 +20,6 @@ import javax.persistence.Transient;
 import java.util.Date;
 
 @Entity
-@TypeDef(name = "measure", typeClass = MeasureType.class)
 public class Ferment
         extends Persistent {
 

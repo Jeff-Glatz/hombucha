@@ -13,7 +13,6 @@ import javax.persistence.OneToOne;
 import java.io.Serializable;
 
 @Embeddable
-@TypeDef(name = "measure", typeClass = MeasureType.class)
 public class Ingredient<Q extends Quantity>
         implements Serializable {
 
