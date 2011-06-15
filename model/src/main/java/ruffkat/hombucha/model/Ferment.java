@@ -1,5 +1,9 @@
 package ruffkat.hombucha.model;
 
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import ruffkat.hombucha.type.MeasureType;
+
 import javax.measure.Measure;
 import javax.measure.quantity.Volume;
 import javax.persistence.Basic;
@@ -16,6 +20,7 @@ import javax.persistence.Transient;
 import java.util.Date;
 
 @Entity
+@TypeDef(name = "measure", typeClass = MeasureType.class)
 public class Ferment
         extends Persistent {
 
@@ -34,7 +39,7 @@ public class Ferment
             CascadeType.REFRESH, CascadeType.DETACH})
     private Container container;
 
-    @Transient
+    @Type(type = "measure")
     private Measure<Volume> volume;
 
     @Basic

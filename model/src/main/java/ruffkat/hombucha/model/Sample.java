@@ -1,5 +1,9 @@
 package ruffkat.hombucha.model;
 
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import ruffkat.hombucha.type.MeasureType;
+
 import javax.measure.Measure;
 import javax.measure.quantity.Quantity;
 import javax.persistence.Basic;
@@ -11,11 +15,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Calendar;
 
 @Entity
+@TypeDef(name = "measure", typeClass = MeasureType.class)
 public class Sample<Q extends Quantity>
         implements Serializable {
 
@@ -33,7 +37,7 @@ public class Sample<Q extends Quantity>
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar takenAt;
 
-    @Transient
+    @Type(type = "measure")
     private Measure<Q> measurement;
 
     public Long getId() {

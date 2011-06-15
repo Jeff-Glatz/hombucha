@@ -1,14 +1,18 @@
 package ruffkat.hombucha.model;
 
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import ruffkat.hombucha.type.MeasureType;
+
 import javax.measure.Measure;
 import javax.measure.quantity.Volume;
 import javax.persistence.Basic;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.Transient;
 import java.util.List;
 
 @Entity
+@TypeDef(name = "measure", typeClass = MeasureType.class)
 public class Recipe
         extends Sourced {
 
@@ -18,7 +22,7 @@ public class Recipe
     @Basic
     private String instructions;
 
-    @Transient
+    @Type(type = "measure")
     private Measure<Volume> yields;
 
     public List<Ingredient<?>> getIngredients() {

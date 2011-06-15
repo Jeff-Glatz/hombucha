@@ -1,15 +1,19 @@
 package ruffkat.hombucha.model;
 
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import ruffkat.hombucha.type.MeasureType;
+
 import javax.measure.Measure;
 import javax.measure.quantity.Quantity;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 import java.io.Serializable;
 
 @Embeddable
+@TypeDef(name = "measure", typeClass = MeasureType.class)
 public class Ingredient<Q extends Quantity>
         implements Serializable {
 
@@ -18,7 +22,7 @@ public class Ingredient<Q extends Quantity>
             CascadeType.REFRESH, CascadeType.DETACH})
     private Item item;
 
-    @Transient
+    @Type(type = "measure")
     private Measure<Q> amount;
 
     @Basic
