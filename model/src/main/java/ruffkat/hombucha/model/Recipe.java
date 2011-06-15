@@ -32,6 +32,10 @@ public class Recipe
         this.ingredients = ingredients;
     }
 
+    public void addIngredient(Ingredient<?> ingredient) {
+        ingredients.add(ingredient);
+    }
+
     public String getInstructions() {
         return instructions;
     }
