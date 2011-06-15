@@ -1,15 +1,19 @@
 package ruffkat.hombucha.model;
 
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import ruffkat.hombucha.type.MeasureType;
+
 import javax.measure.Measure;
 import javax.measure.quantity.Volume;
 import javax.persistence.Entity;
-import javax.persistence.Transient;
 
 @Entity
+@TypeDef(name = "measure", typeClass = MeasureType.class)
 public class Container
         extends Sourced {
 
-    @Transient
+    @Type(type = "measure")
     private Measure<Volume> volume;
 
     public Measure<Volume> getVolume() {

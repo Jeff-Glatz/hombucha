@@ -30,7 +30,6 @@
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="database" value="DERBY"/>
-                <property name="generateDdl" value="true"/>
             </bean>
         </property>
     </bean>
