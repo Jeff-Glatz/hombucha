@@ -4,13 +4,16 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import ruffkat.hombucha.measure.Measurements;
+import ruffkat.hombucha.model.Friend;
 import ruffkat.hombucha.model.Ingredient;
 import ruffkat.hombucha.model.Item;
+import ruffkat.hombucha.model.Online;
 import ruffkat.hombucha.model.Recipe;
 import ruffkat.hombucha.util.CalendarUtils;
 
 import javax.measure.quantity.Mass;
 import javax.persistence.EntityNotFoundException;
+import java.net.URL;
 import java.util.Calendar;
 
 import static org.junit.Assert.assertEquals;
@@ -23,9 +26,23 @@ public class RecipesTest extends FunctionalTest {
 
     @Test
     @Rollback(false)
-    public void testSaveAndLoad() {
+    public void testSaveAndLoad()
+            throws Exception {
+        Friend friend = new Friend("Zoid Berg");
+        friend.setEmail("foo@bar.com");
+        entityManager.persist(friend);
+
+        Online westelm = new Online("Recycled Glass Beverage Dispenser",
+                new URL("http://www.westelm.com"));
+        entityManager.persist(westelm);
+
+        Online rishi = new Online("Rishi Tea Company",
+                new URL("http://www.rishi.com"));
+        entityManager.persist(rishi);
+
         Item item = new Item();
         item.setName("Ancient Emerald Lilly");
+        item.setSource(rishi);
 
         entityManager.persist(item);
 
@@ -33,6 +50,7 @@ public class RecipesTest extends FunctionalTest {
         recipe.setName("SCOBY DO");
         recipe.setReceived(CalendarUtils.date(Calendar.MAY, 12, 2011));
         recipe.setYields(Measurements.volume("4.0 L"));
+        recipe.setSource(friend);
 
         Ingredient<Mass> tea = new Ingredient<Mass>();
         tea.setAmount(Measurements.mass("5.0 g"));

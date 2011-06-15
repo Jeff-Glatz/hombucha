@@ -1,10 +1,10 @@
 package ruffkat.hombucha.model;
 
 import javax.persistence.Basic;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import java.util.Date;
 
 @MappedSuperclass
@@ -15,7 +15,7 @@ public abstract class Sourced
     @Temporal(TemporalType.TIMESTAMP)
     private Date received;
 
-    @Transient
+    @ManyToOne
     private Source source;
 
 
