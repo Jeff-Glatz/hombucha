@@ -3,9 +3,10 @@ package ruffkat.hombucha.store;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
-import ruffkat.hombucha.util.CalendarUtils;
+import ruffkat.hombucha.measure.Measurements;
 import ruffkat.hombucha.model.Ferment;
 import ruffkat.hombucha.model.Processing;
+import ruffkat.hombucha.util.CalendarUtils;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Calendar;
@@ -25,6 +26,7 @@ public class FermentsTest extends FunctionalTest {
     @Rollback(false)
     public void testSaveAndLoad() {
         Ferment ferment = ferments.create();
+        ferment.setVolume(Measurements.volume("1.5 L"));
         ferment.setProcessing(Processing.SECONDARY);
         ferment.setStartTime(CalendarUtils.date(Calendar.MAY, 12, 2011));
         ferment.setEndTime(CalendarUtils.date(Calendar.MAY, 24, 2011));
@@ -41,6 +43,7 @@ public class FermentsTest extends FunctionalTest {
     @Rollback(false)
     public void testSaveAndDelete() {
         Ferment ferment = ferments.create();
+        ferment.setVolume(Measurements.volume("6.0 l"));
         ferment.setProcessing(Processing.CONTINUOUS);
         ferment.setStartTime(CalendarUtils.date(Calendar.MAY, 12, 2011));
         ferment.setEndTime(CalendarUtils.date(Calendar.MAY, 24, 2011));

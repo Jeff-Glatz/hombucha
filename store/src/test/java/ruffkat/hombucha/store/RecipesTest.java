@@ -3,8 +3,9 @@ package ruffkat.hombucha.store;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
-import ruffkat.hombucha.util.CalendarUtils;
+import ruffkat.hombucha.measure.Measurements;
 import ruffkat.hombucha.model.Recipe;
+import ruffkat.hombucha.util.CalendarUtils;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Calendar;
@@ -23,6 +24,7 @@ public class RecipesTest extends FunctionalTest {
         Recipe recipe = recipes.create();
         recipe.setName("SCOBY DO");
         recipe.setReceived(CalendarUtils.date(Calendar.MAY, 12, 2011));
+        recipe.setYields(Measurements.volume("4.0 L"));
 
         entityManager.persist(recipe);
 
@@ -38,6 +40,7 @@ public class RecipesTest extends FunctionalTest {
         Recipe recipe = recipes.create();
         recipe.setName("SCOBY DO");
         recipe.setReceived(CalendarUtils.date(Calendar.MAY, 12, 2011));
+        recipe.setYields(Measurements.volume("2.0 L"));
 
         entityManager.persist(recipe);
 
