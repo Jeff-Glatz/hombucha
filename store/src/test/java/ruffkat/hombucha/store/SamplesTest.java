@@ -79,16 +79,23 @@ public class SamplesTest extends FunctionalTest {
     @Rollback(false)
     public void SaveSample()
             throws Exception {
+        Friend friend = new Friend("Christina Toyota");
+        entityManager.persist(friend);
+
+        Online online = new Online("Recycled Glass Dispenser",
+                new URL("http://www.westelm.com"));
+        entityManager.persist(online);
+
         // Create a mother
         Mushroom mother = new Mushroom();
-        mother.setSource(new Friend("Christina Toyota"));
+        mother.setSource(friend);
         mother.setName("Mama");
         mother.setReceived(CalendarUtils.date(Calendar.MAY, 12, 2011));
         entityManager.persist(mother);
 
         // First baby
         Mushroom baby1 = new Mushroom();
-        baby1.setSource(new Friend("Christina Toyota"));
+        baby1.setSource(friend);
         baby1.setName("Baby 1");
         baby1.setReceived(CalendarUtils.date(Calendar.MAY, 12, 2011));
         baby1.setMother(mother);
@@ -96,7 +103,7 @@ public class SamplesTest extends FunctionalTest {
 
         // Second baby
         Mushroom baby2 = new Mushroom();
-        baby2.setSource(new Friend("Christina Toyota"));
+        baby2.setSource(friend);
         baby2.setName("Baby 2");
         baby2.setReceived(CalendarUtils.date(Calendar.MAY, 12, 2011));
         baby2.setMother(mother);
@@ -104,16 +111,14 @@ public class SamplesTest extends FunctionalTest {
 
         // Create a reactor to hold the brew
         Container containerA = new Container();
-        containerA.setSource(new Online("Recycled Glass Dispenser",
-                new URL("http://www.westelm.com")));
+        containerA.setSource(online);
         containerA.setName("A");
         containerA.setReceived(CalendarUtils.date(Calendar.JUNE, 11, 2011));
         entityManager.persist(containerA);
 
         // Create another reactor to hold the brew
         Container containerB = new Container();
-        containerB.setSource(new Online("Recycled Glass Dispenser",
-                new URL("http://www.westelm.com")));
+        containerB.setSource(online);
         containerB.setName("B");
         containerB.setReceived(CalendarUtils.date(Calendar.JUNE, 11, 2011));
         entityManager.persist(containerB);
