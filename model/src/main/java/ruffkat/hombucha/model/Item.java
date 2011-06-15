@@ -4,6 +4,7 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import java.math.BigDecimal;
 import java.util.Currency;
+import java.util.Locale;
 
 @Entity
 public class Item
@@ -13,7 +14,7 @@ public class Item
     private BigDecimal price;
 
     @Basic
-    private Currency currency;
+    private Currency currency = Currency.getInstance(Locale.getDefault());
 
     public BigDecimal getPrice() {
         return price;
