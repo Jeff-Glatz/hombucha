@@ -17,8 +17,6 @@ import javax.measure.Measure;
 import javax.measure.quantity.Volume;
 import javax.measure.unit.Unit;
 import javax.persistence.EntityNotFoundException;
-import java.math.BigDecimal;
-import java.math.MathContext;
 import java.net.URL;
 import java.util.Calendar;
 
@@ -45,27 +43,7 @@ public class SamplesTest extends FunctionalTest {
     public void testSaveAndLoad() {
         entityManager.persist(ferment);
 
-        Sample<Molarity> sample = samples.create(ferment, new Measure<Molarity>() {
-            @Override
-            public Number getValue() {
-                return null;  //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public Unit<Molarity> getUnit() {
-                return null;  //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public double doubleValue(Unit<Molarity> molarityUnit) {
-                return 0;  //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public BigDecimal decimalValue(Unit<Molarity> molarityUnit, MathContext ctx) throws ArithmeticException {
-                return null;  //To change body of implemented methods use File | Settings | File Templates.
-            }
-        });
+        Sample<Molarity> sample = samples.create(ferment, Measure.valueOf(7.0, Molarity.UNIT));
 
         entityManager.persist(sample);
 
@@ -80,27 +58,8 @@ public class SamplesTest extends FunctionalTest {
     public void testSaveAndDelete() {
         entityManager.persist(ferment);
 
-        Sample<Volume> sample = samples.create(ferment, new Measure<Volume>() {
-            @Override
-            public Number getValue() {
-                return null;  //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public Unit<Volume> getUnit() {
-                return null;  //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public double doubleValue(Unit<Volume> volumeUnit) {
-                return 0;  //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public BigDecimal decimalValue(Unit<Volume> volumeUnit, MathContext ctx) throws ArithmeticException {
-                return null;  //To change body of implemented methods use File | Settings | File Templates.
-            }
-        });
+        Sample<Volume> sample = samples.create(ferment, Measure.valueOf(6.0,
+                Unit.valueOf("L").asType(Volume.class)));
 
         entityManager.persist(sample);
 
