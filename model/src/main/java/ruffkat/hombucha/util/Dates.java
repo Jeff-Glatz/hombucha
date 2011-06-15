@@ -3,7 +3,7 @@ package ruffkat.hombucha.util;
 import java.util.Calendar;
 import java.util.Date;
 
-public final class CalendarUtils {
+public final class Dates {
 
     public static Date date(int month, int day, int year) {
         Calendar calendar = Calendar.getInstance();

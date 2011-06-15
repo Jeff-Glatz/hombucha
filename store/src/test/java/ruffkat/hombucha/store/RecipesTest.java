@@ -9,7 +9,7 @@ import ruffkat.hombucha.model.Ingredient;
 import ruffkat.hombucha.model.Item;
 import ruffkat.hombucha.model.Online;
 import ruffkat.hombucha.model.Recipe;
-import ruffkat.hombucha.util.CalendarUtils;
+import ruffkat.hombucha.util.Dates;
 
 import javax.measure.quantity.Mass;
 import javax.persistence.EntityNotFoundException;
@@ -48,7 +48,7 @@ public class RecipesTest extends FunctionalTest {
 
         Recipe recipe = recipes.create();
         recipe.setName("SCOBY DO");
-        recipe.setReceived(CalendarUtils.date(Calendar.MAY, 12, 2011));
+        recipe.setReceived(Dates.date(Calendar.MAY, 12, 2011));
         recipe.setYields(Measurements.volume("4.0 L"));
         recipe.setSource(friend);
 
@@ -72,7 +72,7 @@ public class RecipesTest extends FunctionalTest {
     public void testSaveAndDelete() {
         Recipe recipe = recipes.create();
         recipe.setName("SCOBY DO");
-        recipe.setReceived(CalendarUtils.date(Calendar.MAY, 12, 2011));
+        recipe.setReceived(Dates.date(Calendar.MAY, 12, 2011));
         recipe.setYields(Measurements.volume("2.0 L"));
 
         entityManager.persist(recipe);

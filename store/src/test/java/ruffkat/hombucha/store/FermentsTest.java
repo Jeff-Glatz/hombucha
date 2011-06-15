@@ -6,7 +6,7 @@ import org.springframework.test.annotation.Rollback;
 import ruffkat.hombucha.measure.Measurements;
 import ruffkat.hombucha.model.Ferment;
 import ruffkat.hombucha.model.Processing;
-import ruffkat.hombucha.util.CalendarUtils;
+import ruffkat.hombucha.util.Dates;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Calendar;
@@ -28,8 +28,8 @@ public class FermentsTest extends FunctionalTest {
         Ferment ferment = ferments.create();
         ferment.setVolume(Measurements.volume("1.5 L"));
         ferment.setProcessing(Processing.SECONDARY);
-        ferment.setStartTime(CalendarUtils.date(Calendar.MAY, 12, 2011));
-        ferment.setEndTime(CalendarUtils.date(Calendar.MAY, 24, 2011));
+        ferment.setStartTime(Dates.date(Calendar.MAY, 12, 2011));
+        ferment.setEndTime(Dates.date(Calendar.MAY, 24, 2011));
 
         entityManager.persist(ferment);
 
@@ -45,8 +45,8 @@ public class FermentsTest extends FunctionalTest {
         Ferment ferment = ferments.create();
         ferment.setVolume(Measurements.volume("6.0 l"));
         ferment.setProcessing(Processing.CONTINUOUS);
-        ferment.setStartTime(CalendarUtils.date(Calendar.MAY, 12, 2011));
-        ferment.setEndTime(CalendarUtils.date(Calendar.MAY, 24, 2011));
+        ferment.setStartTime(Dates.date(Calendar.MAY, 12, 2011));
+        ferment.setEndTime(Dates.date(Calendar.MAY, 24, 2011));
 
         entityManager.persist(ferment);
 
@@ -67,8 +67,8 @@ public class FermentsTest extends FunctionalTest {
     public void testActive() {
         Ferment ferment = ferments.create();
         ferment.setProcessing(Processing.BATCH);
-        ferment.setStartTime(CalendarUtils.date(Calendar.MAY, 12, 2011));
-        ferment.setEndTime(CalendarUtils.date(Calendar.MAY, 24, 2012));
+        ferment.setStartTime(Dates.date(Calendar.MAY, 12, 2011));
+        ferment.setEndTime(Dates.date(Calendar.MAY, 24, 2012));
 
         Set<Ferment> active = ferments.active();
         assertFalse(active.contains(ferment));

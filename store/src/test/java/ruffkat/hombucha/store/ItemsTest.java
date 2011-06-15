@@ -3,7 +3,7 @@ package ruffkat.hombucha.store;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
-import ruffkat.hombucha.util.CalendarUtils;
+import ruffkat.hombucha.util.Dates;
 import ruffkat.hombucha.model.Item;
 
 import javax.persistence.EntityNotFoundException;
@@ -22,7 +22,7 @@ public class ItemsTest extends FunctionalTest {
     public void testSaveAndLoad() {
         Item item = items.create();
         item.setName("SCOBY DO");
-        item.setReceived(CalendarUtils.date(Calendar.MAY, 12, 2011));
+        item.setReceived(Dates.date(Calendar.MAY, 12, 2011));
 
         entityManager.persist(item);
 
@@ -37,7 +37,7 @@ public class ItemsTest extends FunctionalTest {
     public void testSaveAndDelete() {
         Item item = items.create();
         item.setName("SCOBY DO");
-        item.setReceived(CalendarUtils.date(Calendar.MAY, 12, 2011));
+        item.setReceived(Dates.date(Calendar.MAY, 12, 2011));
 
         entityManager.persist(item);
 

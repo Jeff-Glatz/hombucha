@@ -12,7 +12,7 @@ import ruffkat.hombucha.model.Friend;
 import ruffkat.hombucha.model.Mushroom;
 import ruffkat.hombucha.model.Online;
 import ruffkat.hombucha.model.Sample;
-import ruffkat.hombucha.util.CalendarUtils;
+import ruffkat.hombucha.util.Dates;
 
 import javax.measure.quantity.Volume;
 import javax.persistence.EntityNotFoundException;
@@ -33,8 +33,8 @@ public class SamplesTest extends FunctionalTest {
     public void setUp()
             throws Exception {
         ferment = new Ferment();
-        ferment.setStartTime(CalendarUtils.date(Calendar.JUNE, 12, 2011));
-        ferment.setEndTime(CalendarUtils.date(Calendar.JUNE, 26, 2011));
+        ferment.setStartTime(Dates.date(Calendar.JUNE, 12, 2011));
+        ferment.setEndTime(Dates.date(Calendar.JUNE, 26, 2011));
     }
 
     @Test
@@ -90,14 +90,14 @@ public class SamplesTest extends FunctionalTest {
         Mushroom mother = new Mushroom();
         mother.setSource(friend);
         mother.setName("Mama");
-        mother.setReceived(CalendarUtils.date(Calendar.MAY, 12, 2011));
+        mother.setReceived(Dates.date(Calendar.MAY, 12, 2011));
         entityManager.persist(mother);
 
         // First baby
         Mushroom baby1 = new Mushroom();
         baby1.setSource(friend);
         baby1.setName("Baby 1");
-        baby1.setReceived(CalendarUtils.date(Calendar.MAY, 12, 2011));
+        baby1.setReceived(Dates.date(Calendar.MAY, 12, 2011));
         baby1.setMother(mother);
         entityManager.persist(baby1);
 
@@ -105,7 +105,7 @@ public class SamplesTest extends FunctionalTest {
         Mushroom baby2 = new Mushroom();
         baby2.setSource(friend);
         baby2.setName("Baby 2");
-        baby2.setReceived(CalendarUtils.date(Calendar.MAY, 12, 2011));
+        baby2.setReceived(Dates.date(Calendar.MAY, 12, 2011));
         baby2.setMother(mother);
         entityManager.persist(baby2);
 
@@ -113,27 +113,27 @@ public class SamplesTest extends FunctionalTest {
         Container containerA = new Container();
         containerA.setSource(online);
         containerA.setName("A");
-        containerA.setReceived(CalendarUtils.date(Calendar.JUNE, 11, 2011));
+        containerA.setReceived(Dates.date(Calendar.JUNE, 11, 2011));
         entityManager.persist(containerA);
 
         // Create another reactor to hold the brew
         Container containerB = new Container();
         containerB.setSource(online);
         containerB.setName("B");
-        containerB.setReceived(CalendarUtils.date(Calendar.JUNE, 11, 2011));
+        containerB.setReceived(Dates.date(Calendar.JUNE, 11, 2011));
         entityManager.persist(containerB);
 
 //        Ferment ancientPuErh2006 = new Ferment();
 //        ancientPuErh2006.setProcessing(Processing.BATCH);
 //        ancientPuErh2006.setContainer(containerA);
-//        ancientPuErh2006.setStartTime(CalendarUtils.date(Calendar.JUNE, 12, 2011));
-//        ancientPuErh2006.setEndTime(CalendarUtils.date(Calendar.JUNE, 26, 2011));
+//        ancientPuErh2006.setStartTime(Dates.date(Calendar.JUNE, 12, 2011));
+//        ancientPuErh2006.setEndTime(Dates.date(Calendar.JUNE, 26, 2011));
 //        entityManager.persist(ancientPuErh2006);
 //
 //        Ferment bloodOrangePuErh = new Ferment();
 //        bloodOrangePuErh.setProcessing(Processing.CONTINUOUS);
 //        bloodOrangePuErh.setContainer(containerB);
-//        bloodOrangePuErh.setStartTime(CalendarUtils.date(Calendar.JUNE, 12, 2011));
+//        bloodOrangePuErh.setStartTime(Dates.date(Calendar.JUNE, 12, 2011));
 //        entityManager.persist(bloodOrangePuErh);
 //
 //        Sample<Molarity> ph = samples.ph(bloodOrangePuErh);
