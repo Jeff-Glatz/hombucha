@@ -1,11 +1,11 @@
 package ruffkat.hombucha.model;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
-@Entity
+@MappedSuperclass
 public abstract class Persistent
         implements Serializable {
 

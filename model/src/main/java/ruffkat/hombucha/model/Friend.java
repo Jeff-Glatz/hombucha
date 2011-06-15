@@ -1,9 +1,11 @@
 package ruffkat.hombucha.model;
 
 import javax.persistence.Basic;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
+@DiscriminatorValue("friend")
 public class Friend
         extends Source {
 

@@ -1,15 +1,12 @@
 package ruffkat.hombucha.model;
 
 import javax.persistence.Basic;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.MappedSuperclass;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "subtype")
 public abstract class Source
         extends Persistent {
 
