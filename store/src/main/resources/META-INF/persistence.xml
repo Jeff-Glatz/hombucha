@@ -10,11 +10,9 @@
         <class>ruffkat.hombucha.model.Item</class>
         <class>ruffkat.hombucha.model.Mushroom</class>
         <class>ruffkat.hombucha.model.Online</class>
-        <class>ruffkat.hombucha.model.Persistent</class>
         <class>ruffkat.hombucha.model.Recipe</class>
         <class>ruffkat.hombucha.model.Sample</class>
         <class>ruffkat.hombucha.model.Source</class>
-        <class>ruffkat.hombucha.model.Sourced</class>
         <properties>
             <property name="hibernate.connection.autocommit" value="false"/>
             <property name="hibernate.format_sql" value="true"/>
