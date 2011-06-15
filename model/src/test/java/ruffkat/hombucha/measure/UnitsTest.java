@@ -11,8 +11,7 @@ public class UnitsTest {
     @Test
     public void testMolarity()
             throws Exception {
-        Unit<Molarity> molarity = Units.molarity("mol/m3");
-
+        Unit<Molarity> molarity = Units.molarity("mol/l");
         assertEquals("[N]/[L]3", molarity.getDimension().toString());
     }
 }

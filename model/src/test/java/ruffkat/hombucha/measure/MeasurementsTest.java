@@ -12,9 +12,8 @@ public class MeasurementsTest {
     @Test
     public void testMolarity()
             throws Exception {
-        Measure<Molarity> molarity = Measurements.molarity("7.0 mol/m3");
-
-        assertEquals(new BigDecimal("7.0"), molarity.getValue());
-        assertEquals(Molarity.UNIT, molarity.getUnit());
+        Measure<Molarity> acidity = Measurements.molarity("7.0 mol/m3");
+        assertEquals(new BigDecimal("7.0"), acidity.getValue());
+        assertEquals(Molarity.UNIT, acidity.getUnit());
     }
 }
