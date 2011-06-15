@@ -28,8 +28,8 @@ public class FermentsTest extends FunctionalTest {
         Ferment ferment = ferments.create();
         ferment.setVolume(Measurements.volume("1.5 L"));
         ferment.setProcessing(Processing.SECONDARY);
-        ferment.setStartTime(Dates.date(Calendar.MAY, 12, 2011));
-        ferment.setEndTime(Dates.date(Calendar.MAY, 24, 2011));
+        ferment.setStart(Dates.date(Calendar.MAY, 12, 2011));
+        ferment.setStop(Dates.date(Calendar.MAY, 24, 2011));
 
         entityManager.persist(ferment);
 
@@ -45,8 +45,8 @@ public class FermentsTest extends FunctionalTest {
         Ferment ferment = ferments.create();
         ferment.setVolume(Measurements.volume("6.0 l"));
         ferment.setProcessing(Processing.CONTINUOUS);
-        ferment.setStartTime(Dates.date(Calendar.MAY, 12, 2011));
-        ferment.setEndTime(Dates.date(Calendar.MAY, 24, 2011));
+        ferment.setStart(Dates.date(Calendar.MAY, 12, 2011));
+        ferment.setStop(Dates.date(Calendar.MAY, 24, 2011));
 
         entityManager.persist(ferment);
 
@@ -67,8 +67,8 @@ public class FermentsTest extends FunctionalTest {
     public void testActive() {
         Ferment ferment = ferments.create();
         ferment.setProcessing(Processing.BATCH);
-        ferment.setStartTime(Dates.date(Calendar.MAY, 12, 2011));
-        ferment.setEndTime(Dates.date(Calendar.MAY, 24, 2012));
+        ferment.setStart(Dates.date(Calendar.MAY, 12, 2011));
+        ferment.setStop(Dates.date(Calendar.MAY, 24, 2012));
 
         Set<Ferment> active = ferments.active();
         assertFalse(active.contains(ferment));

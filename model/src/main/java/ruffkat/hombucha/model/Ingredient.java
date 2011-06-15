@@ -19,6 +19,7 @@ public class Ingredient<Q extends Quantity>
             CascadeType.REFRESH, CascadeType.DETACH})
     private Item item;
 
+    @Basic
     @Type(type = "measure")
     private Measure<Q> amount;
 

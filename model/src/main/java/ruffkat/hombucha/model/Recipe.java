@@ -21,6 +21,7 @@ public class Recipe
     @Basic
     private String instructions;
 
+    @Basic
     @Type(type = "measure")
     private Measure<Volume> yields;
 

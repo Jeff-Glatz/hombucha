@@ -6,7 +6,6 @@ import javax.measure.Measure;
 import javax.measure.quantity.Volume;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -43,14 +42,12 @@ public class Ferment
     private Processing processing;
 
     @Basic
-    @Column(name = "START_TIME")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date startTime;
+    private Date start;
 
     @Basic
-    @Column(name = "END_TIME")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date endTime;
+    private Date stop;
 
 
     public Recipe getRecipe() {
@@ -93,20 +90,20 @@ public class Ferment
         this.processing = processing;
     }
 
-    public Date getStartTime() {
-        return startTime;
+    public Date getStart() {
+        return start;
     }
 
-    public void setStartTime(Date start) {
-        this.startTime = start;
+    public void setStart(Date start) {
+        this.start = start;
     }
 
-    public Date getEndTime() {
-        return endTime;
+    public Date getStop() {
+        return stop;
     }
 
-    public void setEndTime(Date end) {
-        this.endTime = end;
+    public void setStop(Date end) {
+        this.stop = end;
     }
 
     @Override
@@ -116,12 +113,12 @@ public class Ferment
 
         Ferment ferment = (Ferment) o;
 
-        if (endTime != null ? !endTime.equals(ferment.endTime) : ferment.endTime != null) return false;
+        if (stop != null ? !stop.equals(ferment.stop) : ferment.stop != null) return false;
         if (processing != ferment.processing) return false;
         if (mushroom != null ? !mushroom.equals(ferment.mushroom) : ferment.mushroom != null) return false;
         if (container != null ? !container.equals(ferment.container) : ferment.container != null) return false;
         if (recipe != null ? !recipe.equals(ferment.recipe) : ferment.recipe != null) return false;
-        if (startTime != null ? !startTime.equals(ferment.startTime) : ferment.startTime != null) return false;
+        if (start != null ? !start.equals(ferment.start) : ferment.start != null) return false;
         if (volume != null ? !volume.equals(ferment.volume) : ferment.volume != null) return false;
 
         return true;
@@ -134,8 +131,8 @@ public class Ferment
         result = 31 * result + (container != null ? container.hashCode() : 0);
         result = 31 * result + (volume != null ? volume.hashCode() : 0);
         result = 31 * result + (processing != null ? processing.hashCode() : 0);
-        result = 31 * result + (startTime != null ? startTime.hashCode() : 0);
-        result = 31 * result + (endTime != null ? endTime.hashCode() : 0);
+        result = 31 * result + (start != null ? start.hashCode() : 0);
+        result = 31 * result + (stop != null ? stop.hashCode() : 0);
         return result;
     }
 }

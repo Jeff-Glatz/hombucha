@@ -4,6 +4,7 @@ import org.hibernate.annotations.Type;
 
 import javax.measure.Measure;
 import javax.measure.quantity.Quantity;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,9 +26,11 @@ public class Sample<Q extends Quantity>
             CascadeType.REFRESH, CascadeType.DETACH})
     private Ferment ferment;
 
+    @Basic
     @Type(type = "instant")
     private Instant taken;
 
+    @Basic
     @Type(type = "measure")
     private Measure<Q> measurement;
 

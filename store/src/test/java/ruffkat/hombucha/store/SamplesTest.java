@@ -33,8 +33,8 @@ public class SamplesTest extends FunctionalTest {
     public void setUp()
             throws Exception {
         ferment = new Ferment();
-        ferment.setStartTime(Dates.date(Calendar.JUNE, 12, 2011));
-        ferment.setEndTime(Dates.date(Calendar.JUNE, 26, 2011));
+        ferment.setStart(Dates.date(Calendar.JUNE, 12, 2011));
+        ferment.setStop(Dates.date(Calendar.JUNE, 26, 2011));
     }
 
     @Test
@@ -126,14 +126,14 @@ public class SamplesTest extends FunctionalTest {
 //        Ferment ancientPuErh2006 = new Ferment();
 //        ancientPuErh2006.setProcessing(Processing.BATCH);
 //        ancientPuErh2006.setContainer(containerA);
-//        ancientPuErh2006.setStartTime(Dates.date(Calendar.JUNE, 12, 2011));
-//        ancientPuErh2006.setEndTime(Dates.date(Calendar.JUNE, 26, 2011));
+//        ancientPuErh2006.setStart(Dates.date(Calendar.JUNE, 12, 2011));
+//        ancientPuErh2006.setStop(Dates.date(Calendar.JUNE, 26, 2011));
 //        entityManager.persist(ancientPuErh2006);
 //
 //        Ferment bloodOrangePuErh = new Ferment();
 //        bloodOrangePuErh.setProcessing(Processing.CONTINUOUS);
 //        bloodOrangePuErh.setContainer(containerB);
-//        bloodOrangePuErh.setStartTime(Dates.date(Calendar.JUNE, 12, 2011));
+//        bloodOrangePuErh.setStart(Dates.date(Calendar.JUNE, 12, 2011));
 //        entityManager.persist(bloodOrangePuErh);
 //
 //        Sample<Molarity> ph = samples.ph(bloodOrangePuErh);

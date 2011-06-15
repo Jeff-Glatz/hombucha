@@ -29,17 +29,17 @@ public class InstantType
     }
 
     public int[] sqlTypes() {
-        return new int[]{Types.DATE};
+        return new int[]{Types.TIMESTAMP};
     }
 
     public void nullSafeSet(PreparedStatement st, Object value, int index)
             throws HibernateException, SQLException {
         if (value == null) {
-            st.setNull(index, Types.DATE);
+            st.setNull(index, Types.TIMESTAMP);
         } else {
             Instant instant = (Instant) value;
             Timestamp timestamp = new Timestamp(instant.toEpochMillisLong());
-            st.setObject(index, timestamp, Types.DATE);
+            st.setObject(index, timestamp, Types.TIMESTAMP);
         }
     }
 
