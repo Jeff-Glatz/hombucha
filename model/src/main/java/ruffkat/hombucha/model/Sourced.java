@@ -1,25 +1,15 @@
 package ruffkat.hombucha.model;
 
 import javax.persistence.Basic;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import java.io.Serializable;
 import java.util.Date;
 
 @MappedSuperclass
 public abstract class Sourced
-        implements Serializable {
-
-    @Id
-    @GeneratedValue
-    private Long id;
-
-    @Basic
-    private String name;
+        extends Persistent {
 
     @Basic
     @Temporal(TemporalType.TIMESTAMP)
@@ -28,17 +18,6 @@ public abstract class Sourced
     @Transient
     private Source source;
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public Date getReceived() {
         return received;
@@ -61,19 +40,17 @@ public abstract class Sourced
         if (this == o) return true;
         if (!(o instanceof Sourced)) return false;
 
-        Sourced that = (Sourced) o;
+        Sourced sourced = (Sourced) o;
 
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (received != null ? !received.equals(that.received) : that.received != null) return false;
-        if (source != null ? !source.equals(that.source) : that.source != null) return false;
+        if (received != null ? !received.equals(sourced.received) : sourced.received != null) return false;
+        if (source != null ? !source.equals(sourced.source) : sourced.source != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (received != null ? received.hashCode() : 0);
+        int result = received != null ? received.hashCode() : 0;
         result = 31 * result + (source != null ? source.hashCode() : 0);
         return result;
     }

@@ -3,35 +3,35 @@ package ruffkat.hombucha.model;
 import javax.measure.Measure;
 import javax.measure.quantity.Volume;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 public class Ferment
-        implements Serializable {
+        extends Persistent {
 
-    @Id
-    @GeneratedValue
-    private Long id;
-
-    @ManyToOne
+    @ManyToOne(cascade = {
+            CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.REFRESH, CascadeType.DETACH})
     private Recipe recipe;
 
-    @OneToOne
+    @OneToOne(cascade = {
+            CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.REFRESH, CascadeType.DETACH})
     private Mushroom mushroom;
 
-    @OneToOne
+    @OneToOne(cascade = {
+            CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.REFRESH, CascadeType.DETACH})
     private Container container;
 
     @Transient
@@ -51,10 +51,6 @@ public class Ferment
     @Temporal(TemporalType.TIMESTAMP)
     private Date endTime;
 
-
-    public Long getId() {
-        return id;
-    }
 
     public Recipe getRecipe() {
         return recipe;

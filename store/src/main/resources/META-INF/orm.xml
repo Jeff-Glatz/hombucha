@@ -7,4 +7,7 @@
             where current_timestamp() between f.startTime and f.endTime
         </query>
     </named-query>
+    <named-query name="Ferments.truncate">
+        <query>delete from Ferment</query>
+    </named-query>
 </entity-mappings>

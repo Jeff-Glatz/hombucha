@@ -8,6 +8,7 @@ import ruffkat.hombucha.model.Ferment;
 import ruffkat.hombucha.model.Processing;
 
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.Query;
 import java.util.Calendar;
 import java.util.Set;
 
@@ -61,6 +62,9 @@ public class FermentsTest extends FunctionalTest {
     @Test
     @Rollback(false)
     public void testActive() {
+        Query query = entityManager.createNamedQuery("Ferments.truncate");
+        query.executeUpdate();
+
         Set<Ferment> active = ferments.active();
         assertEquals(0, active.size());
 

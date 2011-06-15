@@ -3,6 +3,7 @@ package ruffkat.hombucha.model;
 import javax.measure.Measure;
 import javax.measure.quantity.Quantity;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,11 +23,13 @@ public class Sample<Q extends Quantity>
     @GeneratedValue
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = {
+            CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.REFRESH, CascadeType.DETACH})
     private Ferment ferment;
 
     @Basic
-    @Column(name = "TAKEN_AT")
+    @Column(name = "taken_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar takenAt;
 

@@ -1,5 +1,6 @@
 package ruffkat.hombucha.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -7,7 +8,9 @@ import javax.persistence.ManyToOne;
 public class Mushroom
         extends Sourced {
 
-    @ManyToOne
+    @ManyToOne(cascade = {
+            CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.REFRESH, CascadeType.DETACH})
     private Mushroom mother;
 
     public Mushroom getMother() {

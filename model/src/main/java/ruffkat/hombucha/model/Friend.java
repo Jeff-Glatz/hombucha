@@ -2,8 +2,10 @@ package ruffkat.hombucha.model;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "friend")
 public class Friend
         extends Source {
 
