@@ -1,10 +1,9 @@
-package ruffkat.hombucha.jpa;
+package ruffkat.hombucha.type;
 
 import org.hibernate.HibernateException;
 import org.hibernate.usertype.UserType;
 
 import javax.measure.Measure;
-import javax.measure.unit.Unit;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,18 +27,15 @@ public class MeasureType implements UserType {
     }
 
     public int[] sqlTypes() {
-        return new int[]{Types.NUMERIC, Types.VARCHAR};
+        return new int[]{Types.VARCHAR};
     }
 
     public void nullSafeSet(PreparedStatement st, Object value, int index)
             throws HibernateException, SQLException {
         if (value == null) {
-            st.setNull(index, Types.NUMERIC);
-            st.setNull(index + 1, Types.VARCHAR);
+            st.setNull(index, Types.VARCHAR);
         } else {
-            Measure<?> measure = (Measure<?>) value;
-            st.setObject(index, measure.getValue(), Types.NUMERIC);
-            st.setObject(index + 1, measure.getUnit().toString(), Types.VARCHAR);
+            st.setObject(index, value.toString(), Types.VARCHAR);
         }
     }
 
@@ -47,10 +43,9 @@ public class MeasureType implements UserType {
             throws HibernateException,
             SQLException {
         if (!resultSet.wasNull()) {
-            Double value = resultSet.getDouble(names[0]);
-            if (value != null) {
-                Unit<?> unit = Unit.valueOf(resultSet.getString(names[1]));
-                return Measure.valueOf(value, unit);
+            String measure = resultSet.getString(names[0]);
+            if (measure != null) {
+                return Measure.valueOf(measure);
             }
         }
         return null;

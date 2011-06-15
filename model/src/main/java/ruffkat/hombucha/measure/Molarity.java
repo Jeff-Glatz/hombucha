@@ -1,4 +1,4 @@
-package ruffkat.hombucha.model;
+package ruffkat.hombucha.measure;
 
 import javax.measure.quantity.Quantity;
 import javax.measure.unit.ProductUnit;

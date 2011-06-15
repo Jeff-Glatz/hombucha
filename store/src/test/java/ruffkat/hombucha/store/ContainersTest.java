@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import ruffkat.hombucha.model.CalendarUtils;
 import ruffkat.hombucha.model.Container;
+import ruffkat.hombucha.measure.Measurements;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Calendar;
@@ -23,6 +24,7 @@ public class ContainersTest extends FunctionalTest {
         Container container = containers.create();
         container.setName("SCOBY DO");
         container.setReceived(CalendarUtils.date(Calendar.MAY, 12, 2011));
+        container.setVolume(Measurements.volume("6.0 l"));
 
         entityManager.persist(container);
 
@@ -38,6 +40,7 @@ public class ContainersTest extends FunctionalTest {
         Container container = containers.create();
         container.setName("SCOBY DO");
         container.setReceived(CalendarUtils.date(Calendar.MAY, 12, 2011));
+        container.setVolume(Measurements.volume("6.0 l"));
 
         entityManager.persist(container);
 
