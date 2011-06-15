@@ -6,15 +6,12 @@ import javax.measure.Measure;
 import javax.measure.quantity.Quantity;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.time.Instant;
 import java.io.Serializable;
-import java.util.Calendar;
 
 @Entity
 public class Sample<Q extends Quantity>
@@ -30,9 +27,7 @@ public class Sample<Q extends Quantity>
     private Ferment ferment;
 
     @Basic
-    @Column(name = "taken_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Calendar takenAt;
+    private Instant takenAt;
 
     @Type(type = "measure")
     private Measure<Q> measurement;
@@ -49,11 +44,11 @@ public class Sample<Q extends Quantity>
         this.ferment = ferment;
     }
 
-    public Calendar getTakenAt() {
+    public Instant getTakenAt() {
         return takenAt;
     }
 
-    public void setTakenAt(Calendar takenAt) {
+    public void setTakenAt(Instant takenAt) {
         this.takenAt = takenAt;
     }
 
