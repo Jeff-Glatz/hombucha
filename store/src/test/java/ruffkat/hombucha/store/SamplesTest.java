@@ -4,18 +4,17 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
+import ruffkat.hombucha.measure.Measurements;
 import ruffkat.hombucha.measure.Molarity;
-import ruffkat.hombucha.util.CalendarUtils;
 import ruffkat.hombucha.model.Container;
 import ruffkat.hombucha.model.Ferment;
 import ruffkat.hombucha.model.Friend;
 import ruffkat.hombucha.model.Mushroom;
 import ruffkat.hombucha.model.Online;
 import ruffkat.hombucha.model.Sample;
+import ruffkat.hombucha.util.CalendarUtils;
 
-import javax.measure.Measure;
 import javax.measure.quantity.Volume;
-import javax.measure.unit.Unit;
 import javax.persistence.EntityNotFoundException;
 import java.net.URL;
 import java.util.Calendar;
@@ -43,7 +42,8 @@ public class SamplesTest extends FunctionalTest {
     public void testSaveAndLoad() {
         entityManager.persist(ferment);
 
-        Sample<Molarity> sample = samples.create(ferment, Measure.valueOf(7.0, Molarity.UNIT));
+        Sample<Molarity> sample = samples.create(ferment,
+                Measurements.molarity("7.0 mol/l"));
 
         entityManager.persist(sample);
 
@@ -58,8 +58,8 @@ public class SamplesTest extends FunctionalTest {
     public void testSaveAndDelete() {
         entityManager.persist(ferment);
 
-        Sample<Volume> sample = samples.create(ferment, Measure.valueOf(6.0,
-                Unit.valueOf("L").asType(Volume.class)));
+        Sample<Volume> sample = samples.create(ferment,
+                Measurements.volume("6.0 l"));
 
         entityManager.persist(sample);
 
