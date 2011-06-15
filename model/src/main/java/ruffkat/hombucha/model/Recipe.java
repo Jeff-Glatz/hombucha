@@ -1,8 +1,6 @@
 package ruffkat.hombucha.model;
 
 import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-import ruffkat.hombucha.type.MeasureType;
 
 import javax.measure.Measure;
 import javax.measure.quantity.Volume;
