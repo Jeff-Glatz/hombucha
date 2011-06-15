@@ -7,12 +7,19 @@ import javax.measure.quantity.Quantity;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.time.Instant;
+import java.io.Serializable;
 
 @Entity
 public class Sample<Q extends Quantity>
-        extends Persistent {
+        implements Serializable {
+
+    @Id
+    @GeneratedValue
+    private Long oid;
 
     @OneToOne(cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
@@ -26,6 +33,10 @@ public class Sample<Q extends Quantity>
     @Basic
     @Type(type = "measure")
     private Measure<Q> measurement;
+
+    public Long getOid() {
+        return oid;
+    }
 
     public Ferment getFerment() {
         return ferment;
