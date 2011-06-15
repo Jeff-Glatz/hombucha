@@ -11,11 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.time.Instant;
-import java.io.Serializable;
 
 @Entity
 public class Sample<Q extends Quantity>
-        implements Serializable {
+        implements Persistent {
 
     @Id
     @GeneratedValue
@@ -34,8 +33,13 @@ public class Sample<Q extends Quantity>
     @Type(type = "measure")
     private Measure<Q> measurement;
 
+
     public Long getOid() {
         return oid;
+    }
+
+    public boolean persisted() {
+        return oid != null;
     }
 
     public Ferment getFerment() {

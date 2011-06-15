@@ -1,6 +1,8 @@
 package ruffkat.hombucha.model;
 
 import javax.persistence.Basic;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
@@ -9,7 +11,11 @@ import java.util.Date;
 
 @MappedSuperclass
 public abstract class Sourced
-        extends Persistent {
+        implements Persistent {
+
+    @Id
+    @GeneratedValue
+    private Long oid;
 
     @Basic
     private String name;
@@ -21,6 +27,14 @@ public abstract class Sourced
     @ManyToOne
     private Source source;
 
+
+    public Long getOid() {
+        return oid;
+    }
+
+    public boolean persisted() {
+        return oid != null;
+    }
 
     public String getName() {
         return name;

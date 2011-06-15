@@ -9,6 +9,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -17,7 +19,11 @@ import java.util.Date;
 
 @Entity
 public class Ferment
-        extends Persistent {
+        implements Persistent {
+
+    @Id
+    @GeneratedValue
+    private Long oid;
 
     @Basic
     private String name;
@@ -52,6 +58,14 @@ public class Ferment
     @Temporal(TemporalType.TIMESTAMP)
     private Date stop;
 
+
+    public Long getOid() {
+        return oid;
+    }
+
+    public boolean persisted() {
+        return oid != null;
+    }
 
     public String getName() {
         return name;

@@ -2,13 +2,19 @@ package ruffkat.hombucha.model;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Source
-        extends Persistent {
+        implements Persistent {
+
+    @Id
+    @GeneratedValue
+    private Long oid;
 
     @Basic
     private String name;
@@ -19,6 +25,14 @@ public abstract class Source
 
     public Source(String name) {
         this.name = name;
+    }
+
+    public Long getOid() {
+        return oid;
+    }
+
+    public boolean persisted() {
+        return oid != null;
     }
 
     public String getName() {
