@@ -21,7 +21,7 @@ public class SamplesImpl
     public <Q extends Quantity> Sample<Q> create(Ferment ferment, Measure<Q> measurement) {
         Sample<Q> sample = new Sample<Q>();
         sample.setFerment(ferment);
-        sample.setTakenAt(timeSource.instant());
+        sample.setTaken(timeSource.instant());
         sample.setMeasurement(measurement);
         return sample;
     }

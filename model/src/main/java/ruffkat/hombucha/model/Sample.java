@@ -26,7 +26,7 @@ public class Sample<Q extends Quantity>
     private Ferment ferment;
 
     @Type(type = "instant")
-    private Instant takenAt;
+    private Instant taken;
 
     @Type(type = "measure")
     private Measure<Q> measurement;
@@ -43,12 +43,12 @@ public class Sample<Q extends Quantity>
         this.ferment = ferment;
     }
 
-    public Instant getTakenAt() {
-        return takenAt;
+    public Instant getTaken() {
+        return taken;
     }
 
-    public void setTakenAt(Instant takenAt) {
-        this.takenAt = takenAt;
+    public void setTaken(Instant taken) {
+        this.taken = taken;
     }
 
     public Measure<Q> getMeasurement() {
@@ -69,7 +69,7 @@ public class Sample<Q extends Quantity>
         if (ferment != null ? !ferment.equals(sample.ferment) : sample.ferment != null) return false;
         if (id != null ? !id.equals(sample.id) : sample.id != null) return false;
         if (measurement != null ? !measurement.equals(sample.measurement) : sample.measurement != null) return false;
-        if (takenAt != null ? !takenAt.equals(sample.takenAt) : sample.takenAt != null) return false;
+        if (taken != null ? !taken.equals(sample.taken) : sample.taken != null) return false;
 
         return true;
     }
@@ -78,7 +78,7 @@ public class Sample<Q extends Quantity>
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (ferment != null ? ferment.hashCode() : 0);
-        result = 31 * result + (takenAt != null ? takenAt.hashCode() : 0);
+        result = 31 * result + (taken != null ? taken.hashCode() : 0);
         result = 31 * result + (measurement != null ? measurement.hashCode() : 0);
         return result;
     }
