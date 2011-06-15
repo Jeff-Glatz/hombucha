@@ -8,10 +8,10 @@ import ruffkat.hombucha.model.Ferment;
 import ruffkat.hombucha.model.Processing;
 
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.Query;
 import java.util.Calendar;
 import java.util.Set;
 
+import static junit.framework.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -62,21 +62,17 @@ public class FermentsTest extends FunctionalTest {
     @Test
     @Rollback(false)
     public void testActive() {
-        Query query = entityManager.createNamedQuery("Ferments.truncate");
-        query.executeUpdate();
-
-        Set<Ferment> active = ferments.active();
-        assertEquals(0, active.size());
-
         Ferment ferment = ferments.create();
         ferment.setProcessing(Processing.BATCH);
         ferment.setStartTime(CalendarUtils.date(Calendar.MAY, 12, 2011));
         ferment.setEndTime(CalendarUtils.date(Calendar.MAY, 24, 2012));
 
+        Set<Ferment> active = ferments.active();
+        assertFalse(active.contains(ferment));
+
         entityManager.persist(ferment);
 
         active = ferments.active();
-        assertEquals(1, active.size());
         assertTrue(active.contains(ferment));
     }
 }
