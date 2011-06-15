@@ -47,7 +47,7 @@ public class SamplesTest extends FunctionalTest {
 
         entityManager.persist(sample);
 
-        Long id = sample.getId();
+        Long id = sample.getOid();
 
         assertNotNull(id);
         assertEquals(sample, samples.load(id));
@@ -63,7 +63,7 @@ public class SamplesTest extends FunctionalTest {
 
         entityManager.persist(sample);
 
-        Long id = sample.getId();
+        Long id = sample.getOid();
 
         sample = samples.load(id);
         samples.delete(sample);

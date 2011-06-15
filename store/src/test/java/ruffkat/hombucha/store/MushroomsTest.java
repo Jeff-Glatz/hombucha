@@ -26,7 +26,7 @@ public class MushroomsTest extends FunctionalTest {
 
         entityManager.persist(mushroom);
 
-        Long id = mushroom.getId();
+        Long id = mushroom.getOid();
 
         assertNotNull(id);
         assertEquals(mushroom, mushrooms.load(id));
@@ -41,7 +41,7 @@ public class MushroomsTest extends FunctionalTest {
 
         entityManager.persist(mushroom);
 
-        Long id = mushroom.getId();
+        Long id = mushroom.getOid();
 
         mushroom = mushrooms.load(id);
         mushrooms.delete(mushroom);

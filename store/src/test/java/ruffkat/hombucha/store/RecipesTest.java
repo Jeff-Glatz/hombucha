@@ -61,7 +61,7 @@ public class RecipesTest extends FunctionalTest {
 
         entityManager.persist(recipe);
 
-        Long id = recipe.getId();
+        Long id = recipe.getOid();
 
         assertNotNull(id);
         assertEquals(recipe, recipes.load(id));
@@ -77,7 +77,7 @@ public class RecipesTest extends FunctionalTest {
 
         entityManager.persist(recipe);
 
-        Long id = recipe.getId();
+        Long id = recipe.getOid();
 
         recipe = recipes.load(id);
         recipes.delete(recipe);

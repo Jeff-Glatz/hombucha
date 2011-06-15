@@ -19,6 +19,9 @@ import java.util.Date;
 public class Ferment
         extends Persistent {
 
+    @Basic
+    private String name;
+
     @ManyToOne(cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.REFRESH, CascadeType.DETACH})
@@ -49,6 +52,14 @@ public class Ferment
     @Temporal(TemporalType.TIMESTAMP)
     private Date stop;
 
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Recipe getRecipe() {
         return recipe;
@@ -109,16 +120,17 @@ public class Ferment
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Ferment)) return false;
 
         Ferment ferment = (Ferment) o;
 
-        if (stop != null ? !stop.equals(ferment.stop) : ferment.stop != null) return false;
-        if (processing != ferment.processing) return false;
-        if (mushroom != null ? !mushroom.equals(ferment.mushroom) : ferment.mushroom != null) return false;
         if (container != null ? !container.equals(ferment.container) : ferment.container != null) return false;
+        if (mushroom != null ? !mushroom.equals(ferment.mushroom) : ferment.mushroom != null) return false;
+        if (name != null ? !name.equals(ferment.name) : ferment.name != null) return false;
+        if (processing != ferment.processing) return false;
         if (recipe != null ? !recipe.equals(ferment.recipe) : ferment.recipe != null) return false;
         if (start != null ? !start.equals(ferment.start) : ferment.start != null) return false;
+        if (stop != null ? !stop.equals(ferment.stop) : ferment.stop != null) return false;
         if (volume != null ? !volume.equals(ferment.volume) : ferment.volume != null) return false;
 
         return true;
@@ -126,7 +138,8 @@ public class Ferment
 
     @Override
     public int hashCode() {
-        int result = recipe != null ? recipe.hashCode() : 0;
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (recipe != null ? recipe.hashCode() : 0);
         result = 31 * result + (mushroom != null ? mushroom.hashCode() : 0);
         result = 31 * result + (container != null ? container.hashCode() : 0);
         result = 31 * result + (volume != null ? volume.hashCode() : 0);

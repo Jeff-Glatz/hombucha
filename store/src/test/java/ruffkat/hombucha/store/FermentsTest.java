@@ -33,7 +33,7 @@ public class FermentsTest extends FunctionalTest {
 
         entityManager.persist(ferment);
 
-        Long id = ferment.getId();
+        Long id = ferment.getOid();
 
         assertNotNull(id);
         assertEquals(ferment, ferments.load(id));
@@ -50,7 +50,7 @@ public class FermentsTest extends FunctionalTest {
 
         entityManager.persist(ferment);
 
-        Long id = ferment.getId();
+        Long id = ferment.getOid();
 
         ferment = ferments.load(id);
         ferments.delete(ferment);

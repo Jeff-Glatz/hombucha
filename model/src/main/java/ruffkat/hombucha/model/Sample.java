@@ -7,19 +7,12 @@ import javax.measure.quantity.Quantity;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.time.Instant;
-import java.io.Serializable;
 
 @Entity
 public class Sample<Q extends Quantity>
-        implements Serializable {
-
-    @Id
-    @GeneratedValue
-    private Long id;
+        extends Persistent {
 
     @OneToOne(cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
@@ -33,10 +26,6 @@ public class Sample<Q extends Quantity>
     @Basic
     @Type(type = "measure")
     private Measure<Q> measurement;
-
-    public Long getId() {
-        return id;
-    }
 
     public Ferment getFerment() {
         return ferment;
@@ -65,12 +54,11 @@ public class Sample<Q extends Quantity>
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Sample)) return false;
 
         Sample sample = (Sample) o;
 
         if (ferment != null ? !ferment.equals(sample.ferment) : sample.ferment != null) return false;
-        if (id != null ? !id.equals(sample.id) : sample.id != null) return false;
         if (measurement != null ? !measurement.equals(sample.measurement) : sample.measurement != null) return false;
         if (taken != null ? !taken.equals(sample.taken) : sample.taken != null) return false;
 
@@ -79,8 +67,7 @@ public class Sample<Q extends Quantity>
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (ferment != null ? ferment.hashCode() : 0);
+        int result = ferment != null ? ferment.hashCode() : 0;
         result = 31 * result + (taken != null ? taken.hashCode() : 0);
         result = 31 * result + (measurement != null ? measurement.hashCode() : 0);
         return result;

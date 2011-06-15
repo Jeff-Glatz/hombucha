@@ -28,7 +28,7 @@ public class ContainersTest extends FunctionalTest {
 
         entityManager.persist(container);
 
-        Long id = container.getId();
+        Long id = container.getOid();
 
         assertNotNull(id);
         assertEquals(container, containers.load(id));
@@ -44,7 +44,7 @@ public class ContainersTest extends FunctionalTest {
 
         entityManager.persist(container);
 
-        Long id = container.getId();
+        Long id = container.getOid();
 
         container = containers.load(id);
         containers.delete(container);

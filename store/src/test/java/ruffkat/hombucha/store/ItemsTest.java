@@ -26,7 +26,7 @@ public class ItemsTest extends FunctionalTest {
 
         entityManager.persist(item);
 
-        Long id = item.getId();
+        Long id = item.getOid();
 
         assertNotNull(id);
         assertEquals(item, items.load(id));
@@ -41,7 +41,7 @@ public class ItemsTest extends FunctionalTest {
 
         entityManager.persist(item);
 
-        Long id = item.getId();
+        Long id = item.getOid();
 
         item = items.load(id);
         items.delete(item);
