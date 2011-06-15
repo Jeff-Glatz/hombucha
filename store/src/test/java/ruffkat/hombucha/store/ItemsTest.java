@@ -3,7 +3,7 @@ package ruffkat.hombucha.store;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
-import ruffkat.hombucha.model.CalendarUtils;
+import ruffkat.hombucha.util.CalendarUtils;
 import ruffkat.hombucha.model.Item;
 
 import javax.persistence.EntityNotFoundException;

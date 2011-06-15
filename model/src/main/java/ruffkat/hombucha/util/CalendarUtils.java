@@ -1,4 +1,4 @@
-package ruffkat.hombucha.model;
+package ruffkat.hombucha.util;
 
 import java.util.Calendar;
 import java.util.Date;
