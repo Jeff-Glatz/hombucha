@@ -7,14 +7,16 @@ import javax.measure.quantity.Volume;
 import javax.persistence.Basic;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
 public class Recipe
         extends Sourced {
 
-    @ElementCollection
-    private List<Ingredient<?>> ingredients;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<Ingredient<?>> ingredients = new LinkedList<Ingredient<?>>();
 
     @Basic
     private String instructions;

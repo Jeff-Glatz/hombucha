@@ -1,6 +1,7 @@
 package ruffkat.hombucha.measure;
 
 import javax.measure.Measure;
+import javax.measure.quantity.Mass;
 import javax.measure.quantity.Temperature;
 import javax.measure.quantity.Volume;
 
@@ -19,5 +20,10 @@ public final class Measurements {
     public static Measure<Molarity> molarity(String value) {
         return Measure.valueOf(value).
                 asType(Molarity.class);
+    }
+
+    public static Measure<Mass> mass(String value) {
+        return Measure.valueOf(value).
+                asType(Mass.class);
     }
 }
