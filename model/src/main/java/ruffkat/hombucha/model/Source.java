@@ -3,21 +3,15 @@ package ruffkat.hombucha.model;
 import javax.persistence.Basic;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import java.io.Serializable;
+import javax.persistence.MappedSuperclass;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "subtype")
 public abstract class Source
-        implements Serializable {
-
-    @Id
-    @GeneratedValue
-    private Long id;
+        extends Persistent {
 
     @Basic
     private String name;
@@ -28,10 +22,6 @@ public abstract class Source
 
     public Source(String name) {
         this.name = name;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getName() {

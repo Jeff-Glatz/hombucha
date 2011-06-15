@@ -3,15 +3,18 @@
     <persistence-unit name="hombucha" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <mapping-file>META-INF/orm.xml</mapping-file>
+        <class>ruffkat.hombucha.model.Container</class>
         <class>ruffkat.hombucha.model.Ferment</class>
         <class>ruffkat.hombucha.model.Friend</class>
-        <class>ruffkat.hombucha.model.Item</class>
         <class>ruffkat.hombucha.model.Ingredient</class>
+        <class>ruffkat.hombucha.model.Item</class>
         <class>ruffkat.hombucha.model.Mushroom</class>
         <class>ruffkat.hombucha.model.Online</class>
-        <class>ruffkat.hombucha.model.Container</class>
+        <class>ruffkat.hombucha.model.Persistent</class>
         <class>ruffkat.hombucha.model.Recipe</class>
         <class>ruffkat.hombucha.model.Sample</class>
+        <class>ruffkat.hombucha.model.Source</class>
+        <class>ruffkat.hombucha.model.Sourced</class>
         <properties>
             <property name="hibernate.connection.autocommit" value="false"/>
             <property name="hibernate.format_sql" value="true"/>
