@@ -3,5 +3,5 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <typedef name="measure"
-             class="ruffkat.hombucha.type.MeasureType"/>
+             class="ruffkat.hombucha.measure.MeasureType"/>
 </hibernate-mapping>

@@ -12,7 +12,7 @@ import ruffkat.hombucha.model.Mushroom;
 import ruffkat.hombucha.model.Online;
 import ruffkat.hombucha.model.Processing;
 import ruffkat.hombucha.model.Recipe;
-import ruffkat.hombucha.util.Dates;
+import ruffkat.hombucha.time.Dates;
 
 import javax.measure.quantity.Mass;
 import javax.time.Duration;

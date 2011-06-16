@@ -2,6 +2,7 @@ package ruffkat.hombucha.type;
 
 import org.junit.Before;
 import org.junit.Test;
+import ruffkat.hombucha.measure.MeasureType;
 import ruffkat.hombucha.measure.Measurements;
 import ruffkat.hombucha.measure.Units;
 

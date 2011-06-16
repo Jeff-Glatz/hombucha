@@ -1,33 +1,21 @@
-package ruffkat.hombucha.type;
+package ruffkat.hombucha.time;
 
 import org.hibernate.HibernateException;
-import org.hibernate.usertype.ParameterizedType;
 import org.hibernate.usertype.UserType;
 
-import javax.measure.Measure;
-import javax.measure.MeasureFormat;
+import javax.time.Instant;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.sql.Types;
-import java.text.ParsePosition;
-import java.util.Properties;
 
-/**
- * Persists instances of {@code JSR-275} {@link Measure}
- */
-public class MeasureType implements UserType, ParameterizedType {
-    private MeasureFormat format;
-
-    @Override
-    public void setParameterValues(Properties parameters) {
-        // TODO: support configuration via parameters
-        format = MeasureFormat.getStandard();
-    }
+public class InstantType
+        implements UserType {
 
     public Class returnedClass() {
-        return Measure.class;
+        return Instant.class;
     }
 
     public boolean equals(Object x, Object y)
@@ -41,15 +29,17 @@ public class MeasureType implements UserType, ParameterizedType {
     }
 
     public int[] sqlTypes() {
-        return new int[]{Types.VARCHAR};
+        return new int[]{Types.TIMESTAMP};
     }
 
     public void nullSafeSet(PreparedStatement st, Object value, int index)
             throws HibernateException, SQLException {
         if (value == null) {
-            st.setNull(index, Types.VARCHAR);
+            st.setNull(index, Types.TIMESTAMP);
         } else {
-            st.setObject(index, format.format(value), Types.VARCHAR);
+            Instant instant = (Instant) value;
+            Timestamp timestamp = new Timestamp(instant.toEpochMillisLong());
+            st.setObject(index, timestamp, Types.TIMESTAMP);
         }
     }
 
@@ -57,9 +47,9 @@ public class MeasureType implements UserType, ParameterizedType {
             throws HibernateException,
             SQLException {
         if (!resultSet.wasNull()) {
-            String measure = resultSet.getString(names[0]);
-            if (measure != null) {
-                return format.parse(measure, new ParsePosition(0));
+            Timestamp timestamp = resultSet.getTimestamp(names[0]);
+            if (timestamp != null) {
+                return Instant.millis(timestamp.getTime());
             }
         }
         return null;

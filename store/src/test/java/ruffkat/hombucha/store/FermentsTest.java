@@ -6,7 +6,7 @@ import org.springframework.test.annotation.Rollback;
 import ruffkat.hombucha.measure.Measurements;
 import ruffkat.hombucha.model.Ferment;
 import ruffkat.hombucha.model.Processing;
-import ruffkat.hombucha.util.Dates;
+import ruffkat.hombucha.time.Dates;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Calendar;

@@ -3,5 +3,5 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <typedef name="instant"
-             class="ruffkat.hombucha.type.InstantType"/>
+             class="ruffkat.hombucha.time.InstantType"/>
 </hibernate-mapping>

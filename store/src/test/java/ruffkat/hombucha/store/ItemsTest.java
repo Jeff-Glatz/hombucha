@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import ruffkat.hombucha.measure.Measurements;
-import ruffkat.hombucha.util.Dates;
+import ruffkat.hombucha.time.Dates;
 import ruffkat.hombucha.model.Item;
 
 import javax.measure.quantity.Mass;

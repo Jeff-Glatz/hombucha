@@ -12,7 +12,7 @@ import ruffkat.hombucha.model.Friend;
 import ruffkat.hombucha.model.Mushroom;
 import ruffkat.hombucha.model.Online;
 import ruffkat.hombucha.model.Sample;
-import ruffkat.hombucha.util.Dates;
+import ruffkat.hombucha.time.Dates;
 
 import javax.measure.quantity.Volume;
 import javax.persistence.EntityNotFoundException;

@@ -9,7 +9,7 @@ import ruffkat.hombucha.model.Ingredient;
 import ruffkat.hombucha.model.Item;
 import ruffkat.hombucha.model.Online;
 import ruffkat.hombucha.model.Recipe;
-import ruffkat.hombucha.util.Dates;
+import ruffkat.hombucha.time.Dates;
 
 import javax.measure.quantity.Mass;
 import javax.persistence.EntityNotFoundException;
