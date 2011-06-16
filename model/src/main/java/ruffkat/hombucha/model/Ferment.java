@@ -1,6 +1,7 @@
 package ruffkat.hombucha.model;
 
 import org.hibernate.annotations.Type;
+import ruffkat.hombucha.measure.Volumetric;
 import ruffkat.hombucha.util.PropertyUtils;
 
 import javax.measure.Measure;
@@ -22,7 +23,7 @@ import java.util.Date;
 
 @Entity
 public class Ferment
-        implements Persistent, Viewable {
+        implements Persistent, Viewable, Volumetric {
 
     @Id
     @GeneratedValue

@@ -3,12 +3,9 @@ package ruffkat.hombucha.store;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ruffkat.hombucha.measure.Measurements;
-import ruffkat.hombucha.model.Container;
 import ruffkat.hombucha.model.Ferment;
 import ruffkat.hombucha.model.Processing;
 
-import javax.measure.Measure;
-import javax.measure.quantity.Volume;
 import javax.time.Duration;
 import javax.time.Instant;
 import javax.time.TimeSource;
@@ -54,10 +51,8 @@ public class PackageTest extends FunctionalTest {
         batch.setProcessing(Processing.CONTINUOUS);
         batch.setMushroom(Searches.first(mushroomMaker.repository(), "Squiddy"));
         batch.setRecipe(Searches.first(recipeMaker.repository(), "Starter Solution"));
-        Measure<Volume> volume = Measurements.volume("6.0 l");
-        batch.setVolume(volume);
-        Container container = containers.pick(volume);
-        batch.setContainer(container);
+        batch.setVolume(Measurements.volume("6.0 l"));
+        batch.setContainer(containers.pick(batch));
         ferments.save(batch);
 
         // Begin fermentation

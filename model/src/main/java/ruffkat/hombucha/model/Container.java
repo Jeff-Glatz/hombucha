@@ -1,6 +1,7 @@
 package ruffkat.hombucha.model;
 
 import org.hibernate.annotations.Type;
+import ruffkat.hombucha.measure.Volumetric;
 import ruffkat.hombucha.util.PropertyUtils;
 
 import javax.measure.Measure;
@@ -10,7 +11,8 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Container
-        extends Item<Volume> {
+        extends Item<Volume>
+        implements Volumetric {
 
     @Type(type = "measure")
     private Measure<Volume> volume;
