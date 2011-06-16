@@ -8,7 +8,8 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class AbstractRepository<P extends Persistent>
         implements Repository<P> {
@@ -37,7 +38,7 @@ public abstract class AbstractRepository<P extends Persistent>
 
     // TODO: lucene
     @Override
-    public List<P> search(String criteria) {
+    public Set<P> search(String criteria) {
         // Build the criteria query
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<P> criteriaQuery = criteriaBuilder.createQuery(type);
@@ -45,7 +46,7 @@ public abstract class AbstractRepository<P extends Persistent>
         criteriaQuery = criteriaQuery.where(criteriaBuilder.equal(from.get("name"), criteria));
         // Create a "real" query from it
         TypedQuery<P> query = entityManager.createQuery(criteriaQuery);
-        return query.getResultList();
+        return new HashSet<P>(query.getResultList());
     }
 
     @Override

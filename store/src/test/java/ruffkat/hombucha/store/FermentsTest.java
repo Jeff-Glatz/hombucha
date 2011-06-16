@@ -70,12 +70,12 @@ public class FermentsTest extends FunctionalTest {
         ferment.setStart(Dates.date(Calendar.MAY, 12, 2011));
         ferment.setStop(Dates.date(Calendar.MAY, 24, 2012));
 
-        Set<Ferment> active = ferments.active();
+        Set<Ferment> active = ferments.brewing();
         assertFalse(active.contains(ferment));
 
         entityManager.persist(ferment);
 
-        active = ferments.active();
+        active = ferments.brewing();
         assertTrue(active.contains(ferment));
     }
 }

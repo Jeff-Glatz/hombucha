@@ -5,7 +5,9 @@ import ruffkat.hombucha.model.Container;
 import javax.measure.Measure;
 import javax.measure.quantity.Volume;
 import javax.persistence.TypedQuery;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContainersImpl
         extends AbstractRepository<Container>
@@ -21,10 +23,10 @@ public class ContainersImpl
     }
 
     @Override
-    public List<Container> available() {
+    public Set<Container> available() {
         TypedQuery<Container> query = entityManager.
                 createNamedQuery("Containers.available", Container.class);
-        return query.getResultList();
+        return new HashSet<Container>(query.getResultList());
     }
 
     @Override

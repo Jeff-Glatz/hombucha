@@ -7,5 +7,5 @@ import java.util.Set;
 public interface Ferments
         extends Repository<Ferment> {
     Ferment create();
-    Set<Ferment> active();
+    Set<Ferment> brewing();
 }
