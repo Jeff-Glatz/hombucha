@@ -7,11 +7,12 @@ import ruffkat.hombucha.model.Container;
 import ruffkat.hombucha.model.Ferment;
 import ruffkat.hombucha.model.Processing;
 
+import javax.measure.Measure;
+import javax.measure.quantity.Volume;
 import javax.time.Duration;
 import javax.time.Instant;
 import javax.time.TimeSource;
 import java.util.Date;
-import java.util.List;
 
 public class PackageTest extends FunctionalTest {
 
@@ -45,9 +46,7 @@ public class PackageTest extends FunctionalTest {
         mushroomMaker.make();
         recipeMaker.make();
 
-        // First grab an available container
-        List<Container> available = containerMaker.repository().available();
-        Container containerA = available.get(0);
+        Containers containers = containerMaker.repository();
 
         // "Design" the ferment
         Ferment batch = ferments.create();
@@ -55,13 +54,15 @@ public class PackageTest extends FunctionalTest {
         batch.setProcessing(Processing.CONTINUOUS);
         batch.setMushroom(Searches.first(mushroomMaker.repository(), "Squiddy"));
         batch.setRecipe(Searches.first(recipeMaker.repository(), "Starter Solution"));
-        batch.setVolume(Measurements.volume("6.0 l"));
+        Measure<Volume> volume = Measurements.volume("6.0 l");
+        batch.setVolume(volume);
+        Container container = containers.pick(volume);
+        batch.setContainer(container);
         ferments.save(batch);
 
         // Begin fermentation
         Instant now = timeSource.instant();
         Instant later = now.plus(Duration.standardDays(10));
-        batch.setContainer(containerA);
         batch.setStart(new Date(now.toEpochMillisLong()));
         batch.setStop(new Date(later.toEpochMillisLong()));
         ferments.save(batch);
