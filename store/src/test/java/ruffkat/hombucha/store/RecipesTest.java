@@ -13,6 +13,7 @@ import ruffkat.hombucha.util.Dates;
 
 import javax.measure.quantity.Mass;
 import javax.persistence.EntityNotFoundException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.Calendar;
 
@@ -40,9 +41,11 @@ public class RecipesTest extends FunctionalTest {
                 new URL("http://www.rishi.com"));
         entityManager.persist(rishi);
 
-        Item item = new Item();
+        Item<Mass> item = new Item<Mass>();
         item.setName("Ancient Emerald Lilly");
         item.setSource(rishi);
+        item.setUnit(Measurements.mass("125 g"));
+        item.setPrice(new BigDecimal("19.99"));
 
         entityManager.persist(item);
 

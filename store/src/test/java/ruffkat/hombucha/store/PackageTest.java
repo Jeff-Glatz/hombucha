@@ -6,10 +6,12 @@ import ruffkat.hombucha.measure.Measurements;
 import ruffkat.hombucha.model.Container;
 import ruffkat.hombucha.model.Ferment;
 import ruffkat.hombucha.model.Friend;
+import ruffkat.hombucha.model.Ingredient;
 import ruffkat.hombucha.model.Item;
 import ruffkat.hombucha.model.Mushroom;
 import ruffkat.hombucha.model.Online;
 import ruffkat.hombucha.model.Processing;
+import ruffkat.hombucha.model.Recipe;
 import ruffkat.hombucha.util.Dates;
 
 import javax.measure.quantity.Mass;
@@ -125,13 +127,13 @@ public class PackageTest extends FunctionalTest {
         entityManager.persist(baby);
 
         // Add recipes
-//        Recipe recipe = recipes.create();
-//        recipe.setName("MaltBrewCha");
-//        recipe.setYields(Measurements.volume("6.0 l"));
-//        recipe.setInstructions("Boil water, steep tea, add sugar, cool down");
-//        recipe.addIngredient(new Ingredient<Mass>(sugar, Measurements.mass("500 g")));
+        Recipe recipe = recipes.create();
+        recipe.setName("MaltBrewCha");
+        recipe.setYields(Measurements.volume("6.0 l"));
+        recipe.setInstructions("Boil water, steep tea, add sugar, cool down");
+        recipe.addIngredient(new Ingredient<Mass>(sugar, Measurements.mass("500 g")));
 //        recipe.addIngredient(new Ingredient<Mass>(tea, Measurements.mass("10 g")));
-//        entityManager.persist(recipe);
+        entityManager.persist(recipe);
 
         Instant now = timeSource.instant();
         Instant later = now.plus(Duration.standardDays(10));
@@ -143,7 +145,7 @@ public class PackageTest extends FunctionalTest {
         batch.setContainer(containerA);
         batch.setProcessing(Processing.BATCH);
         batch.setMushroom(mother);
-//        batch.setRecipe(recipe);
+        batch.setRecipe(recipe);
         batch.setStart(new Date(now.toEpochMillisLong()));
         batch.setStop(new Date(later.toEpochMillisLong()));
         entityManager.persist(batch);
