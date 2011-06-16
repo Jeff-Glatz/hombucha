@@ -15,6 +15,9 @@ public class Item<Q extends Quantity>
         extends Sourced {
 
     @Basic
+    private String reference;
+
+    @Basic
     private BigDecimal price;
 
     @Basic
@@ -23,6 +26,14 @@ public class Item<Q extends Quantity>
     @Basic
     @Type(type = "measure")
     private Measure<Q> unit;
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
 
     public BigDecimal getPrice() {
         return price;
@@ -58,6 +69,7 @@ public class Item<Q extends Quantity>
 
         if (currency != null ? !currency.equals(item.currency) : item.currency != null) return false;
         if (price != null ? !price.equals(item.price) : item.price != null) return false;
+        if (reference != null ? !reference.equals(item.reference) : item.reference != null) return false;
         if (unit != null ? !unit.equals(item.unit) : item.unit != null) return false;
 
         return true;
@@ -66,6 +78,7 @@ public class Item<Q extends Quantity>
     @Override
     public int hashCode() {
         int result = super.hashCode();
+        result = 31 * result + (reference != null ? reference.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
         result = 31 * result + (currency != null ? currency.hashCode() : 0);
         result = 31 * result + (unit != null ? unit.hashCode() : 0);

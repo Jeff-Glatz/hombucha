@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 
 @Entity
 public class Container
-        extends Sourced {
+        extends Item<Volume> {
 
     @Type(type = "measure")
     private Measure<Volume> volume;
