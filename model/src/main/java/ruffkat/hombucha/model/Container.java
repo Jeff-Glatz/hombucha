@@ -4,16 +4,18 @@ import org.hibernate.annotations.Type;
 
 import javax.measure.Measure;
 import javax.measure.quantity.Volume;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 @Entity
-@DiscriminatorValue("container")
 public class Container
         extends Item<Volume> {
 
     @Type(type = "measure")
     private Measure<Volume> volume;
+
+    @OneToOne
+    private Ferment ferment;
 
     public Measure<Volume> getVolume() {
         return volume;
@@ -21,6 +23,14 @@ public class Container
 
     public void setVolume(Measure<Volume> volume) {
         this.volume = volume;
+    }
+
+    public Ferment getFerment() {
+        return ferment;
+    }
+
+    public boolean isFermenting() {
+        return ferment != null;
     }
 
     @Override
@@ -41,5 +51,15 @@ public class Container
         int result = super.hashCode();
         result = 31 * result + (volume != null ? volume.hashCode() : 0);
         return result;
+    }
+
+    // TODO: Events
+
+    void fill(Ferment ferment) {
+        this.ferment = ferment;
+    }
+
+    void drain() {
+        this.ferment = null;
     }
 }

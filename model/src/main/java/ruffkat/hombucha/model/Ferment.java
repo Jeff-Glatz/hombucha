@@ -1,6 +1,7 @@
 package ruffkat.hombucha.model;
 
 import org.hibernate.annotations.Type;
+import ruffkat.hombucha.util.PropertyUtils;
 
 import javax.measure.Measure;
 import javax.measure.quantity.Volume;
@@ -45,6 +46,7 @@ public class Ferment
             CascadeType.REFRESH, CascadeType.DETACH})
     private Container container;
 
+    @Basic
     @Type(type = "measure")
     private Measure<Volume> volume;
 
@@ -102,10 +104,14 @@ public class Ferment
     }
 
     public void setContainer(Container container) {
-        this.container = container;
-        if (container != null) {
-            // TODO: Implement bi-directional relationship
-            // container.setFerment(this);
+        if (PropertyUtils.changed(this.container, container)) {
+            if (this.container != null) {
+                this.container.drain();
+            }
+            if (container != null) {
+                container.fill(this);
+            }
+            this.container = container;
         }
     }
 
