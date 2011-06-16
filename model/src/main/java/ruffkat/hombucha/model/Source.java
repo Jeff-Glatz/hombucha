@@ -3,17 +3,18 @@ package ruffkat.hombucha.model;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Source
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class Source
         implements Persistent {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long oid;
 
     @Basic

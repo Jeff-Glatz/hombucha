@@ -77,7 +77,7 @@ public class SamplesTest extends FunctionalTest {
 
     @Test
     @Rollback(false)
-    public void SaveSample()
+    public void testSaveSample()
             throws Exception {
         Friend friend = new Friend("Christina Toyota");
         entityManager.persist(friend);
