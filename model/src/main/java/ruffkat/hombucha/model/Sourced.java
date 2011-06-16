@@ -1,8 +1,10 @@
 package ruffkat.hombucha.model;
 
 import javax.persistence.Basic;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
@@ -11,7 +13,7 @@ import java.util.Date;
 
 @MappedSuperclass
 public abstract class Sourced
-        implements Persistent {
+        implements Persistent, Viewable {
 
     @Id
     @GeneratedValue
@@ -26,6 +28,10 @@ public abstract class Sourced
 
     @ManyToOne
     private Source source;
+
+    @Basic(fetch = FetchType.LAZY)
+    @Lob
+    private byte[] image;
 
 
     public Long getOid() {
@@ -58,6 +64,14 @@ public abstract class Sourced
 
     public void setSource(Source source) {
         this.source = source;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     @Override

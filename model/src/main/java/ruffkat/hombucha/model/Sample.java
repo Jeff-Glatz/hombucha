@@ -7,14 +7,16 @@ import javax.measure.quantity.Quantity;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.time.Instant;
 
 @Entity
 public class Sample<Q extends Quantity>
-        implements Persistent {
+        implements Persistent, Viewable {
 
     @Id
     @GeneratedValue
@@ -32,6 +34,10 @@ public class Sample<Q extends Quantity>
     @Basic
     @Type(type = "measure")
     private Measure<Q> measurement;
+
+    @Basic(fetch= FetchType.LAZY)
+    @Lob
+    private byte[] image;
 
 
     public Long getOid() {
@@ -64,6 +70,14 @@ public class Sample<Q extends Quantity>
 
     public void setMeasurement(Measure<Q> measurement) {
         this.measurement = measurement;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     @Override

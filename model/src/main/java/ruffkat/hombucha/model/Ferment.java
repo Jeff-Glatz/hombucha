@@ -9,8 +9,10 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -19,7 +21,7 @@ import java.util.Date;
 
 @Entity
 public class Ferment
-        implements Persistent {
+        implements Persistent, Viewable {
 
     @Id
     @GeneratedValue
@@ -45,6 +47,10 @@ public class Ferment
 
     @Type(type = "measure")
     private Measure<Volume> volume;
+
+    @Basic(fetch = FetchType.LAZY)
+    @Lob
+    private byte[] image;
 
     @Basic
     @Enumerated(EnumType.STRING)
@@ -105,6 +111,14 @@ public class Ferment
 
     public void setVolume(Measure<Volume> volume) {
         this.volume = volume;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public Processing getProcessing() {
