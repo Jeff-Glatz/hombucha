@@ -2,8 +2,7 @@ package ruffkat.hombucha.store;
 
 import ruffkat.hombucha.model.Source;
 
-public interface Sources {
+public interface Sources
+        extends Repository<Source> {
     <T extends Source> T create(Class<T> type);
-    Source load(Long id);
-    void delete(Source sample);
 }

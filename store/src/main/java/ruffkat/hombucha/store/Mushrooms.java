@@ -2,8 +2,7 @@ package ruffkat.hombucha.store;
 
 import ruffkat.hombucha.model.Mushroom;
 
-public interface Mushrooms {
+public interface Mushrooms
+        extends Repository<Mushroom> {
     Mushroom create();
-    Mushroom load(Long id);
-    void delete(Mushroom mushroom);
 }

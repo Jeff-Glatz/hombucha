@@ -3,7 +3,7 @@ package ruffkat.hombucha.store;
 import ruffkat.hombucha.model.Mushroom;
 
 public class MushroomsImpl
-        extends Repository<Mushroom>
+        extends AbstractRepository<Mushroom>
         implements Mushrooms {
 
     public MushroomsImpl() {

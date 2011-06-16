@@ -8,7 +8,7 @@ import javax.measure.quantity.Quantity;
 import javax.time.TimeSource;
 
 public class SamplesImpl
-        extends Repository<Sample>
+        extends AbstractRepository<Sample>
         implements Samples {
     private final TimeSource timeSource;
 

@@ -10,10 +10,10 @@ public class Friend
         extends Source {
 
     @Basic
-    public String phone;
+    private String phone;
 
     @Basic
-    public String email;
+    private String email;
 
     public Friend() {
         this(null);

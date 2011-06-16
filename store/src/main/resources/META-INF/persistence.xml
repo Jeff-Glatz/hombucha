@@ -8,6 +8,7 @@
         <class>ruffkat.hombucha.model.Friend</class>
         <class>ruffkat.hombucha.model.Ingredient</class>
         <class>ruffkat.hombucha.model.Item</class>
+        <class>ruffkat.hombucha.model.Local</class>
         <class>ruffkat.hombucha.model.Mushroom</class>
         <class>ruffkat.hombucha.model.Online</class>
         <class>ruffkat.hombucha.model.Recipe</class>

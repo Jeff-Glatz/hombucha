@@ -2,8 +2,7 @@ package ruffkat.hombucha.store;
 
 import ruffkat.hombucha.model.Container;
 
-public interface Containers {
+public interface Containers
+        extends Repository<Container> {
     Container create();
-    Container load(Long id);
-    void delete(Container container);
 }

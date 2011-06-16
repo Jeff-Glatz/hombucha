@@ -1,23 +1,13 @@
 package ruffkat.hombucha.store;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import ruffkat.hombucha.model.Persistent;
 
-public abstract class Repository<T> {
-    private final Class<T> type;
+import java.util.List;
 
-    @PersistenceContext(name = "hombucha")
-    protected EntityManager entityManager;
-
-    protected Repository(Class<T> type) {
-        this.type = type;
-    }
-
-    public T load(Long id) {
-        return entityManager.getReference(type, id);
-    }
-
-    public void delete(T t) {
-        entityManager.remove(t);
-    }
+public interface Repository<P extends Persistent> {
+    void save(P item);
+    P load(Long oid);
+    List<P> search(String criteria);
+    void delete(P item);
+    void flush();
 }

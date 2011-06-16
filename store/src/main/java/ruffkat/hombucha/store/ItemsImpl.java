@@ -4,7 +4,8 @@ import ruffkat.hombucha.model.Item;
 
 import javax.measure.quantity.Quantity;
 
-public class ItemsImpl extends Repository<Item>
+public class ItemsImpl extends
+        AbstractRepository<Item>
         implements Items {
 
     public ItemsImpl() {

@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FermentsImpl
-        extends Repository<Ferment>
+        extends AbstractRepository<Ferment>
         implements Ferments {
 
     protected FermentsImpl() {

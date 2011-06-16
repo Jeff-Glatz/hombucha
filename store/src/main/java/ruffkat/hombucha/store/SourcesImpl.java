@@ -3,7 +3,7 @@ package ruffkat.hombucha.store;
 import ruffkat.hombucha.model.Source;
 
 public class SourcesImpl
-        extends Repository<Source>
+        extends AbstractRepository<Source>
         implements Sources {
 
     public SourcesImpl() {

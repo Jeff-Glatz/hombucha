@@ -4,21 +4,28 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import ruffkat.hombucha.measure.Measurements;
-import ruffkat.hombucha.time.Dates;
 import ruffkat.hombucha.model.Item;
+import ruffkat.hombucha.time.Dates;
 
 import javax.measure.quantity.Mass;
 import javax.measure.quantity.Volume;
 import javax.persistence.EntityNotFoundException;
+import java.math.BigDecimal;
 import java.util.Calendar;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class ItemsTest extends FunctionalTest {
+
     @Autowired
     private Items items;
+
+    @Autowired
+    private SourceFactory sourceFactory;
 
     @Test
     @Rollback(false)
@@ -56,5 +63,41 @@ public class ItemsTest extends FunctionalTest {
             fail("expected an exception");
         } catch (EntityNotFoundException e) {
         }
+    }
+
+    @Test
+    @Rollback(false)
+    public void testPersistItems()
+            throws Exception {
+        sourceFactory.make();
+
+        Item<Volume> water = items.create(Volume.class);
+        water.setName("Distilled Water");
+        water.setSource(sourceFactory.find("CVS"));
+        water.setPrice(new BigDecimal("0.89"));
+        water.setUnit(Measurements.volume("3.7 l"));
+
+        assertFalse(water.persisted());
+        items.save(water);
+        assertTrue(water.persisted());
+
+        Item<Mass> tea = items.create(Mass.class);
+        tea.setName("Organic Ancient Emerald Lily");
+        tea.setSource(sourceFactory.find("Rishi Tea"));
+        tea.setPrice(new BigDecimal("22.00"));
+        tea.setUnit(Measurements.mass("113.4 g"));
+
+        assertFalse(tea.persisted());
+        items.save(tea);
+        assertTrue(tea.persisted());
+
+        Item<Mass> sugar = items.create(Mass.class);
+        sugar.setName("Sugar in the Raw");
+        sugar.setPrice(new BigDecimal("2.99"));
+        sugar.setUnit(Measurements.mass("907 g"));
+
+        assertFalse(sugar.persisted());
+        items.save(sugar);
+        assertTrue(sugar.persisted());
     }
 }

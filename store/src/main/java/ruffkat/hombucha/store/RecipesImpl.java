@@ -3,7 +3,7 @@ package ruffkat.hombucha.store;
 import ruffkat.hombucha.model.Recipe;
 
 public class RecipesImpl
-        extends Repository<Recipe>
+        extends AbstractRepository<Recipe>
         implements Recipes {
 
     public RecipesImpl() {
