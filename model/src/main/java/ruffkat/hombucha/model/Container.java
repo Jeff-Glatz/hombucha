@@ -4,9 +4,11 @@ import org.hibernate.annotations.Type;
 
 import javax.measure.Measure;
 import javax.measure.quantity.Volume;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
+@DiscriminatorValue("container")
 public class Container
         extends Item<Volume> {
 
