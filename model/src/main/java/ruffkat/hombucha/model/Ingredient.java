@@ -17,7 +17,7 @@ public class Ingredient<Q extends Quantity>
     @OneToOne(cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.REFRESH, CascadeType.DETACH})
-    private Item item;
+    private Item<Q> item;
 
     @Basic
     @Type(type = "measure")
@@ -26,11 +26,26 @@ public class Ingredient<Q extends Quantity>
     @Basic
     private String instructions;
 
-    public Item getItem() {
+    public Ingredient() {
+        this(null, null, null);
+    }
+
+    public Ingredient(Item<Q> item, Measure<Q> amount) {
+        this.item = item;
+        this.amount = amount;
+    }
+
+    public Ingredient(Item<Q> item, Measure<Q> amount, String instructions) {
+        this.item = item;
+        this.amount = amount;
+        this.instructions = instructions;
+    }
+
+    public Item<Q> getItem() {
         return item;
     }
 
-    public void setItem(Item item) {
+    public void setItem(Item<Q> item) {
         this.item = item;
     }
 

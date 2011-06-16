@@ -3,9 +3,12 @@ package ruffkat.hombucha.store;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
+import ruffkat.hombucha.measure.Measurements;
 import ruffkat.hombucha.util.Dates;
 import ruffkat.hombucha.model.Item;
 
+import javax.measure.quantity.Mass;
+import javax.measure.quantity.Volume;
 import javax.persistence.EntityNotFoundException;
 import java.util.Calendar;
 
@@ -20,9 +23,10 @@ public class ItemsTest extends FunctionalTest {
     @Test
     @Rollback(false)
     public void testSaveAndLoad() {
-        Item item = items.create();
+        Item<Mass> item = items.create(Mass.class);
         item.setName("SCOBY DO");
         item.setReceived(Dates.date(Calendar.MAY, 12, 2011));
+        item.setUnit(Measurements.mass("12 kg"));
 
         entityManager.persist(item);
 
@@ -35,9 +39,10 @@ public class ItemsTest extends FunctionalTest {
     @Test
     @Rollback(false)
     public void testSaveAndDelete() {
-        Item item = items.create();
+        Item<Volume> item = items.create(Volume.class);
         item.setName("SCOBY DO");
         item.setReceived(Dates.date(Calendar.MAY, 12, 2011));
+        item.setUnit(Measurements.volume("12 l"));
 
         entityManager.persist(item);
 

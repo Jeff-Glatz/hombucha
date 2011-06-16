@@ -1,12 +1,10 @@
 package ruffkat.hombucha.model;
 
 import javax.persistence.Basic;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import java.net.URL;
 
 @Entity
-@DiscriminatorValue("online")
 public class Online
         extends Source {
 

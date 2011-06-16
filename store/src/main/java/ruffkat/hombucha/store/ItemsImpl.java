@@ -2,6 +2,8 @@ package ruffkat.hombucha.store;
 
 import ruffkat.hombucha.model.Item;
 
+import javax.measure.quantity.Quantity;
+
 public class ItemsImpl extends Repository<Item>
         implements Items {
 
@@ -10,7 +12,7 @@ public class ItemsImpl extends Repository<Item>
     }
 
     @Override
-    public Item create() {
-        return new Item();
+    public <Q extends Quantity> Item<Q> create(Class<Q> type) {
+        return new Item<Q>();
     }
 }

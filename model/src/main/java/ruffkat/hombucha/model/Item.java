@@ -1,5 +1,9 @@
 package ruffkat.hombucha.model;
 
+import org.hibernate.annotations.Type;
+
+import javax.measure.Measure;
+import javax.measure.quantity.Quantity;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import java.math.BigDecimal;
@@ -7,7 +11,7 @@ import java.util.Currency;
 import java.util.Locale;
 
 @Entity
-public class Item
+public class Item<Q extends Quantity>
         extends Sourced {
 
     @Basic
@@ -15,6 +19,10 @@ public class Item
 
     @Basic
     private Currency currency = Currency.getInstance(Locale.getDefault());
+
+    @Basic
+    @Type(type = "measure")
+    private Measure<Q> unit;
 
     public BigDecimal getPrice() {
         return price;
@@ -32,6 +40,14 @@ public class Item
         this.currency = currency;
     }
 
+    public Measure<Q> getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Measure<Q> unit) {
+        this.unit = unit;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -42,6 +58,7 @@ public class Item
 
         if (currency != null ? !currency.equals(item.currency) : item.currency != null) return false;
         if (price != null ? !price.equals(item.price) : item.price != null) return false;
+        if (unit != null ? !unit.equals(item.unit) : item.unit != null) return false;
 
         return true;
     }
@@ -51,6 +68,7 @@ public class Item
         int result = super.hashCode();
         result = 31 * result + (price != null ? price.hashCode() : 0);
         result = 31 * result + (currency != null ? currency.hashCode() : 0);
+        result = 31 * result + (unit != null ? unit.hashCode() : 0);
         return result;
     }
 }

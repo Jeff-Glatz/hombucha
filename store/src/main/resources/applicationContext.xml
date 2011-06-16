@@ -48,6 +48,8 @@
     <bean id="timeSource"
           class="javax.time.TimeSource$SystemTimeSource"/>
 
+    <bean id="sources"
+          class="ruffkat.hombucha.store.SourcesImpl"/>
     <bean id="items"
           class="ruffkat.hombucha.store.ItemsImpl"/>
     <bean id="recipes"
