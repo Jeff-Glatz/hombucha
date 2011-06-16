@@ -109,7 +109,7 @@ public class PackageTest extends FunctionalTest {
         tea.setSource(rishi);
         tea.setPrice(new BigDecimal("25.99"));
         tea.setUnit(Measurements.mass("25 g"));
-        entityManager.persist(sugar);
+        entityManager.persist(tea);
 
         // Add a mother
         Mushroom mother = mushrooms.create();
@@ -132,7 +132,7 @@ public class PackageTest extends FunctionalTest {
         recipe.setYields(Measurements.volume("6.0 l"));
         recipe.setInstructions("Boil water, steep tea, add sugar, cool down");
         recipe.addIngredient(new Ingredient<Mass>(sugar, Measurements.mass("500 g")));
-//        recipe.addIngredient(new Ingredient<Mass>(tea, Measurements.mass("10 g")));
+        recipe.addIngredient(new Ingredient<Mass>(tea, Measurements.mass("10 g")));
         entityManager.persist(recipe);
 
         Instant now = timeSource.instant();
