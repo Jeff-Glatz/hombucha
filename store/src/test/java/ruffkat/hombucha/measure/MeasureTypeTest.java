@@ -1,10 +1,7 @@
-package ruffkat.hombucha.type;
+package ruffkat.hombucha.measure;
 
 import org.junit.Before;
 import org.junit.Test;
-import ruffkat.hombucha.measure.MeasureType;
-import ruffkat.hombucha.measure.Measurements;
-import ruffkat.hombucha.measure.Units;
 
 import javax.measure.Measure;
 import javax.measure.quantity.Volume;
