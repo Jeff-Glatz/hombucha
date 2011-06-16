@@ -25,7 +25,7 @@ public class ItemsTest extends FunctionalTest {
     private Items items;
 
     @Autowired
-    private SourceFactory sourceFactory;
+    private SourceMaker sourceFactory;
 
     @Test
     @Rollback(false)
@@ -73,7 +73,7 @@ public class ItemsTest extends FunctionalTest {
 
         Item<Volume> water = items.create(Volume.class);
         water.setName("Distilled Water");
-        water.setSource(sourceFactory.find("CVS"));
+        water.setSource(Searches.first(sourceFactory.repository(), "CVS"));
         water.setPrice(new BigDecimal("0.89"));
         water.setUnit(Measurements.volume("3.7 l"));
 
@@ -83,7 +83,7 @@ public class ItemsTest extends FunctionalTest {
 
         Item<Mass> tea = items.create(Mass.class);
         tea.setName("Organic Ancient Emerald Lily");
-        tea.setSource(sourceFactory.find("Rishi Tea"));
+        tea.setSource(Searches.first(sourceFactory.repository(), "Rishi Tea"));
         tea.setPrice(new BigDecimal("22.00"));
         tea.setUnit(Measurements.mass("113.4 g"));
 

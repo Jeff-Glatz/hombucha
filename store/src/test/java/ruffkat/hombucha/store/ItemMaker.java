@@ -10,8 +10,8 @@ import javax.measure.quantity.Volume;
 import java.math.BigDecimal;
 
 @Component
-public class ItemFactory
-        extends AbstractFactory<Item> {
+public class ItemMaker
+        extends AbstractMaker<Item> {
 
     @Autowired
     private Items items;
@@ -19,7 +19,7 @@ public class ItemFactory
     @Autowired
     private Sources sources;
 
-    public ItemFactory() {
+    public ItemMaker() {
         super(Item.class);
     }
 
@@ -28,18 +28,19 @@ public class ItemFactory
         return items;
     }
 
+    @Override
     public void make()
             throws Exception {
         Item<Volume> water = items.create(Volume.class);
         water.setName("Distilled Water");
         water.setPrice(new BigDecimal("0.89"));
         water.setUnit(Measurements.volume("3.7 l"));
-        water.setSource(Searches.single(sources, "CVS"));
+        water.setSource(Searches.first(sources, "CVS"));
         items.save(water);
 
         Item<Mass> tea = items.create(Mass.class);
         tea.setName("Organic Ancient Emerald Lily");
-        tea.setSource(Searches.single(sources, "Rishi Tea"));
+        tea.setSource(Searches.first(sources, "Rishi Tea"));
         tea.setUnit(Measurements.mass("113.4 g"));
         tea.setPrice(new BigDecimal("22.00"));
         items.save(tea);

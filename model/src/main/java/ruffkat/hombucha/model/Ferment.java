@@ -103,6 +103,10 @@ public class Ferment
 
     public void setContainer(Container container) {
         this.container = container;
+        if (container != null) {
+            // TODO: Implement bi-directional relationship
+            // container.setFerment(this);
+        }
     }
 
     public Measure<Volume> getVolume() {

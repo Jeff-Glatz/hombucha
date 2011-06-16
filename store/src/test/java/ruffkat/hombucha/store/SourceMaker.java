@@ -11,13 +11,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 @Component
-public class SourceFactory
-        extends AbstractFactory<Source> {
+public class SourceMaker
+        extends AbstractMaker<Source> {
 
     @Autowired
     private Sources sources;
 
-    public SourceFactory() {
+    public SourceMaker() {
         super(Source.class);
     }
 
@@ -26,6 +26,7 @@ public class SourceFactory
         return sources;
     }
 
+    @Override
     public void make()
             throws Exception {
         makeFriendSources();

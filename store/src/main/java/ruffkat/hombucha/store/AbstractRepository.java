@@ -12,7 +12,7 @@ import java.util.List;
 
 public abstract class AbstractRepository<P extends Persistent>
         implements Repository<P> {
-    private final Class<P> type;
+    protected final Class<P> type;
 
     @PersistenceContext(name = "hombucha")
     protected EntityManager entityManager;
