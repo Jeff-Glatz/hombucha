@@ -12,13 +12,12 @@
         <class>ruffkat.hombucha.model.Online</class>
         <class>ruffkat.hombucha.model.Recipe</class>
         <class>ruffkat.hombucha.model.Sample</class>
-        <class>ruffkat.hombucha.model.Source</class>
         <properties>
             <property name="hibernate.connection.autocommit" value="false"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.generate_statistics" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect"/>
         </properties>
     </persistence-unit>
