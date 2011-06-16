@@ -1,6 +1,7 @@
 package ruffkat.hombucha.model;
 
 import org.hibernate.annotations.Type;
+import ruffkat.hombucha.util.PropertyUtils;
 
 import javax.measure.Measure;
 import javax.measure.quantity.Volume;
@@ -53,13 +54,15 @@ public class Container
         return result;
     }
 
-    // TODO: Events
+    // TODO: Events/Workflow
 
-    void fill(Ferment ferment) {
+    void utilize(Ferment ferment) {
         this.ferment = ferment;
     }
 
-    void drain() {
-        this.ferment = null;
+    void release(Ferment ferment) {
+        if (PropertyUtils.same(this.ferment, ferment)) {
+            this.ferment = null;
+        }
     }
 }

@@ -49,17 +49,19 @@ public class PackageTest extends FunctionalTest {
         List<Container> available = containerMaker.repository().available();
         Container containerA = available.get(0);
 
-        Instant now = timeSource.instant();
-        Instant later = now.plus(Duration.standardDays(10));
-
-        // Start a batch
+        // "Design" the ferment
         Ferment batch = ferments.create();
         batch.setName("MaltBrewCha Run 1");
-        batch.setVolume(Measurements.volume("6.0 l"));
-        batch.setContainer(containerA);
         batch.setProcessing(Processing.CONTINUOUS);
         batch.setMushroom(Searches.first(mushroomMaker.repository(), "Squiddy"));
         batch.setRecipe(Searches.first(recipeMaker.repository(), "Starter Solution"));
+        batch.setVolume(Measurements.volume("6.0 l"));
+        ferments.save(batch);
+
+        // Begin fermentation
+        Instant now = timeSource.instant();
+        Instant later = now.plus(Duration.standardDays(10));
+        batch.setContainer(containerA);
         batch.setStart(new Date(now.toEpochMillisLong()));
         batch.setStop(new Date(later.toEpochMillisLong()));
         ferments.save(batch);

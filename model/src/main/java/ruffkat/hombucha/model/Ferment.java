@@ -106,10 +106,10 @@ public class Ferment
     public void setContainer(Container container) {
         if (PropertyUtils.changed(this.container, container)) {
             if (this.container != null) {
-                this.container.drain();
+                this.container.release(this);
             }
             if (container != null) {
-                container.fill(this);
+                container.utilize(this);
             }
             this.container = container;
         }
