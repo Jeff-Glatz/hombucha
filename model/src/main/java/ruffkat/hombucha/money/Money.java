@@ -47,6 +47,10 @@ public class Money
         return new Money(amount.add(that.amount, CONTEXT), currency);
     }
 
+    public Money subtract(Money that) {
+        return new Money(amount.subtract(that.amount, CONTEXT), currency);
+    }
+
     public <Q extends Quantity> Money divide(Measure<Q> measure) {
         BigDecimal value = new BigDecimal(measure.getValue().doubleValue(), CONTEXT);
         return new Money(amount.divide(value, CONTEXT), currency);
