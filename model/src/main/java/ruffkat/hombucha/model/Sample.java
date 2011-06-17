@@ -1,6 +1,14 @@
 package ruffkat.hombucha.model;
 
 import org.hibernate.annotations.Type;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.FieldBridge;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
+import ruffkat.hombucha.measure.MeasureBridge;
+import ruffkat.hombucha.time.InstantBridge;
 
 import javax.measure.Measure;
 import javax.measure.quantity.Quantity;
@@ -15,11 +23,13 @@ import javax.persistence.OneToOne;
 import javax.time.Instant;
 
 @Entity
+@Indexed(index = "indices/samples")
 public class Sample<Q extends Quantity>
         implements Persistent, Viewable {
 
     @Id
     @GeneratedValue
+    @DocumentId
     private Long oid;
 
     @OneToOne(cascade = {
@@ -28,14 +38,18 @@ public class Sample<Q extends Quantity>
     private Ferment ferment;
 
     @Basic
+    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @FieldBridge(impl = InstantBridge.class)
     @Type(type = "instant")
     private Instant taken;
 
     @Basic
+    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @FieldBridge(impl = MeasureBridge.class)
     @Type(type = "measure")
     private Measure<Q> measurement;
 
-    @Basic(fetch= FetchType.LAZY)
+    @Basic(fetch = FetchType.LAZY)
     @Lob
     private byte[] image;
 

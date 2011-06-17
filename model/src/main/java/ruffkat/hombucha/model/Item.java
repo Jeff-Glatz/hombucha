@@ -1,8 +1,15 @@
 package ruffkat.hombucha.model;
 
 import org.hibernate.annotations.Type;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.FieldBridge;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
+import ruffkat.hombucha.measure.MeasureBridge;
 import ruffkat.hombucha.money.Econometric;
 import ruffkat.hombucha.money.Money;
+import ruffkat.hombucha.money.MoneyBridge;
 
 import javax.measure.Measure;
 import javax.measure.quantity.Quantity;
@@ -13,18 +20,24 @@ import javax.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@Indexed(index = "indices/items")
 public class Item<Q extends Quantity>
         extends Sourced
         implements Econometric<Q> {
 
     @Basic
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     private String reference;
 
     @Basic
+    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @FieldBridge(impl = MoneyBridge.class)
     @Type(type = "money")
     private Money price;
 
     @Basic
+    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @FieldBridge(impl = MeasureBridge.class)
     @Type(type = "measure")
     private Measure<Q> unit;
 

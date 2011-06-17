@@ -1,6 +1,11 @@
 package ruffkat.hombucha.model;
 
 import org.hibernate.annotations.Type;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.FieldBridge;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Store;
+import ruffkat.hombucha.measure.MeasureBridge;
 import ruffkat.hombucha.money.Priced;
 import ruffkat.hombucha.money.Money;
 
@@ -23,10 +28,13 @@ public class Ingredient<Q extends Quantity>
     private Item<Q> item;
 
     @Basic
+    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @FieldBridge(impl = MeasureBridge.class)
     @Type(type = "measure")
     private Measure<Q> amount;
 
     @Basic
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     private String instructions;
 
     public Ingredient() {

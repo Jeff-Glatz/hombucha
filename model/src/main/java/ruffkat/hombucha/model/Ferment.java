@@ -1,6 +1,13 @@
 package ruffkat.hombucha.model;
 
 import org.hibernate.annotations.Type;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.FieldBridge;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
+import ruffkat.hombucha.measure.MeasureBridge;
 import ruffkat.hombucha.measure.Volumetric;
 import ruffkat.hombucha.util.PropertyUtils;
 
@@ -22,14 +29,17 @@ import javax.persistence.TemporalType;
 import java.util.Date;
 
 @Entity
+@Indexed(index = "indices/ferments")
 public class Ferment
         implements Persistent, Viewable, Volumetric {
 
     @Id
     @GeneratedValue
+    @DocumentId
     private Long oid;
 
     @Basic
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     private String name;
 
     @ManyToOne(cascade = {
@@ -48,6 +58,8 @@ public class Ferment
     private Vessel vessel;
 
     @Basic
+    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @FieldBridge(impl = MeasureBridge.class)
     @Type(type = "measure")
     private Measure<Volume> volume;
 
@@ -57,14 +69,17 @@ public class Ferment
 
     @Basic
     @Enumerated(EnumType.STRING)
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     private Processing processing;
 
     @Basic
     @Temporal(TemporalType.TIMESTAMP)
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     private Date start;
 
     @Basic
     @Temporal(TemporalType.TIMESTAMP)
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     private Date stop;
 
 

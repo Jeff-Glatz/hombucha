@@ -1,5 +1,11 @@
 package ruffkat.hombucha.model;
 
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
+
 import javax.persistence.Basic;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
@@ -13,14 +19,17 @@ import javax.persistence.InheritanceType;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "kind")
 @DiscriminatorValue("source")
+@Indexed(index = "indices/sources")
 public class Source
         implements Persistent {
 
     @Id
     @GeneratedValue
+    @DocumentId
     private Long oid;
 
     @Basic
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     private String name;
 
     public Source() {

@@ -1,10 +1,13 @@
 package ruffkat.hombucha.model;
 
+import org.hibernate.search.annotations.Indexed;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 @Entity
+@Indexed(index = "indices/mothers")
 public class Mother
         extends Sourced {
 
