@@ -5,12 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import ruffkat.hombucha.measure.Measurements;
 import ruffkat.hombucha.model.Item;
+import ruffkat.hombucha.money.Money;
 import ruffkat.hombucha.time.Dates;
 
 import javax.measure.quantity.Mass;
 import javax.measure.quantity.Volume;
 import javax.persistence.EntityNotFoundException;
-import java.math.BigDecimal;
 import java.util.Calendar;
 
 import static org.junit.Assert.assertEquals;
@@ -74,7 +74,7 @@ public class ItemsTest extends FunctionalTest {
         Item<Volume> water = items.create(Volume.class);
         water.setName("Distilled Water");
         water.setSource(Searches.first(sourceFactory.repository(), "CVS"));
-        water.setPrice(new BigDecimal("0.89"));
+        water.setPrice(new Money("0.89"));
         water.setUnit(Measurements.volume("3.7 l"));
 
         assertFalse(water.persisted());
@@ -84,7 +84,7 @@ public class ItemsTest extends FunctionalTest {
         Item<Mass> tea = items.create(Mass.class);
         tea.setName("Organic Ancient Emerald Lily");
         tea.setSource(Searches.first(sourceFactory.repository(), "Rishi Tea"));
-        tea.setPrice(new BigDecimal("22.00"));
+        tea.setPrice(new Money("22.00"));
         tea.setUnit(Measurements.mass("113.4 g"));
 
         assertFalse(tea.persisted());
@@ -93,7 +93,7 @@ public class ItemsTest extends FunctionalTest {
 
         Item<Mass> sugar = items.create(Mass.class);
         sugar.setName("Sugar in the Raw");
-        sugar.setPrice(new BigDecimal("2.99"));
+        sugar.setPrice(new Money("2.99"));
         sugar.setUnit(Measurements.mass("907 g"));
 
         assertFalse(sugar.persisted());

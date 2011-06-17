@@ -17,6 +17,10 @@ public class Money
         this(ZERO_AMOUNT, defaultCurrency());
     }
 
+    public Money(String amount) {
+        this(new BigDecimal(amount), defaultCurrency());
+    }
+
     public Money(BigDecimal amount) {
         this(amount, defaultCurrency());
     }

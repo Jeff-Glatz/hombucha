@@ -1,6 +1,7 @@
 package ruffkat.hombucha.model;
 
 import org.hibernate.annotations.Type;
+import ruffkat.hombucha.money.Money;
 
 import javax.measure.Measure;
 import javax.measure.quantity.Quantity;
@@ -8,9 +9,6 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import java.math.BigDecimal;
-import java.util.Currency;
-import java.util.Locale;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -21,10 +19,8 @@ public class Item<Q extends Quantity>
     private String reference;
 
     @Basic
-    private BigDecimal price;
-
-    @Basic
-    private Currency currency = Currency.getInstance(Locale.getDefault());
+    @Type(type = "money")
+    private Money price;
 
     @Basic
     @Type(type = "measure")
@@ -38,20 +34,12 @@ public class Item<Q extends Quantity>
         this.reference = reference;
     }
 
-    public BigDecimal getPrice() {
+    public Money getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Money price) {
         this.price = price;
-    }
-
-    public Currency getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
     }
 
     public Measure<Q> getUnit() {
@@ -70,7 +58,6 @@ public class Item<Q extends Quantity>
 
         Item item = (Item) o;
 
-        if (currency != null ? !currency.equals(item.currency) : item.currency != null) return false;
         if (price != null ? !price.equals(item.price) : item.price != null) return false;
         if (reference != null ? !reference.equals(item.reference) : item.reference != null) return false;
         if (unit != null ? !unit.equals(item.unit) : item.unit != null) return false;
@@ -83,7 +70,6 @@ public class Item<Q extends Quantity>
         int result = super.hashCode();
         result = 31 * result + (reference != null ? reference.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (currency != null ? currency.hashCode() : 0);
         result = 31 * result + (unit != null ? unit.hashCode() : 0);
         return result;
     }

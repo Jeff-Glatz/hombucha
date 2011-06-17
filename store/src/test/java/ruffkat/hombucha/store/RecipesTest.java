@@ -9,11 +9,11 @@ import ruffkat.hombucha.model.Ingredient;
 import ruffkat.hombucha.model.Item;
 import ruffkat.hombucha.model.Online;
 import ruffkat.hombucha.model.Recipe;
+import ruffkat.hombucha.money.Money;
 import ruffkat.hombucha.time.Dates;
 
 import javax.measure.quantity.Mass;
 import javax.persistence.EntityNotFoundException;
-import java.math.BigDecimal;
 import java.net.URL;
 import java.util.Calendar;
 
@@ -45,7 +45,7 @@ public class RecipesTest extends FunctionalTest {
         item.setName("Ancient Emerald Lilly");
         item.setSource(rishi);
         item.setUnit(Measurements.mass("125 g"));
-        item.setPrice(new BigDecimal("19.99"));
+        item.setPrice(new Money("19.99"));
 
         entityManager.persist(item);
 

@@ -3,5 +3,5 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <typedef name="money"
-             class="ruffkat.hombucha.money.MoneyFormat"/>
+             class="ruffkat.hombucha.money.MoneyType"/>
 </hibernate-mapping>
