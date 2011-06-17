@@ -3,8 +3,9 @@
                  version="2.0">
     <named-query name="Ferments.brewing">
         <query>
-            from Ferment f
-            where current_timestamp() between f.start and f.stop
+            from Ferment ferment
+            where current_timestamp()
+            between ferment.start and ferment.stop
         </query>
     </named-query>
     <named-query name="Vessels.available">
