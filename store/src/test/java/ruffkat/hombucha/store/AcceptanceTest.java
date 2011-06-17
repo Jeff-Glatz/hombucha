@@ -55,13 +55,14 @@ public class AcceptanceTest extends FunctionalTest {
     @Test
     public void CalculateCustomStarterSolution()
             throws Exception {
-        Measure<Volume> kettle = Measurements.volume("2.0 l");
-
         Recipes recipes = recipeMaker.repository();
-        Recipe recipe = Searches.first(recipes, "Starter Solution");
 
-        Recipe adjusted = recipe.scale(kettle);
-        System.out.println(adjusted);
+        Recipe recipe = Searches.first(recipes, "Starter Solution");
+        System.out.println(recipe);
+
+        Measure<Volume> kettle = Measurements.volume("2.0 l");
+        Recipe scaled = recipe.scale(kettle);
+        System.out.println(scaled);
     }
 
     @Test

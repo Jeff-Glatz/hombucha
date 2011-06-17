@@ -95,4 +95,12 @@ public abstract class Sourced
         result = 31 * result + (source != null ? source.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Sourced{" +
+                "oid=" + oid +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

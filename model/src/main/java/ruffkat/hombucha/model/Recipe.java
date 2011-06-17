@@ -62,7 +62,8 @@ public class Recipe
     public Recipe scale(Measure<Volume> newVolume) {
         float requested = newVolume.floatValue(volume.getUnit());
         float current = volume.floatValue(volume.getUnit());
-        MultiplyConverter converter = new MultiplyConverter((requested - current) / current);
+        float scale = 1.0f + ((requested - current) / current);
+        MultiplyConverter converter = new MultiplyConverter(scale);
 
         Recipe scaled = new Recipe();
         scaled.setInstructions(getInstructions());
@@ -101,5 +102,14 @@ public class Recipe
         result = 31 * result + (instructions != null ? instructions.hashCode() : 0);
         result = 31 * result + (volume != null ? volume.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "ingredients=" + ingredients +
+                ", instructions='" + instructions + '\'' +
+                ", volume=" + volume +
+                '}';
     }
 }

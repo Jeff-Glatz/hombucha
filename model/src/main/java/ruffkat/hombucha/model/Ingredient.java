@@ -97,4 +97,13 @@ public class Ingredient<Q extends Quantity>
         result = 31 * result + (instructions != null ? instructions.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Ingredient{" +
+                "item=" + item +
+                ", amount=" + amount +
+                ", instructions='" + instructions + '\'' +
+                '}';
+    }
 }
