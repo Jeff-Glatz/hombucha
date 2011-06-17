@@ -1,13 +1,18 @@
 package ruffkat.hombucha.money;
 
+import javax.measure.Measure;
+import javax.measure.quantity.Quantity;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.Currency;
 import java.util.Locale;
 
 public class Money
         implements Serializable {
-    private static final BigDecimal ZERO_AMOUNT = new BigDecimal("0.00");
+    private static final MathContext CONTEXT = new MathContext(4, RoundingMode.HALF_UP);
+    private static final BigDecimal ZERO_AMOUNT = new BigDecimal("0.000", CONTEXT);
     public static final Money ZERO = new Money();
 
     private final BigDecimal amount;
@@ -18,7 +23,7 @@ public class Money
     }
 
     public Money(String amount) {
-        this(new BigDecimal(amount), defaultCurrency());
+        this(new BigDecimal(amount, CONTEXT), defaultCurrency());
     }
 
     public Money(BigDecimal amount) {
@@ -36,6 +41,20 @@ public class Money
 
     public Currency getCurrency() {
         return currency;
+    }
+
+    public Money add(Money that) {
+        return new Money(amount.add(that.amount, CONTEXT), currency);
+    }
+
+    public <Q extends Quantity> Money divide(Measure<Q> measure) {
+        BigDecimal value = new BigDecimal(measure.getValue().doubleValue(), CONTEXT);
+        return new Money(amount.divide(value, CONTEXT), currency);
+    }
+
+    public <Q extends Quantity> Money multiply(Measure<Q> measure) {
+        BigDecimal value = new BigDecimal(measure.getValue().doubleValue(), CONTEXT);
+        return new Money(amount.multiply(value, CONTEXT), currency);
     }
 
     @Override
@@ -72,6 +91,6 @@ public class Money
 
     public static BigDecimal amount(String value) {
         return (value != null && value.length() > 0) ?
-                new BigDecimal(value) : ZERO_AMOUNT;
+                new BigDecimal(value, CONTEXT) : ZERO_AMOUNT;
     }
 }

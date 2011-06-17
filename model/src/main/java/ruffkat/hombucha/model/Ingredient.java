@@ -1,6 +1,7 @@
 package ruffkat.hombucha.model;
 
 import org.hibernate.annotations.Type;
+import ruffkat.hombucha.money.Money;
 
 import javax.measure.Measure;
 import javax.measure.converter.UnitConverter;
@@ -74,6 +75,11 @@ public class Ingredient<Q extends Quantity>
                 converter.convert(amount.getValue().doubleValue()),
                 amount.getUnit()));
         return ingredient;
+    }
+
+    public Money price() {
+        Money unit = item.unitPrice();
+        return unit.multiply(amount);
     }
 
     @Override

@@ -34,7 +34,7 @@ public class ItemMaker
         Item<Volume> water = items.create(Volume.class);
         water.setName("Distilled Water");
         water.setPrice(new Money("0.89"));
-        water.setUnit(Measurements.volume("3.7 l"));
+        water.setUnit(Measurements.volume("3.785 l"));
         water.setSource(Searches.first(sources, "CVS"));
         items.save(water);
 

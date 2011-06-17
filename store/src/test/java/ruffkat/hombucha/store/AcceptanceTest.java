@@ -8,6 +8,7 @@ import ruffkat.hombucha.model.Ferment;
 import ruffkat.hombucha.model.Ingredient;
 import ruffkat.hombucha.model.Processing;
 import ruffkat.hombucha.model.Recipe;
+import ruffkat.hombucha.money.Money;
 
 import javax.time.Duration;
 import javax.time.Instant;
@@ -76,6 +77,8 @@ public class AcceptanceTest extends FunctionalTest {
 
         Ingredient<?> tea = ingredients.get(2);
         assertEquals(tea.getAmount(), Measurements.mass("5 g"));
+
+        assertEquals(new Money("2.462"), recipe.price());
     }
 
     @Test

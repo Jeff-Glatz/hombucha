@@ -50,6 +50,10 @@ public class Item<Q extends Quantity>
         this.unit = unit;
     }
 
+    public Money unitPrice() {
+        return price.divide(unit);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

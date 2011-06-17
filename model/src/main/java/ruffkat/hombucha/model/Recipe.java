@@ -2,6 +2,7 @@ package ruffkat.hombucha.model;
 
 import org.hibernate.annotations.Type;
 import ruffkat.hombucha.measure.Volumetric;
+import ruffkat.hombucha.money.Money;
 
 import javax.measure.Measure;
 import javax.measure.converter.MultiplyConverter;
@@ -67,18 +68,26 @@ public class Recipe
         float scale = 1.0f + ((requested - current) / current);
         MultiplyConverter converter = new MultiplyConverter(scale);
 
-        Recipe scaled = new Recipe();
-        scaled.setInstructions(getInstructions());
-        scaled.setName(getName());
-        scaled.setVolume(newVolume);
-        scaled.setReceived(getReceived());
-        scaled.setSource(getSource());
-        List<Ingredient<?>> ingredients = new ArrayList<Ingredient<?>>(ingredientCount());
-        for (Ingredient<?> ingredient : getIngredients()) {
-            ingredients.add(ingredient.scale(converter));
+        Recipe recipe = new Recipe();
+        recipe.setInstructions(getInstructions());
+        recipe.setName(getName());
+        recipe.setVolume(newVolume);
+        recipe.setReceived(getReceived());
+        recipe.setSource(getSource());
+        List<Ingredient<?>> scaled = new ArrayList<Ingredient<?>>(ingredientCount());
+        for (Ingredient<?> ingredient : ingredients) {
+            scaled.add(ingredient.scale(converter));
         }
-        scaled.setIngredients(ingredients);
-        return scaled;
+        recipe.setIngredients(scaled);
+        return recipe;
+    }
+
+    public Money price() {
+        Money price = Money.ZERO;
+        for (Ingredient<?> ingredient : ingredients) {
+            price = price.add(ingredient.price());
+        }
+        return price;
     }
 
     @Override
