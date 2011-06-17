@@ -1,5 +1,10 @@
 package ruffkat.hombucha.money;
 
-public interface Econometric {
-    Money price();
+import javax.measure.Measure;
+import javax.measure.quantity.Quantity;
+
+public interface Econometric<Q extends Quantity> {
+    Measure<Q> getUnit();
+    Money getPrice();
+    Money unitPrice();
 }
