@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import ruffkat.hombucha.measure.Measurements;
 import ruffkat.hombucha.measure.Molarity;
-import ruffkat.hombucha.model.Container;
+import ruffkat.hombucha.model.Vessel;
 import ruffkat.hombucha.model.Ferment;
 import ruffkat.hombucha.model.Friend;
 import ruffkat.hombucha.model.Mother;
@@ -110,29 +110,29 @@ public class SamplesTest extends FunctionalTest {
         entityManager.persist(baby2);
 
         // Create a reactor to hold the brew
-        Container containerA = new Container();
-        containerA.setSource(online);
-        containerA.setName("A");
-        containerA.setReceived(Dates.date(Calendar.JUNE, 11, 2011));
-        entityManager.persist(containerA);
+        Vessel vesselA = new Vessel();
+        vesselA.setSource(online);
+        vesselA.setName("A");
+        vesselA.setReceived(Dates.date(Calendar.JUNE, 11, 2011));
+        entityManager.persist(vesselA);
 
         // Create another reactor to hold the brew
-        Container containerB = new Container();
-        containerB.setSource(online);
-        containerB.setName("B");
-        containerB.setReceived(Dates.date(Calendar.JUNE, 11, 2011));
-        entityManager.persist(containerB);
+        Vessel vesselB = new Vessel();
+        vesselB.setSource(online);
+        vesselB.setName("B");
+        vesselB.setReceived(Dates.date(Calendar.JUNE, 11, 2011));
+        entityManager.persist(vesselB);
 
 //        Ferment ancientPuErh2006 = new Ferment();
 //        ancientPuErh2006.setProcessing(Processing.BATCH);
-//        ancientPuErh2006.setContainer(containerA);
+//        ancientPuErh2006.setVessel(vesselA);
 //        ancientPuErh2006.setStart(Dates.date(Calendar.JUNE, 12, 2011));
 //        ancientPuErh2006.setStop(Dates.date(Calendar.JUNE, 26, 2011));
 //        entityManager.persist(ancientPuErh2006);
 //
 //        Ferment bloodOrangePuErh = new Ferment();
 //        bloodOrangePuErh.setProcessing(Processing.CONTINUOUS);
-//        bloodOrangePuErh.setContainer(containerB);
+//        bloodOrangePuErh.setVessel(vesselB);
 //        bloodOrangePuErh.setStart(Dates.date(Calendar.JUNE, 12, 2011));
 //        entityManager.persist(bloodOrangePuErh);
 //

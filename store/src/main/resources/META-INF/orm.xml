@@ -7,19 +7,19 @@
             where current_timestamp() between f.start and f.stop
         </query>
     </named-query>
-    <named-query name="Containers.available">
+    <named-query name="Vessels.available">
         <query>
-            from Container c
-            where c.ferment is null
-            order by c.volume
+            from Vessel vessel
+            where vessel.ferment is null
+            order by vessel.volume
         </query>
     </named-query>
-    <named-query name="Containers.pick">
+    <named-query name="Vessels.pick">
         <query>
-            from Container c
-            where c.ferment is null
-               and c.volume >= :minimum
-            order by c.volume
+            from Vessel vessel
+            where vessel.ferment is null
+            and vessel.volume >= :minimum
+            order by vessel.volume
         </query>
     </named-query>
 </entity-mappings>

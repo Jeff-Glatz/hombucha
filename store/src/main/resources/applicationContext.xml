@@ -56,8 +56,8 @@
           class="ruffkat.hombucha.store.RecipesImpl"/>
     <bean id="mothers"
           class="ruffkat.hombucha.store.MothersImpl"/>
-    <bean id="reactors"
-          class="ruffkat.hombucha.store.ContainersImpl"/>
+    <bean id="vessels"
+          class="ruffkat.hombucha.store.VesselsImpl"/>
     <bean id="ferments"
           class="ruffkat.hombucha.store.FermentsImpl"/>
     <bean id="samples"

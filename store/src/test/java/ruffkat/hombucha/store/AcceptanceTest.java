@@ -33,7 +33,7 @@ public class AcceptanceTest extends FunctionalTest {
     private ItemMaker itemMaker;
 
     @Autowired
-    private ContainerMaker containerMaker;
+    private VesselMaker containerMaker;
 
     @Autowired
     private MotherMaker mushroomMaker;
@@ -155,7 +155,7 @@ public class AcceptanceTest extends FunctionalTest {
     @Test
     public void DesignNewFerment()
             throws Exception {
-        Containers containers = containerMaker.repository();
+        Vessels vessels = containerMaker.repository();
         Mothers mothers = mushroomMaker.repository();
         Recipes recipes = recipeMaker.repository();
 
@@ -165,7 +165,7 @@ public class AcceptanceTest extends FunctionalTest {
         batch.setMother(Searches.first(mothers, "Squiddy"));
         batch.setRecipe(Searches.first(recipes, "Starter Solution"));
         batch.setVolume(Measurements.volume("6.0 l"));
-        batch.setContainer(containers.pick(batch));
+        batch.setVessel(vessels.pick(batch));
         ferments.save(batch);
     }
 

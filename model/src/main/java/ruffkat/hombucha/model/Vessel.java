@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Container
+public class Vessel
         extends Item<Volume>
         implements Volumetric {
 
@@ -39,12 +39,12 @@ public class Container
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Container)) return false;
+        if (!(o instanceof Vessel)) return false;
         if (!super.equals(o)) return false;
 
-        Container container = (Container) o;
+        Vessel vessel = (Vessel) o;
 
-        if (volume != null ? !volume.equals(container.volume) : container.volume != null) return false;
+        if (volume != null ? !volume.equals(vessel.volume) : vessel.volume != null) return false;
 
         return true;
     }

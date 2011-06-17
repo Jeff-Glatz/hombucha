@@ -20,7 +20,7 @@ public class FermentMaker
     private Recipes recipes;
 
     @Autowired
-    private Containers containers;
+    private Vessels vessels;
 
     public FermentMaker() {
         super(Ferment.class);
@@ -40,7 +40,7 @@ public class FermentMaker
         daily.setMother(Searches.first(mothers, "Squiddy"));
         daily.setRecipe(Searches.first(recipes, "Starter Solution"));
         daily.setVolume(Measurements.volume("6.0 l"));
-        daily.setContainer(containers.pick(daily));
+        daily.setVessel(vessels.pick(daily));
         ferments.save(daily);
 
         Ferment batch = ferments.create();
@@ -49,7 +49,7 @@ public class FermentMaker
         batch.setMother(Searches.first(mothers, "Squiddy"));
         batch.setRecipe(Searches.first(recipes, "Starter Solution"));
         batch.setVolume(Measurements.volume("6.0 l"));
-        batch.setContainer(containers.pick(batch));
+        batch.setVessel(vessels.pick(batch));
         ferments.save(batch);
     }
 }
