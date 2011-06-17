@@ -60,35 +60,93 @@ public class AcceptanceTest extends FunctionalTest {
     }
 
     @Test
-    public void CalculateCustomStarterSolution()
+    public void LookupStarterSolution()
+            throws Exception {
+        Recipes recipes = recipeMaker.repository();
+        Recipe recipe = Searches.first(recipes, "Starter Solution");
+        assertTrue(recipe.persisted());
+        assertEquals(Measurements.volume("3.785 l"), recipe.getVolume());
+        List<Ingredient<?>> ingredients = recipe.getIngredients();
+        assertEquals(3, ingredients.size());
+
+        Ingredient<Volume> water = (Ingredient<Volume>) ingredients.get(0);
+        assertEquals(water.getAmount(), Measurements.volume("2.84 l"));
+
+        Ingredient<Mass> sugar = (Ingredient<Mass>) ingredients.get(1);
+        assertEquals(sugar.getAmount(), Measurements.mass("250 g"));
+
+        Ingredient<Mass> tea = (Ingredient<Mass>) ingredients.get(2);
+        assertEquals(tea.getAmount(), Measurements.mass("5 g"));
+    }
+
+    @Test
+    public void ScaleUpFeederSolution()
             throws Exception {
         Recipes recipes = recipeMaker.repository();
         Measure<Volume> kettle = Measurements.volume("2.0 l");
 
-        Recipe recipe = Searches.first(recipes, "Starter Solution");
+        Recipe recipe = Searches.first(recipes, "Feeder Solution");
         assertTrue(recipe.persisted());
-        assertEquals(Measurements.volume("6.0 l"), recipe.getVolume());
+        assertEquals(Measurements.volume("1.0 l"), recipe.getVolume());
         List<Ingredient<?>> ingredients = recipe.getIngredients();
-        assertEquals(2, ingredients.size());
-        Ingredient<Mass> sugar = (Ingredient<Mass>) ingredients.get(0);
-        Ingredient<Mass> tea = (Ingredient<Mass>) ingredients.get(1);
-        assertEquals(sugar.getAmount(), Measurements.mass("500 g"));
-        assertEquals(tea.getAmount(), Measurements.mass("10 g"));
+        assertEquals(3, ingredients.size());
+        Ingredient<Volume> water = (Ingredient<Volume>) ingredients.get(0);
+        assertEquals(water.getAmount(), Measurements.volume("1.0 l"));
+        Ingredient<Mass> sugar = (Ingredient<Mass>) ingredients.get(1);
+        assertEquals(sugar.getAmount(), Measurements.mass("85 g"));
+        Ingredient<Mass> tea = (Ingredient<Mass>) ingredients.get(2);
+        assertEquals(tea.getAmount(), Measurements.mass("5 g"));
 
         Recipe scaled = recipe.scale(kettle);
         assertFalse(scaled.persisted());
         assertEquals(Measurements.volume("2.0 l"), scaled.getVolume());
         List<Ingredient<?>> scaledIngredients = scaled.getIngredients();
-        assertEquals(2, scaledIngredients.size());
+        assertEquals(3, scaledIngredients.size());
 
-        Ingredient<Mass> scaledSugar = (Ingredient<Mass>) scaledIngredients.get(0);
-        Ingredient<Mass> scaledTea = (Ingredient<Mass>) scaledIngredients.get(1);
+        Ingredient<Volume> scaledWater = (Ingredient<Volume>) scaledIngredients.get(0);
+        assertEquals(scaledWater.getAmount().getValue().floatValue(),
+                Measurements.volume("2.0 l").getValue().floatValue());
+        Ingredient<Mass> scaledSugar = (Ingredient<Mass>) scaledIngredients.get(1);
         assertEquals(scaledSugar.getAmount().getValue().floatValue(),
-                Measurements.mass("166.6666567325592 g").getValue().floatValue());
+                Measurements.mass("170 g").getValue().floatValue());
+        Ingredient<Mass> scaledTea = (Ingredient<Mass>) scaledIngredients.get(2);
         assertEquals(scaledTea.getAmount().getValue().floatValue(),
-                Measurements.mass("3.333333134651184 g").getValue().floatValue());
+                Measurements.mass("10 g").getValue().floatValue());
+    }
 
-        System.out.println(scaled);
+    @Test
+    public void ScaleDownFeederSolution()
+            throws Exception {
+        Recipes recipes = recipeMaker.repository();
+        Measure<Volume> kettle = Measurements.volume("0.5 l");
+
+        Recipe recipe = Searches.first(recipes, "Feeder Solution");
+        assertTrue(recipe.persisted());
+        assertEquals(Measurements.volume("1.0 l"), recipe.getVolume());
+        List<Ingredient<?>> ingredients = recipe.getIngredients();
+        assertEquals(3, ingredients.size());
+        Ingredient<Volume> water = (Ingredient<Volume>) ingredients.get(0);
+        assertEquals(water.getAmount(), Measurements.volume("1.0 l"));
+        Ingredient<Mass> sugar = (Ingredient<Mass>) ingredients.get(1);
+        assertEquals(sugar.getAmount(), Measurements.mass("85 g"));
+        Ingredient<Mass> tea = (Ingredient<Mass>) ingredients.get(2);
+        assertEquals(tea.getAmount(), Measurements.mass("5 g"));
+
+        Recipe scaled = recipe.scale(kettle);
+        assertFalse(scaled.persisted());
+        assertEquals(Measurements.volume("0.5 l"), scaled.getVolume());
+        List<Ingredient<?>> scaledIngredients = scaled.getIngredients();
+        assertEquals(3, scaledIngredients.size());
+
+        Ingredient<Volume> scaledWater = (Ingredient<Volume>) scaledIngredients.get(0);
+        assertEquals(scaledWater.getAmount().getValue().floatValue(),
+                Measurements.volume("0.5 l").getValue().floatValue());
+        Ingredient<Mass> scaledSugar = (Ingredient<Mass>) scaledIngredients.get(1);
+        assertEquals(scaledSugar.getAmount().getValue().floatValue(),
+                Measurements.mass("42.5 g").getValue().floatValue());
+        Ingredient<Mass> scaledTea = (Ingredient<Mass>) scaledIngredients.get(2);
+        assertEquals(scaledTea.getAmount().getValue().floatValue(),
+                Measurements.mass("2.5 g").getValue().floatValue());
     }
 
     @Test
