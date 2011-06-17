@@ -11,6 +11,9 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.sql.Types;
 
+/**
+ * Persists instances of {@code JSR-310} {@link javax.time.Instant}
+ */
 public class InstantType
         implements UserType {
 

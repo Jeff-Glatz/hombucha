@@ -44,13 +44,15 @@ public class PackageTest extends FunctionalTest {
         recipeMaker.make();
 
         Containers containers = containerMaker.repository();
+        Mushrooms mushrooms = mushroomMaker.repository();
+        Recipes recipes = recipeMaker.repository();
 
         // "Design" the ferment
         Ferment batch = ferments.create();
         batch.setName("MaltBrewCha Run 1");
         batch.setProcessing(Processing.CONTINUOUS);
-        batch.setMushroom(Searches.first(mushroomMaker.repository(), "Squiddy"));
-        batch.setRecipe(Searches.first(recipeMaker.repository(), "Starter Solution"));
+        batch.setMushroom(Searches.first(mushrooms, "Squiddy"));
+        batch.setRecipe(Searches.first(recipes, "Starter Solution"));
         batch.setVolume(Measurements.volume("6.0 l"));
         batch.setContainer(containers.pick(batch));
         ferments.save(batch);

@@ -1,34 +1,28 @@
-package ruffkat.hombucha.measure;
+package ruffkat.hombucha.money;
 
 import org.hibernate.HibernateException;
 import org.hibernate.usertype.ParameterizedType;
 import org.hibernate.usertype.UserType;
 
-import javax.measure.Measure;
-import javax.measure.MeasureFormat;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.text.ParsePosition;
 import java.util.Properties;
 
-/**
- * Persists instances of {@code JSR-275} {@link Measure}
- */
-public class MeasureType
-        implements UserType, ParameterizedType {
-    private MeasureFormat format;
+public class MoneyType implements
+        UserType, ParameterizedType {
+    private MoneyFormat format;
 
     @Override
     public void setParameterValues(Properties parameters) {
         // TODO: support configuration via parameters
-        format = MeasureFormat.getStandard();
+        format = DefaultMoneyFormat.get();
     }
 
     public Class returnedClass() {
-        return Measure.class;
+        return Money.class;
     }
 
     public boolean equals(Object x, Object y)
@@ -50,7 +44,8 @@ public class MeasureType
         if (value == null) {
             st.setNull(index, Types.VARCHAR);
         } else {
-            st.setObject(index, format.format(value), Types.VARCHAR);
+            Money money = (Money) value;
+            st.setObject(index, format.format(money), Types.VARCHAR);
         }
     }
 
@@ -58,9 +53,9 @@ public class MeasureType
             throws HibernateException,
             SQLException {
         if (!resultSet.wasNull()) {
-            String measure = resultSet.getString(names[0]);
-            if (measure != null) {
-                return format.parse(measure, new ParsePosition(0));
+            String money = resultSet.getString(names[0]);
+            if (money != null) {
+                return format.parse(money);
             }
         }
         return null;
