@@ -2,6 +2,7 @@ package ruffkat.hombucha.model;
 
 import org.hibernate.annotations.Type;
 import ruffkat.hombucha.money.Money;
+import ruffkat.hombucha.money.Priced;
 
 import javax.measure.Measure;
 import javax.measure.quantity.Quantity;
@@ -13,7 +14,8 @@ import javax.persistence.InheritanceType;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Item<Q extends Quantity>
-        extends Sourced {
+        extends Sourced
+        implements Priced<Q> {
 
     @Basic
     private String reference;

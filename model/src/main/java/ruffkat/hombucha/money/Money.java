@@ -43,12 +43,20 @@ public class Money
         return currency;
     }
 
+    public Money add(BigDecimal amount) {
+        return new Money(this.amount.add(amount, CONTEXT), currency);
+    }
+
     public Money add(Money that) {
-        return new Money(amount.add(that.amount, CONTEXT), currency);
+        return add(that.amount);
+    }
+
+    public Money subtract(BigDecimal amount) {
+        return new Money(this.amount.subtract(amount, CONTEXT), currency);
     }
 
     public Money subtract(Money that) {
-        return new Money(amount.subtract(that.amount, CONTEXT), currency);
+        return subtract(that.amount);
     }
 
     public <Q extends Quantity> Money divide(Measure<Q> measure) {

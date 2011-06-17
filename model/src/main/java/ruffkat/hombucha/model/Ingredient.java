@@ -1,6 +1,7 @@
 package ruffkat.hombucha.model;
 
 import org.hibernate.annotations.Type;
+import ruffkat.hombucha.money.Econometric;
 import ruffkat.hombucha.money.Money;
 
 import javax.measure.Measure;
@@ -14,7 +15,7 @@ import java.io.Serializable;
 
 @Embeddable
 public class Ingredient<Q extends Quantity>
-        implements Serializable {
+        implements Serializable, Econometric {
 
     @OneToOne(cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
@@ -78,8 +79,8 @@ public class Ingredient<Q extends Quantity>
     }
 
     public Money price() {
-        Money unit = item.unitPrice();
-        return unit.multiply(amount);
+        Money price = item.unitPrice();
+        return price.multiply(amount);
     }
 
     @Override
