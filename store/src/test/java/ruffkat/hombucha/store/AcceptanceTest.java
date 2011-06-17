@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ruffkat.hombucha.measure.Measurements;
 import ruffkat.hombucha.model.Ferment;
 import ruffkat.hombucha.model.Processing;
+import ruffkat.hombucha.model.Recipe;
 
+import javax.measure.Measure;
+import javax.measure.quantity.Volume;
 import javax.time.Duration;
 import javax.time.Instant;
 import javax.time.TimeSource;
@@ -47,6 +50,18 @@ public class AcceptanceTest extends FunctionalTest {
         mushroomMaker.make();
         recipeMaker.make();
         fermentMaker.make();
+    }
+
+    @Test
+    public void CalculateCustomStarterSolution()
+            throws Exception {
+        Measure<Volume> kettle = Measurements.volume("2.0 l");
+
+        Recipes recipes = recipeMaker.repository();
+        Recipe recipe = Searches.first(recipes, "Starter Solution");
+
+        Recipe adjusted = recipe.scale(kettle);
+        System.out.println(adjusted);
     }
 
     @Test

@@ -3,11 +3,13 @@ package ruffkat.hombucha.model;
 import org.hibernate.annotations.Type;
 
 import javax.measure.Measure;
+import javax.measure.converter.MultiplyConverter;
 import javax.measure.quantity.Volume;
 import javax.persistence.Basic;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class Recipe
 
     @Basic
     @Type(type = "measure")
-    private Measure<Volume> yields;
+    private Measure<Volume> volume;
 
     public List<Ingredient<?>> getIngredients() {
         return ingredients;
@@ -37,6 +39,10 @@ public class Recipe
         ingredients.add(ingredient);
     }
 
+    public int ingredientCount() {
+        return ingredients.size();
+    }
+
     public String getInstructions() {
         return instructions;
     }
@@ -45,12 +51,31 @@ public class Recipe
         this.instructions = instructions;
     }
 
-    public Measure<Volume> getYields() {
-        return yields;
+    public Measure<Volume> getVolume() {
+        return volume;
     }
 
-    public void setYields(Measure<Volume> yields) {
-        this.yields = yields;
+    public void setVolume(Measure<Volume> volume) {
+        this.volume = volume;
+    }
+
+    public Recipe scale(Measure<Volume> newVolume) {
+        float requested = newVolume.floatValue(volume.getUnit());
+        float current = volume.floatValue(volume.getUnit());
+        MultiplyConverter converter = new MultiplyConverter((requested - current) / current);
+
+        Recipe scaled = new Recipe();
+        scaled.setInstructions(getInstructions());
+        scaled.setName(getName());
+        scaled.setVolume(newVolume);
+        scaled.setReceived(getReceived());
+        scaled.setSource(getSource());
+        List<Ingredient<?>> ingredients = new ArrayList<Ingredient<?>>(ingredientCount());
+        for (Ingredient<?> ingredient : getIngredients()) {
+            ingredients.add(ingredient.scale(converter));
+        }
+        scaled.setIngredients(ingredients);
+        return scaled;
     }
 
     @Override
@@ -64,7 +89,7 @@ public class Recipe
         if (ingredients != null ? !ingredients.equals(recipe.ingredients) : recipe.ingredients != null) return false;
         if (instructions != null ? !instructions.equals(recipe.instructions) : recipe.instructions != null)
             return false;
-        if (yields != null ? !yields.equals(recipe.yields) : recipe.yields != null) return false;
+        if (volume != null ? !volume.equals(recipe.volume) : recipe.volume != null) return false;
 
         return true;
     }
@@ -74,7 +99,7 @@ public class Recipe
         int result = super.hashCode();
         result = 31 * result + (ingredients != null ? ingredients.hashCode() : 0);
         result = 31 * result + (instructions != null ? instructions.hashCode() : 0);
-        result = 31 * result + (yields != null ? yields.hashCode() : 0);
+        result = 31 * result + (volume != null ? volume.hashCode() : 0);
         return result;
     }
 }

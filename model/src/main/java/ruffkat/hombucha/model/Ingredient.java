@@ -3,6 +3,7 @@ package ruffkat.hombucha.model;
 import org.hibernate.annotations.Type;
 
 import javax.measure.Measure;
+import javax.measure.converter.UnitConverter;
 import javax.measure.quantity.Quantity;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -63,6 +64,16 @@ public class Ingredient<Q extends Quantity>
 
     public void setInstructions(String instructions) {
         this.instructions = instructions;
+    }
+
+    public Ingredient<Q> scale(UnitConverter converter) {
+        Ingredient<Q> ingredient = new Ingredient<Q>();
+        ingredient.setInstructions(getInstructions());
+        ingredient.setItem(getItem());
+        ingredient.setAmount(Measure.valueOf(
+                converter.convert(amount.getValue().doubleValue()),
+                amount.getUnit()));
+        return ingredient;
     }
 
     @Override

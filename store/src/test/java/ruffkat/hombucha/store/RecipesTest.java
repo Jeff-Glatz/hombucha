@@ -52,7 +52,7 @@ public class RecipesTest extends FunctionalTest {
         Recipe recipe = recipes.create();
         recipe.setName("SCOBY DO");
         recipe.setReceived(Dates.date(Calendar.MAY, 12, 2011));
-        recipe.setYields(Measurements.volume("4.0 L"));
+        recipe.setVolume(Measurements.volume("4.0 L"));
         recipe.setSource(friend);
 
         Ingredient<Mass> tea = new Ingredient<Mass>();
@@ -76,7 +76,7 @@ public class RecipesTest extends FunctionalTest {
         Recipe recipe = recipes.create();
         recipe.setName("SCOBY DO");
         recipe.setReceived(Dates.date(Calendar.MAY, 12, 2011));
-        recipe.setYields(Measurements.volume("2.0 L"));
+        recipe.setVolume(Measurements.volume("2.0 L"));
 
         entityManager.persist(recipe);
 

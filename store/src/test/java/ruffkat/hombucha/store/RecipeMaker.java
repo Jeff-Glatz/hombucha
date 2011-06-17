@@ -36,7 +36,7 @@ public class RecipeMaker
 
         Recipe starter = recipes.create();
         starter.setName("Starter Solution");
-        starter.setYields(Measurements.volume("6.0 l"));
+        starter.setVolume(Measurements.volume("6.0 l"));
         starter.setInstructions("Boil water, steep tea, add sugar, cool down");
         starter.addIngredient(new Ingredient<Mass>(sugar, Measurements.mass("500 g")));
         starter.addIngredient(new Ingredient<Mass>(tea, Measurements.mass("10 g")));
@@ -44,7 +44,7 @@ public class RecipeMaker
 
         Recipe feeder = recipes.create();
         feeder.setName("Feeder Solution");
-        feeder.setYields(Measurements.volume("6.0 l"));
+        feeder.setVolume(Measurements.volume("6.0 l"));
         feeder.setInstructions("Boil water, steep tea, add sugar, cool down");
         feeder.addIngredient(new Ingredient<Mass>(sugar, Measurements.mass("500 g")));
         feeder.addIngredient(new Ingredient<Mass>(tea, Measurements.mass("10 g")));
