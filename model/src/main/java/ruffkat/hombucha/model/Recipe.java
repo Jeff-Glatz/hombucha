@@ -1,6 +1,7 @@
 package ruffkat.hombucha.model;
 
 import org.hibernate.annotations.Type;
+import ruffkat.hombucha.measure.Volumetric;
 
 import javax.measure.Measure;
 import javax.measure.converter.MultiplyConverter;
@@ -15,7 +16,8 @@ import java.util.List;
 
 @Entity
 public class Recipe
-        extends Sourced {
+        extends Sourced
+        implements Volumetric {
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<Ingredient<?>> ingredients = new LinkedList<Ingredient<?>>();
