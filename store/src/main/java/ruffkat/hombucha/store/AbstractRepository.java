@@ -16,7 +16,7 @@ public abstract class AbstractRepository<P extends Persistent>
     protected final Class<P> type;
 
     @PersistenceContext(name = "hombucha")
-    protected EntityManager entityManager;
+    protected EntityManager manager;
 
     protected AbstractRepository(Class<P> type) {
         this.type = type;
@@ -25,37 +25,37 @@ public abstract class AbstractRepository<P extends Persistent>
     @Override
     public void save(P persistent) {
         if (persistent.persisted()) {
-            entityManager.merge(persistent);
+            manager.merge(persistent);
         } else {
-            entityManager.persist(persistent);
+            manager.persist(persistent);
         }
     }
 
     @Override
     public P load(Long id) {
-        return entityManager.getReference(type, id);
+        return manager.getReference(type, id);
     }
 
     // TODO: lucene
     @Override
     public Set<P> search(String criteria) {
         // Build the criteria query
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
         CriteriaQuery<P> criteriaQuery = criteriaBuilder.createQuery(type);
         Root<P> from = criteriaQuery.from(type);
         criteriaQuery = criteriaQuery.where(criteriaBuilder.equal(from.get("name"), criteria));
         // Create a "real" query from it
-        TypedQuery<P> query = entityManager.createQuery(criteriaQuery);
+        TypedQuery<P> query = manager.createQuery(criteriaQuery);
         return new HashSet<P>(query.getResultList());
     }
 
     @Override
     public void delete(P persistent) {
-        entityManager.remove(persistent);
+        manager.remove(persistent);
     }
 
     @Override
     public void flush() {
-        entityManager.flush();
+        manager.flush();
     }
 }

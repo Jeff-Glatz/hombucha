@@ -128,16 +128,16 @@ public class SamplesTest extends FunctionalTest {
 //        ancientPuErh2006.setVessel(vesselA);
 //        ancientPuErh2006.setStart(Dates.date(Calendar.JUNE, 12, 2011));
 //        ancientPuErh2006.setStop(Dates.date(Calendar.JUNE, 26, 2011));
-//        entityManager.persist(ancientPuErh2006);
+//        manager.persist(ancientPuErh2006);
 //
 //        Ferment bloodOrangePuErh = new Ferment();
 //        bloodOrangePuErh.setProcessing(Processing.CONTINUOUS);
 //        bloodOrangePuErh.setVessel(vesselB);
 //        bloodOrangePuErh.setStart(Dates.date(Calendar.JUNE, 12, 2011));
-//        entityManager.persist(bloodOrangePuErh);
+//        manager.persist(bloodOrangePuErh);
 //
 //        Sample<Molarity> ph = samples.ph(bloodOrangePuErh);
-//        entityManager.persist(ph);
+//        manager.persist(ph);
 
         entityManager.flush();
     }

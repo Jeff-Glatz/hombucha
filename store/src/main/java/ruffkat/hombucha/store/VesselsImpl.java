@@ -23,15 +23,15 @@ public class VesselsImpl
 
     @Override
     public Set<Vessel> available() {
-        TypedQuery<Vessel> query = entityManager.
-                createNamedQuery("Vessels.available", Vessel.class);
+        TypedQuery<Vessel> query = manager.createNamedQuery(
+                "Vessels.available", Vessel.class);
         return new HashSet<Vessel>(query.getResultList());
     }
 
     @Override
     public Vessel pick(Volumetric volumetric) {
-        TypedQuery<Vessel> query = entityManager.
-                createNamedQuery("Vessels.pick", Vessel.class);
+        TypedQuery<Vessel> query = manager.createNamedQuery(
+                "Vessels.pick", Vessel.class);
         query.setParameter("minimum", volumetric.getVolume());
         List<Vessel> candidates = query.getResultList();
         return !candidates.isEmpty() ? candidates.get(0) : null;

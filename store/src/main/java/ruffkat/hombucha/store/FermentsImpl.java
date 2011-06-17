@@ -21,8 +21,8 @@ public class FermentsImpl
 
     @Override
     public Set<Ferment> brewing() {
-        TypedQuery<Ferment> query = entityManager.
-                createNamedQuery("Ferments.brewing", Ferment.class);
+        TypedQuery<Ferment> query = manager.createNamedQuery(
+                "Ferments.brewing", Ferment.class);
         return new HashSet<Ferment>(query.getResultList());
     }
 }
