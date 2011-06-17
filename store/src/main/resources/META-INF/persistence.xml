@@ -21,7 +21,10 @@
             <property name="hibernate.show_sql" value="false"/>
             <property name="hibernate.generate_statistics" value="true"/>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect"/>
+            <property name="hibernate.dialect"
+                      value="org.hibernate.dialect.DerbyDialect"/>
+            <property name="hibernate.search.default.directory_provider"
+                      value="org.hibernate.search.store.RAMDirectoryProvider"/>
         </properties>
     </persistence-unit>
 </persistence>
