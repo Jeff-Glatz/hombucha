@@ -128,6 +128,8 @@ public class AcceptanceTest extends FunctionalTest {
         assertEquals(tea.getAmount().getValue().floatValue(),
                 Measurements.mass("10 g").getValue().floatValue());
 
+        assertEquals(new Money("1.485"), recipe.price());
+
         System.out.println("Recipe: " + scaled.getName());
         System.out.println("Yield: " + scaled.getVolume());
         System.out.println();
