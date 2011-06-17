@@ -1,4 +1,4 @@
-package ruffkat.homebucha.swing.main;
+package ruffkat.hombucha.swing.main;
 
 import javax.swing.SwingUtilities;
 
