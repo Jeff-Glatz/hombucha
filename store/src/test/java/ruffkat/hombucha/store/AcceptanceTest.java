@@ -5,15 +5,22 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ruffkat.hombucha.measure.Measurements;
 import ruffkat.hombucha.model.Ferment;
+import ruffkat.hombucha.model.Ingredient;
 import ruffkat.hombucha.model.Processing;
 import ruffkat.hombucha.model.Recipe;
 
 import javax.measure.Measure;
+import javax.measure.quantity.Mass;
 import javax.measure.quantity.Volume;
 import javax.time.Duration;
 import javax.time.Instant;
 import javax.time.TimeSource;
 import java.util.Date;
+import java.util.List;
+
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 
 public class AcceptanceTest extends FunctionalTest {
 
@@ -56,12 +63,31 @@ public class AcceptanceTest extends FunctionalTest {
     public void CalculateCustomStarterSolution()
             throws Exception {
         Recipes recipes = recipeMaker.repository();
+        Measure<Volume> kettle = Measurements.volume("2.0 l");
 
         Recipe recipe = Searches.first(recipes, "Starter Solution");
-        System.out.println(recipe);
+        assertTrue(recipe.persisted());
+        assertEquals(Measurements.volume("6.0 l"), recipe.getVolume());
+        List<Ingredient<?>> ingredients = recipe.getIngredients();
+        assertEquals(2, ingredients.size());
+        Ingredient<Mass> sugar = (Ingredient<Mass>) ingredients.get(0);
+        Ingredient<Mass> tea = (Ingredient<Mass>) ingredients.get(1);
+        assertEquals(sugar.getAmount(), Measurements.mass("500 g"));
+        assertEquals(tea.getAmount(), Measurements.mass("10 g"));
 
-        Measure<Volume> kettle = Measurements.volume("2.0 l");
         Recipe scaled = recipe.scale(kettle);
+        assertFalse(scaled.persisted());
+        assertEquals(Measurements.volume("2.0 l"), scaled.getVolume());
+        List<Ingredient<?>> scaledIngredients = scaled.getIngredients();
+        assertEquals(2, scaledIngredients.size());
+
+        Ingredient<Mass> scaledSugar = (Ingredient<Mass>) scaledIngredients.get(0);
+        Ingredient<Mass> scaledTea = (Ingredient<Mass>) scaledIngredients.get(1);
+        assertEquals(scaledSugar.getAmount().getValue().floatValue(),
+                Measurements.mass("166.6666567325592 g").getValue().floatValue());
+        assertEquals(scaledTea.getAmount().getValue().floatValue(),
+                Measurements.mass("3.333333134651184 g").getValue().floatValue());
+
         System.out.println(scaled);
     }
 
