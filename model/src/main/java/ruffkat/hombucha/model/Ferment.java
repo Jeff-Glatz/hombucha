@@ -40,7 +40,7 @@ public class Ferment
     @OneToOne(cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.REFRESH, CascadeType.DETACH})
-    private Mushroom mushroom;
+    private Mother mother;
 
     @OneToOne(cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
@@ -92,12 +92,12 @@ public class Ferment
         this.recipe = recipe;
     }
 
-    public Mushroom getMushroom() {
-        return mushroom;
+    public Mother getMother() {
+        return mother;
     }
 
-    public void setMushroom(Mushroom mushroom) {
-        this.mushroom = mushroom;
+    public void setMother(Mother mother) {
+        this.mother = mother;
     }
 
     public Container getContainer() {
@@ -164,7 +164,7 @@ public class Ferment
         Ferment ferment = (Ferment) o;
 
         if (container != null ? !container.equals(ferment.container) : ferment.container != null) return false;
-        if (mushroom != null ? !mushroom.equals(ferment.mushroom) : ferment.mushroom != null) return false;
+        if (mother != null ? !mother.equals(ferment.mother) : ferment.mother != null) return false;
         if (name != null ? !name.equals(ferment.name) : ferment.name != null) return false;
         if (processing != ferment.processing) return false;
         if (recipe != null ? !recipe.equals(ferment.recipe) : ferment.recipe != null) return false;
@@ -179,7 +179,7 @@ public class Ferment
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (recipe != null ? recipe.hashCode() : 0);
-        result = 31 * result + (mushroom != null ? mushroom.hashCode() : 0);
+        result = 31 * result + (mother != null ? mother.hashCode() : 0);
         result = 31 * result + (container != null ? container.hashCode() : 0);
         result = 31 * result + (volume != null ? volume.hashCode() : 0);
         result = 31 * result + (processing != null ? processing.hashCode() : 0);

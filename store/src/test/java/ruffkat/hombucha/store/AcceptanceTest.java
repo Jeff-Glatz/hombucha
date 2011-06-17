@@ -1,5 +1,6 @@
 package ruffkat.hombucha.store;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ruffkat.hombucha.measure.Measurements;
@@ -11,7 +12,7 @@ import javax.time.Instant;
 import javax.time.TimeSource;
 import java.util.Date;
 
-public class PackageTest extends FunctionalTest {
+public class AcceptanceTest extends FunctionalTest {
 
     @Autowired
     private TimeSource timeSource;
@@ -26,38 +27,51 @@ public class PackageTest extends FunctionalTest {
     private ContainerMaker containerMaker;
 
     @Autowired
-    private MushroomMaker mushroomMaker;
+    private MotherMaker mushroomMaker;
 
     @Autowired
     private RecipeMaker recipeMaker;
 
     @Autowired
+    private FermentMaker fermentMaker;
+
+    @Autowired
     private Ferments ferments;
 
-    @Test
-    public void testNewFerment()
+    @Before
+    public void setUp()
             throws Exception {
         sourceMaker.make();
         itemMaker.make();
         containerMaker.make();
         mushroomMaker.make();
         recipeMaker.make();
+        fermentMaker.make();
+    }
 
+    @Test
+    public void DesignNewFerment()
+            throws Exception {
         Containers containers = containerMaker.repository();
-        Mushrooms mushrooms = mushroomMaker.repository();
+        Mothers mothers = mushroomMaker.repository();
         Recipes recipes = recipeMaker.repository();
 
-        // "Design" the ferment
         Ferment batch = ferments.create();
-        batch.setName("MaltBrewCha Run 1");
-        batch.setProcessing(Processing.CONTINUOUS);
-        batch.setMushroom(Searches.first(mushrooms, "Squiddy"));
+        batch.setName("Pu-Erh 2006");
+        batch.setProcessing(Processing.SECONDARY);
+        batch.setMother(Searches.first(mothers, "Squiddy"));
         batch.setRecipe(Searches.first(recipes, "Starter Solution"));
         batch.setVolume(Measurements.volume("6.0 l"));
         batch.setContainer(containers.pick(batch));
         ferments.save(batch);
+    }
 
-        // Begin fermentation
+    @Test
+    public void StartFermentation()
+            throws Exception {
+        Ferment batch = Searches.first(ferments, "MaltBrewCha Run 1");
+
+        // TODO: Begin fermentation
         Instant now = timeSource.instant();
         Instant later = now.plus(Duration.standardDays(10));
         batch.setStart(new Date(now.toEpochMillisLong()));

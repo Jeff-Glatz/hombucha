@@ -2,46 +2,46 @@ package ruffkat.hombucha.store;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ruffkat.hombucha.model.Mushroom;
+import ruffkat.hombucha.model.Mother;
 import ruffkat.hombucha.time.Dates;
 
 import java.util.Calendar;
 
 @Component
-public class MushroomMaker
-        extends AbstractMaker<Mushroom> {
+public class MotherMaker
+        extends AbstractMaker<Mother> {
 
     @Autowired
-    private Mushrooms mushrooms;
+    private Mothers mothers;
 
     @Autowired
     private Sources sources;
 
-    public MushroomMaker() {
-        super(Mushroom.class);
+    public MotherMaker() {
+        super(Mother.class);
     }
 
     @Override
-    public Mushrooms repository() {
-        return mushrooms;
+    public Mothers repository() {
+        return mothers;
     }
 
     @Override
     public void make()
             throws Exception {
         // Add a mother
-        Mushroom mother = mushrooms.create();
+        Mother mother = mothers.create();
         mother.setName("Squiddy");
         mother.setReceived(Dates.date(Calendar.MAY, 7, 2011));
         mother.setSource(Searches.first(sources, "My friend"));
-        mushrooms.save(mother);
+        mothers.save(mother);
 
         // Add the babies
-        Mushroom baby = mushrooms.create();
+        Mother baby = mothers.create();
         baby.setName("Eggshell");
         baby.setMother(mother);
         baby.setReceived(Dates.date(Calendar.MAY, 7, 2011));
         baby.setSource(Searches.first(sources, "My friend"));
-        mushrooms.save(baby);
+        mothers.save(baby);
     }
 }

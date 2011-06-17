@@ -54,8 +54,8 @@
           class="ruffkat.hombucha.store.ItemsImpl"/>
     <bean id="recipes"
           class="ruffkat.hombucha.store.RecipesImpl"/>
-    <bean id="mushrooms"
-          class="ruffkat.hombucha.store.MushroomsImpl"/>
+    <bean id="mothers"
+          class="ruffkat.hombucha.store.MothersImpl"/>
     <bean id="reactors"
           class="ruffkat.hombucha.store.ContainersImpl"/>
     <bean id="ferments"

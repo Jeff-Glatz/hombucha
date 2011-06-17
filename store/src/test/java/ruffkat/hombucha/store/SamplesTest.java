@@ -9,7 +9,7 @@ import ruffkat.hombucha.measure.Molarity;
 import ruffkat.hombucha.model.Container;
 import ruffkat.hombucha.model.Ferment;
 import ruffkat.hombucha.model.Friend;
-import ruffkat.hombucha.model.Mushroom;
+import ruffkat.hombucha.model.Mother;
 import ruffkat.hombucha.model.Online;
 import ruffkat.hombucha.model.Sample;
 import ruffkat.hombucha.time.Dates;
@@ -87,14 +87,14 @@ public class SamplesTest extends FunctionalTest {
         entityManager.persist(online);
 
         // Create a mother
-        Mushroom mother = new Mushroom();
+        Mother mother = new Mother();
         mother.setSource(friend);
         mother.setName("Mama");
         mother.setReceived(Dates.date(Calendar.MAY, 12, 2011));
         entityManager.persist(mother);
 
         // First baby
-        Mushroom baby1 = new Mushroom();
+        Mother baby1 = new Mother();
         baby1.setSource(friend);
         baby1.setName("Baby 1");
         baby1.setReceived(Dates.date(Calendar.MAY, 12, 2011));
@@ -102,7 +102,7 @@ public class SamplesTest extends FunctionalTest {
         entityManager.persist(baby1);
 
         // Second baby
-        Mushroom baby2 = new Mushroom();
+        Mother baby2 = new Mother();
         baby2.setSource(friend);
         baby2.setName("Baby 2");
         baby2.setReceived(Dates.date(Calendar.MAY, 12, 2011));

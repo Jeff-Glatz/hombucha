@@ -5,31 +5,31 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Mushroom
+public class Mother
         extends Sourced {
 
     @ManyToOne(cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.REFRESH, CascadeType.DETACH})
-    private Mushroom mother;
+    private Mother mother;
 
-    public Mushroom getMother() {
+    public Mother getMother() {
         return mother;
     }
 
-    public void setMother(Mushroom mother) {
+    public void setMother(Mother mother) {
         this.mother = mother;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Mushroom)) return false;
+        if (!(o instanceof Mother)) return false;
         if (!super.equals(o)) return false;
 
-        Mushroom mushroom = (Mushroom) o;
+        Mother mother = (Mother) o;
 
-        if (mother != null ? !mother.equals(mushroom.mother) : mushroom.mother != null) return false;
+        if (mother != null ? !mother.equals(mother.mother) : mother.mother != null) return false;
 
         return true;
     }
