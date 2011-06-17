@@ -42,7 +42,7 @@ public class RecipeMaker
         starter.setInstructions(
                 "1. Boil water (no longer than five minutes)\n" +
                         "2. Steep tea accordingly\n" +
-                        "3. Add sugar\n " +
+                        "3. Add sugar\n" +
                         "4. Cool down to room temperature\n" +
                         "5. Add 0.5 l of starter ferment");
         starter.addIngredient(new Ingredient<Volume>(water, Measurements.volume("2.84 l")));
@@ -56,7 +56,7 @@ public class RecipeMaker
         feeder.setInstructions(
                 "1. Boil water (no longer than five minutes)\n" +
                         "2. Steep tea accordingly\n" +
-                        "3. Add sugar\n " +
+                        "3. Add sugar\n" +
                         "4. Cool down to room temperature");
         feeder.addIngredient(new Ingredient<Volume>(water, Measurements.volume("1.0 l")));
         feeder.addIngredient(new Ingredient<Mass>(sugar, Measurements.mass("85 g")));
