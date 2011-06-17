@@ -1,5 +1,10 @@
 package ruffkat.hombucha.model;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
+
 import javax.persistence.Basic;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -7,10 +12,12 @@ import java.net.URL;
 
 @Entity
 @DiscriminatorValue("online")
+@Indexed(index = "indices/online")
 public class Online
         extends Source {
 
     @Basic
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     private URL url;
 
     public Online() {

@@ -1,5 +1,10 @@
 package ruffkat.hombucha.model;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
+
 import javax.persistence.Basic;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -7,19 +12,24 @@ import java.net.URL;
 
 @Entity
 @DiscriminatorValue("local")
+@Indexed(index = "indices/local")
 public class Local
         extends Source {
 
     @Basic
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     private URL url;
 
     @Basic
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     private String phone;
 
     @Basic
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     private String email;
 
     @Basic
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     private String directions;
 
     public URL getUrl() {
