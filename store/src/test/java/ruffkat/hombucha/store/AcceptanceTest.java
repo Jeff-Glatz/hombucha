@@ -129,20 +129,6 @@ public class AcceptanceTest extends FunctionalTest {
                 Measurements.mass("10 g").getValue().floatValue());
 
         assertEquals(new Money("1.485"), recipe.price());
-
-        System.out.println("Recipe: " + scaled.getName());
-        System.out.println("Yield: " + scaled.getVolume());
-        System.out.println();
-        System.out.println("Ingredient List");
-        for (Ingredient<?> ingredient : scaled.getIngredients()) {
-            System.out.print("    * ");
-            System.out.print(ingredient.getItem().getName());
-            System.out.print(" - ");
-            System.out.println(ingredient.getAmount());
-        }
-        System.out.println();
-        System.out.println("Instructions");
-        System.out.println(scaled.getInstructions());
     }
 
     @Test

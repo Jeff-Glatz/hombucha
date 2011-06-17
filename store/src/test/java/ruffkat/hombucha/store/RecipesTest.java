@@ -91,4 +91,20 @@ public class RecipesTest extends FunctionalTest {
         } catch (EntityNotFoundException e) {
         }
     }
+
+    public static void print(Recipe scaled) {
+        System.out.println("Recipe: " + scaled.getName());
+        System.out.println("Yield: " + scaled.getVolume());
+        System.out.println();
+        System.out.println("Ingredient List");
+        for (Ingredient<?> ingredient : scaled.getIngredients()) {
+            System.out.print("    * ");
+            System.out.print(ingredient.getItem().getName());
+            System.out.print(" - ");
+            System.out.println(ingredient.getAmount());
+        }
+        System.out.println();
+        System.out.println("Instructions");
+        System.out.println(scaled.getInstructions());
+    }
 }
