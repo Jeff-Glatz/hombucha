@@ -9,8 +9,6 @@ import ruffkat.hombucha.model.Ingredient;
 import ruffkat.hombucha.model.Processing;
 import ruffkat.hombucha.model.Recipe;
 
-import javax.measure.quantity.Mass;
-import javax.measure.quantity.Volume;
 import javax.time.Duration;
 import javax.time.Instant;
 import javax.time.TimeSource;
@@ -70,13 +68,13 @@ public class AcceptanceTest extends FunctionalTest {
         List<Ingredient<?>> ingredients = recipe.getIngredients();
         assertEquals(3, ingredients.size());
 
-        Ingredient<Volume> water = (Ingredient<Volume>) ingredients.get(0);
+        Ingredient<?> water = ingredients.get(0);
         assertEquals(water.getAmount(), Measurements.volume("2.84 l"));
 
-        Ingredient<Mass> sugar = (Ingredient<Mass>) ingredients.get(1);
+        Ingredient<?> sugar = ingredients.get(1);
         assertEquals(sugar.getAmount(), Measurements.mass("250 g"));
 
-        Ingredient<Mass> tea = (Ingredient<Mass>) ingredients.get(2);
+        Ingredient<?> tea = ingredients.get(2);
         assertEquals(tea.getAmount(), Measurements.mass("5 g"));
     }
 
@@ -92,13 +90,13 @@ public class AcceptanceTest extends FunctionalTest {
         List<Ingredient<?>> ingredients = recipe.getIngredients();
         assertEquals(3, ingredients.size());
 
-        Ingredient<Volume> water = (Ingredient<Volume>) ingredients.get(0);
+        Ingredient<?> water = ingredients.get(0);
         assertEquals(water.getAmount(), Measurements.volume("1.0 l"));
 
-        Ingredient<Mass> sugar = (Ingredient<Mass>) ingredients.get(1);
+        Ingredient<?> sugar = ingredients.get(1);
         assertEquals(sugar.getAmount(), Measurements.mass("85 g"));
 
-        Ingredient<Mass> tea = (Ingredient<Mass>) ingredients.get(2);
+        Ingredient<?> tea = ingredients.get(2);
         assertEquals(tea.getAmount(), Measurements.mass("5 g"));
     }
 
@@ -115,15 +113,15 @@ public class AcceptanceTest extends FunctionalTest {
         List<Ingredient<?>> ingredients = scaled.getIngredients();
         assertEquals(3, ingredients.size());
 
-        Ingredient<Volume> water = (Ingredient<Volume>) ingredients.get(0);
+        Ingredient<?> water = ingredients.get(0);
         assertEquals(water.getAmount().getValue().floatValue(),
                 Measurements.volume("2.0 l").getValue().floatValue());
 
-        Ingredient<Mass> sugar = (Ingredient<Mass>) ingredients.get(1);
+        Ingredient<?> sugar = ingredients.get(1);
         assertEquals(sugar.getAmount().getValue().floatValue(),
                 Measurements.mass("170 g").getValue().floatValue());
 
-        Ingredient<Mass> tea = (Ingredient<Mass>) ingredients.get(2);
+        Ingredient<?> tea = ingredients.get(2);
         assertEquals(tea.getAmount().getValue().floatValue(),
                 Measurements.mass("10 g").getValue().floatValue());
 
@@ -155,13 +153,13 @@ public class AcceptanceTest extends FunctionalTest {
         List<Ingredient<?>> ingredients = scaled.getIngredients();
         assertEquals(3, ingredients.size());
 
-        Ingredient<Volume> water = (Ingredient<Volume>) ingredients.get(0);
+        Ingredient<?> water = ingredients.get(0);
         assertEquals(water.getAmount().getValue().floatValue(),
                 Measurements.volume("0.5 l").getValue().floatValue());
-        Ingredient<Mass> sugar = (Ingredient<Mass>) ingredients.get(1);
+        Ingredient<?> sugar = ingredients.get(1);
         assertEquals(sugar.getAmount().getValue().floatValue(),
                 Measurements.mass("42.5 g").getValue().floatValue());
-        Ingredient<Mass> tea = (Ingredient<Mass>) ingredients.get(2);
+        Ingredient<?> tea = ingredients.get(2);
         assertEquals(tea.getAmount().getValue().floatValue(),
                 Measurements.mass("2.5 g").getValue().floatValue());
     }
