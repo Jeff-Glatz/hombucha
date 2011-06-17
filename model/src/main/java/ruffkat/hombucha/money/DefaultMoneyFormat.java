@@ -26,7 +26,7 @@ public class DefaultMoneyFormat implements MoneyFormat {
             case 2:
                 return new Money(Money.amount(parts[0]), Currency.getInstance(parts[1]));
             default:
-                return new Money(Money.amount("0.00"));
+                return Money.ZERO;
         }
     }
 }
