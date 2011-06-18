@@ -32,10 +32,10 @@ public class AcceptanceTest extends FunctionalTest {
     private ItemMaker itemMaker;
 
     @Autowired
-    private VesselMaker containerMaker;
+    private VesselMaker vesselMaker;
 
     @Autowired
-    private MotherMaker mushroomMaker;
+    private MotherMaker motherMaker;
 
     @Autowired
     private RecipeMaker recipeMaker;
@@ -51,8 +51,8 @@ public class AcceptanceTest extends FunctionalTest {
             throws Exception {
         sourceMaker.make();
         itemMaker.make();
-        containerMaker.make();
-        mushroomMaker.make();
+        vesselMaker.make();
+        motherMaker.make();
         recipeMaker.make();
         fermentMaker.make();
     }
@@ -158,8 +158,8 @@ public class AcceptanceTest extends FunctionalTest {
     @Test
     public void DesignNewFerment()
             throws Exception {
-        Vessels vessels = containerMaker.repository();
-        Mothers mothers = mushroomMaker.repository();
+        Vessels vessels = vesselMaker.repository();
+        Mothers mothers = motherMaker.repository();
         Recipes recipes = recipeMaker.repository();
 
         Ferment batch = ferments.create();
