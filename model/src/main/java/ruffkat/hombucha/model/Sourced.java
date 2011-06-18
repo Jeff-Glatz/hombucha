@@ -2,8 +2,7 @@ package ruffkat.hombucha.model;
 
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Index;
-import org.hibernate.search.annotations.Store;
+import org.hibernate.search.annotations.IndexedEmbedded;
 
 import javax.persistence.Basic;
 import javax.persistence.FetchType;
@@ -26,15 +25,16 @@ public abstract class Sourced
     private Long oid;
 
     @Basic
-    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @Field
     private String name;
 
     @Basic
     @Temporal(TemporalType.TIMESTAMP)
-    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @Field
     private Date received;
 
     @ManyToOne
+    @IndexedEmbedded
     private Source source;
 
     @Basic(fetch = FetchType.LAZY)

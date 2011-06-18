@@ -12,12 +12,12 @@ import java.net.URL;
 
 @Entity
 @DiscriminatorValue("online")
-@Indexed(index = "indices/online")
+@Indexed
 public class Online
         extends Source {
 
     @Basic
-    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @Field
     private URL url;
 
     public Online() {

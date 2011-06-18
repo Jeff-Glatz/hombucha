@@ -12,24 +12,24 @@ import java.net.URL;
 
 @Entity
 @DiscriminatorValue("local")
-@Indexed(index = "indices/local")
+@Indexed
 public class Local
         extends Source {
 
     @Basic
-    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @Field
     private URL url;
 
     @Basic
-    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @Field
     private String phone;
 
     @Basic
-    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @Field
     private String email;
 
     @Basic
-    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @Field
     private String directions;
 
     public URL getUrl() {

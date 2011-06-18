@@ -24,7 +24,9 @@
             <property name="hibernate.dialect"
                       value="org.hibernate.dialect.DerbyDialect"/>
             <property name="hibernate.search.default.directory_provider"
-                      value="org.hibernate.search.store.RAMDirectoryProvider"/>
+                      value="org.hibernate.search.store.FSDirectoryProvider"/>
+            <property name="hibernate.search.default.indexBase"
+                      value="/Users/jeff/HombuchaIdx"/>
         </properties>
     </persistence-unit>
 </persistence>

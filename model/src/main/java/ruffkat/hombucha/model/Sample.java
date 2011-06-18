@@ -4,9 +4,8 @@ import org.hibernate.annotations.Type;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.FieldBridge;
-import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.Store;
+import org.hibernate.search.annotations.IndexedEmbedded;
 import ruffkat.hombucha.measure.MeasureBridge;
 import ruffkat.hombucha.time.InstantBridge;
 
@@ -23,7 +22,7 @@ import javax.persistence.OneToOne;
 import javax.time.Instant;
 
 @Entity
-@Indexed(index = "indices/samples")
+@Indexed
 public class Sample<Q extends Quantity>
         implements Persistent, Viewable {
 
@@ -35,16 +34,17 @@ public class Sample<Q extends Quantity>
     @OneToOne(cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.REFRESH, CascadeType.DETACH})
+    @IndexedEmbedded
     private Ferment ferment;
 
     @Basic
-    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @Field
     @FieldBridge(impl = InstantBridge.class)
     @Type(type = "instant")
     private Instant taken;
 
     @Basic
-    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @Field
     @FieldBridge(impl = MeasureBridge.class)
     @Type(type = "measure")
     private Measure<Q> measurement;

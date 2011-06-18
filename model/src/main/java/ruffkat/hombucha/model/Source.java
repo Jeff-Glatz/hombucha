@@ -19,7 +19,7 @@ import javax.persistence.InheritanceType;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "kind")
 @DiscriminatorValue("source")
-@Indexed(index = "indices/sources")
+@Indexed
 public class Source
         implements Persistent {
 
@@ -29,7 +29,7 @@ public class Source
     private Long oid;
 
     @Basic
-    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @Field
     private String name;
 
     public Source() {

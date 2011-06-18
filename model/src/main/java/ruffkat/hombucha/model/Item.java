@@ -20,23 +20,23 @@ import javax.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Indexed(index = "indices/items")
+@Indexed
 public class Item<Q extends Quantity>
         extends Sourced
         implements Econometric<Q> {
 
     @Basic
-    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @Field
     private String reference;
 
     @Basic
-    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @Field
     @FieldBridge(impl = MoneyBridge.class)
     @Type(type = "money")
     private Money price;
 
     @Basic
-    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @Field
     @FieldBridge(impl = MeasureBridge.class)
     @Type(type = "measure")
     private Measure<Q> unit;

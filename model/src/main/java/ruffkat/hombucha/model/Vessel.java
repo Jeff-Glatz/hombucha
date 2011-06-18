@@ -3,9 +3,8 @@ package ruffkat.hombucha.model;
 import org.hibernate.annotations.Type;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.FieldBridge;
-import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.Store;
+import org.hibernate.search.annotations.IndexedEmbedded;
 import ruffkat.hombucha.measure.MeasureBridge;
 import ruffkat.hombucha.measure.Volumetric;
 import ruffkat.hombucha.util.PropertyUtils;
@@ -16,17 +15,18 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 @Entity
-@Indexed(index = "indices/vessels")
+@Indexed
 public class Vessel
         extends Item<Volume>
         implements Volumetric {
 
-    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @Field
     @FieldBridge(impl = MeasureBridge.class)
     @Type(type = "measure")
     private Measure<Volume> volume;
 
     @OneToOne
+    @IndexedEmbedded(depth = 1)
     private Ferment ferment;
 
     public Measure<Volume> getVolume() {

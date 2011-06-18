@@ -3,13 +3,12 @@ package ruffkat.hombucha.model;
 import org.hibernate.annotations.Type;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.FieldBridge;
-import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.Store;
+import org.hibernate.search.annotations.IndexedEmbedded;
 import ruffkat.hombucha.measure.MeasureBridge;
 import ruffkat.hombucha.measure.Volumetric;
-import ruffkat.hombucha.money.Priced;
 import ruffkat.hombucha.money.Money;
+import ruffkat.hombucha.money.Priced;
 
 import javax.measure.Measure;
 import javax.measure.converter.MultiplyConverter;
@@ -23,20 +22,21 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Entity
-@Indexed(index = "indices/recipes")
+@Indexed
 public class Recipe
         extends Sourced
         implements Volumetric, Priced {
 
     @ElementCollection(fetch = FetchType.EAGER)
+    @IndexedEmbedded
     private List<Ingredient<?>> ingredients = new LinkedList<Ingredient<?>>();
 
     @Basic
-    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @Field
     private String instructions;
 
     @Basic
-    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @Field
     @FieldBridge(impl = MeasureBridge.class)
     @Type(type = "measure")
     private Measure<Volume> volume;

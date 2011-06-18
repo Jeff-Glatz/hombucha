@@ -4,6 +4,7 @@ import org.hibernate.annotations.Type;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.FieldBridge;
 import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.IndexedEmbedded;
 import org.hibernate.search.annotations.Store;
 import ruffkat.hombucha.measure.MeasureBridge;
 import ruffkat.hombucha.money.Priced;
@@ -25,16 +26,17 @@ public class Ingredient<Q extends Quantity>
     @OneToOne(cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.REFRESH, CascadeType.DETACH})
+    @IndexedEmbedded
     private Item<Q> item;
 
     @Basic
-    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @Field
     @FieldBridge(impl = MeasureBridge.class)
     @Type(type = "measure")
     private Measure<Q> amount;
 
     @Basic
-    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @Field
     private String instructions;
 
     public Ingredient() {

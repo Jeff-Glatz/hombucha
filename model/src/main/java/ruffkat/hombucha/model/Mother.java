@@ -1,19 +1,21 @@
 package ruffkat.hombucha.model;
 
 import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 @Entity
-@Indexed(index = "indices/mothers")
+@Indexed
 public class Mother
         extends Sourced {
 
     @ManyToOne(cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.REFRESH, CascadeType.DETACH})
+    @IndexedEmbedded(depth = 1)
     private Mother mother;
 
     public Mother getMother() {

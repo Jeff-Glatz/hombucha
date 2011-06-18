@@ -1,9 +1,7 @@
 package ruffkat.hombucha.model;
 
 import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.Store;
 
 import javax.persistence.Basic;
 import javax.persistence.DiscriminatorValue;
@@ -11,16 +9,16 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("friend")
-@Indexed(index = "indices/friends")
+@Indexed
 public class Friend
         extends Source {
 
     @Basic
-    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @Field
     private String phone;
 
     @Basic
-    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @Field
     private String email;
 
     public Friend() {
