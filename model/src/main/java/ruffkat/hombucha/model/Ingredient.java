@@ -3,18 +3,15 @@ package ruffkat.hombucha.model;
 import org.hibernate.annotations.Type;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.FieldBridge;
-import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.IndexedEmbedded;
-import org.hibernate.search.annotations.Store;
 import ruffkat.hombucha.measure.MeasureBridge;
-import ruffkat.hombucha.money.Priced;
 import ruffkat.hombucha.money.Money;
+import ruffkat.hombucha.money.Priced;
 
 import javax.measure.Measure;
 import javax.measure.converter.UnitConverter;
 import javax.measure.quantity.Quantity;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.OneToOne;
 import java.io.Serializable;
@@ -23,9 +20,7 @@ import java.io.Serializable;
 public class Ingredient<Q extends Quantity>
         implements Serializable, Priced {
 
-    @OneToOne(cascade = {
-            CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.REFRESH, CascadeType.DETACH})
+    @OneToOne
     @IndexedEmbedded
     private Item<Q> item;
 

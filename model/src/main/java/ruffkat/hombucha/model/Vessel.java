@@ -25,7 +25,7 @@ public class Vessel
     @Type(type = "measure")
     private Measure<Volume> volume;
 
-    @OneToOne
+    @OneToOne(mappedBy = "vessel")
     @IndexedEmbedded(depth = 1)
     private Ferment ferment;
 

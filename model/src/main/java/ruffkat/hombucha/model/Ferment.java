@@ -13,7 +13,6 @@ import ruffkat.hombucha.util.PropertyUtils;
 import javax.measure.Measure;
 import javax.measure.quantity.Volume;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -41,21 +40,15 @@ public class Ferment
     @Field
     private String name;
 
-    @ManyToOne(cascade = {
-            CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToOne
     @IndexedEmbedded
     private Recipe recipe;
 
-    @OneToOne(cascade = {
-            CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.REFRESH, CascadeType.DETACH})
+    @OneToOne
     @IndexedEmbedded
     private Mother mother;
 
-    @OneToOne(cascade = {
-            CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.REFRESH, CascadeType.DETACH})
+    @OneToOne
     @IndexedEmbedded(depth = 1)
     private Vessel vessel;
 

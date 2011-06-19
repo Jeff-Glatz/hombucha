@@ -17,12 +17,18 @@ public final class Searches {
         return results.iterator().next();
     }
 
-    public static <P extends Persistent> P first(Repository<P> repository, String criteria) {
+    public static <P extends Persistent> P first(Repository<P> repository, String criteria,
+                                                 Predicate<P> predicate) {
         Set<P> results = repository.search(criteria);
-        if (results.size() > 0) {
-            return results.iterator().next();
-
+        for (P result : results) {
+            if (predicate.include(result)) {
+                return result;
+            }
         }
         throw new NoResultException("Search criteria returned no results");
+    }
+
+    public static <P extends Persistent> P first(Repository<P> repository, String criteria) {
+        return first(repository, criteria, Predicates.<P>any());
     }
 }

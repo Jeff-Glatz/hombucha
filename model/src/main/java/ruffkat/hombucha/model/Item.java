@@ -3,9 +3,7 @@ package ruffkat.hombucha.model;
 import org.hibernate.annotations.Type;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.FieldBridge;
-import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.Store;
 import ruffkat.hombucha.measure.MeasureBridge;
 import ruffkat.hombucha.money.Econometric;
 import ruffkat.hombucha.money.Money;
@@ -91,5 +89,16 @@ public class Item<Q extends Quantity>
         result = 31 * result + (price != null ? price.hashCode() : 0);
         result = 31 * result + (unit != null ? unit.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "oid=" + getOid() +
+                ", name='" + getName() + '\'' +
+                ", reference='" + getReference() + '\'' +
+                ", price=" + getPrice() +
+                ", unit=" + getUnit() +
+                '}';
     }
 }

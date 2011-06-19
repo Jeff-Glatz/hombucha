@@ -31,9 +31,7 @@ public class Sample<Q extends Quantity>
     @DocumentId
     private Long oid;
 
-    @OneToOne(cascade = {
-            CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.REFRESH, CascadeType.DETACH})
+    @OneToOne
     @IndexedEmbedded
     private Ferment ferment;
 

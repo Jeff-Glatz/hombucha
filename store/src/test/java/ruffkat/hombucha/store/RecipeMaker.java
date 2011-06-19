@@ -10,6 +10,8 @@ import ruffkat.hombucha.model.Recipe;
 import javax.measure.quantity.Mass;
 import javax.measure.quantity.Volume;
 
+import static junit.framework.Assert.assertNotNull;
+
 @Component
 public class RecipeMaker
         extends AbstractMaker<Recipe> {
@@ -32,9 +34,14 @@ public class RecipeMaker
     @Override
     public void make()
             throws Exception {
-        Item<Mass> sugar = Searches.first(items, "Sugar in the Raw");
-        Item<Mass> tea = Searches.first(items, "Organic Ancient Emerald Lily");
-        Item<Volume> water = Searches.first(items, "Distilled Water");
+        Item<Volume> water = Searches.first(items, "Distilled Water", Predicates.<Item>withUnitPrice());
+        assertNotNull(water.unitPrice());
+
+        Item<Mass> sugar = Searches.first(items, "Sugar in the Raw", Predicates.<Item>withUnitPrice());
+        assertNotNull(sugar.unitPrice());
+
+        Item<Mass> tea = Searches.first(items, "Organic Ancient Emerald Lily", Predicates.<Item>withUnitPrice());
+        assertNotNull(tea.unitPrice());
 
         Recipe starter = recipes.create();
         starter.setName("Starter Solution");

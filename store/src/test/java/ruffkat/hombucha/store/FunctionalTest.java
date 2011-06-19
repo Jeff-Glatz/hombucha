@@ -1,6 +1,7 @@
 package ruffkat.hombucha.store;
 
 
+import org.junit.After;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -31,4 +32,10 @@ public abstract class FunctionalTest {
 
     @Autowired
     protected PlatformTransactionManager transactionManager;
+
+    @After
+    public void tearDown()
+            throws Exception {
+        entityManager.flush();
+    }
 }
