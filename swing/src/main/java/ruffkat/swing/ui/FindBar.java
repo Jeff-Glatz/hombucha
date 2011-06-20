@@ -93,12 +93,14 @@ public class FindBar extends JXFindBar {
         findRecent.setPreferredSize(new Dimension(20, 20));
 
         // configure case sensitive search
+        matchCheck.setOpaque(false);
         matchCheck.setFocusable(false);
         matchCheck.setFocusPainted(false);
         actionConfiguration.configure("find.case", matchCheck.getAction());
         matchCheck.getModel().setSelected(getPatternModel().isCaseSensitive());
 
         // configure incremental search
+        incremental.setOpaque(false);
         incremental.setFocusable(false);
         incremental.setFocusPainted(false);
         incremental.setAction(actionConfiguration.configure("find.incremental", new AbstractActionExt() {
@@ -123,6 +125,7 @@ public class FindBar extends JXFindBar {
 
     @Override
     protected void build() {
+        setOpaque(false);
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         setBorder(BorderFactory.createEmptyBorder(5, 5, 0, 5));
         add(searchLabel);

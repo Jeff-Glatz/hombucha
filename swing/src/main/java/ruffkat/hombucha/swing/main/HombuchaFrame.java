@@ -175,7 +175,7 @@ public class HombuchaFrame
 
         findBar = new FindBar(actions.getConfiguration(), searchable,
                 new RecentSearches(preferences, "searches.recent"));
-        findBar.setVisible(false);
+        findBar.setVisible(true);
 
         fileChooser = new JFileChooser();
         fileChooser.setAcceptAllFileFilterUsed(true);
@@ -189,9 +189,9 @@ public class HombuchaFrame
 
     private JComponent buildContentPane() {
         MultiSplitLayout.Leaf ferments = new MultiSplitLayout.Leaf("Ferments");
-        ferments.setWeight(0.5);
+        ferments.setWeight(0.3);
         MultiSplitLayout.Leaf desktop = new MultiSplitLayout.Leaf("Desktop");
-        desktop.setWeight(0.5);
+        desktop.setWeight(0.7);
 
         JXMultiSplitPane splitPane = new JXMultiSplitPane();
         splitPane.setDividerSize(5);
@@ -202,11 +202,11 @@ public class HombuchaFrame
                 desktop));
 
         ModuleView fermentsView = new ModuleView(ui, buildFermentsPanel());
-        fermentsView.setPreferredSize(new Dimension(300, 400));
+        fermentsView.setPreferredSize(new Dimension(200, 400));
         fermentsView.setActive(true);
 
         ModuleView desktopView = new ModuleView(ui, buildDesktopPanel());
-        desktopView.setPreferredSize(new Dimension(300, 400));
+        desktopView.setPreferredSize(new Dimension(500, 400));
         desktopView.setActive(true);
 
         splitPane.add(fermentsView.createTitledPanel(), "Ferments");
