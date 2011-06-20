@@ -8,6 +8,7 @@ import javax.measure.quantity.Mass;
 import javax.measure.quantity.Quantity;
 import javax.measure.quantity.Temperature;
 import javax.measure.quantity.Volume;
+import javax.measure.unit.Unit;
 import java.math.BigDecimal;
 
 public final class Measurements {
@@ -34,6 +35,10 @@ public final class Measurements {
 
     public static <Q extends Quantity> BigDecimal decimalValue(Measure<Q> measure) {
         return measure.decimalValue(measure.getUnit(), MathUtils.context());
+    }
+
+    public static <Q extends Quantity> BigDecimal decimalValue(Measure<Q> measure, Unit<Q> unit) {
+        return measure.decimalValue(unit, MathUtils.context());
     }
 
     public static <Q extends Quantity> Measure<Q> convert(Measure<Q> measure, UnitConverter converter) {

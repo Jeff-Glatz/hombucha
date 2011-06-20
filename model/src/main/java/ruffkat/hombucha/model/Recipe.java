@@ -10,6 +10,7 @@ import ruffkat.hombucha.measure.Measurements;
 import ruffkat.hombucha.measure.Volumetric;
 import ruffkat.hombucha.money.Money;
 import ruffkat.hombucha.money.Priced;
+import ruffkat.hombucha.util.MathUtils;
 import ruffkat.hombucha.util.PropertyUtils;
 
 import javax.measure.Measure;
@@ -21,6 +22,7 @@ import javax.persistence.Basic;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -107,8 +109,8 @@ public class Recipe
      *               scaled.
      * @return The scaled {@link Recipe}
      */
-    public Recipe scale(float factor) {
-        MultiplyConverter converter = new MultiplyConverter(factor);
+    public Recipe scale(BigDecimal factor) {
+        MultiplyConverter converter = new MultiplyConverter(factor.doubleValue());
         Recipe recipe = new Recipe();
         recipe.setInstructions(getInstructions());
         recipe.setName(getName());
@@ -131,9 +133,9 @@ public class Recipe
      */
     public Recipe scale(Measure<Volume> yield) {
         Unit<Volume> unit = volume.getUnit();
-        float current = volume.floatValue(unit);
-        float requested = yield.floatValue(unit);
-        return scale(1.0f + ((requested - current) / current));
+        BigDecimal current = Measurements.decimalValue(volume, unit);
+        BigDecimal requested = Measurements.decimalValue(yield, unit);
+        return scale(MathUtils.scaleFactor(current, requested));
     }
 
     /**
@@ -148,9 +150,9 @@ public class Recipe
     public <Q extends Quantity> Recipe scale(String name, Measure<Q> amount) {
         Ingredient<Q> ingredient = ingredient(name);
         Unit<Q> unit = ingredient.getAmount().getUnit();
-        float current = ingredient.getAmount().floatValue(unit);
-        float requested = amount.floatValue(unit);
-        return scale(1.0f + ((requested - current) / current));
+        BigDecimal current = Measurements.decimalValue(ingredient.getAmount(), unit);
+        BigDecimal requested = Measurements.decimalValue(amount, unit);
+        return scale(MathUtils.scaleFactor(current, requested));
     }
 
     public Money price() {

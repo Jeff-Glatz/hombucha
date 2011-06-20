@@ -153,21 +153,21 @@ public class AcceptanceTest extends FunctionalTest {
         Recipes recipes = recipeMaker.repository();
         Recipe recipe = Searches.first(recipes, "Feeder Solution");
 
-        Recipe scaled = recipe.scale(Measurements.volume("3.785 l"));
+        Recipe scaled = recipe.scale(Measurements.volume("3.7850 l"));
         assertFalse(scaled.persisted());
-        assertMeasureEquals(Measurements.volume("3.785000 l"), scaled.getVolume());
+        assertMeasureEquals(Measurements.volume("3.7850 l"), scaled.getVolume());
 
         List<Ingredient<?>> ingredients = scaled.getIngredients();
         assertEquals(3, ingredients.size());
 
         Ingredient<Volume> water = scaled.ingredient("Distilled Water");
-        assertMeasureEquals(Measurements.volume("3.785000 l"), water.getAmount());
+        assertMeasureEquals(Measurements.volume("3.7850 l"), water.getAmount());
 
         Ingredient<Mass> sugar = scaled.ingredient("Sugar in the Raw");
-        assertMeasureEquals(Measurements.mass("321.7250 g"), sugar.getAmount());
+        assertMeasureEquals(Measurements.mass("321.725 g"), sugar.getAmount());
 
         Ingredient<Mass> tea = scaled.ingredient("Organic Ancient Emerald Lily");
-        assertMeasureEquals(Measurements.mass("18.92500 g"), tea.getAmount());
+        assertMeasureEquals(Measurements.mass("18.925 g"), tea.getAmount());
 
         assertEquals(new Money("5.622109"), scaled.price());
     }
@@ -206,7 +206,7 @@ public class AcceptanceTest extends FunctionalTest {
         Recipes recipes = recipeMaker.repository();
         Recipe recipe = Searches.first(recipes, "Feeder Solution");
 
-        Recipe scaled = recipe.scale("Sugar in the Raw", Measurements.mass("103 g"));
+        Recipe scaled = recipe.scale("Sugar in the Raw", Measurements.mass("103.00 g"));
         assertFalse(scaled.persisted());
         assertMeasureEquals(Measurements.volume("1.211765 l"), scaled.getVolume());
 
@@ -220,7 +220,7 @@ public class AcceptanceTest extends FunctionalTest {
         assertMeasureEquals(Measurements.mass("103.0000 g"), sugar.getAmount());
 
         Ingredient<Mass> tea = scaled.ingredient("Organic Ancient Emerald Lily");
-        assertMeasureEquals(Measurements.mass("6.058823 g"), tea.getAmount());
+        assertMeasureEquals(Measurements.mass("6.058824 g"), tea.getAmount());
 
         assertEquals(new Money("1.799914"), scaled.price());
     }

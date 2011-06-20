@@ -2,11 +2,11 @@ package ruffkat.hombucha.util;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.math.RoundingMode;
 
 public class MathUtils {
     private static final MathContext CONTEXT = MathContext.DECIMAL32;
-    private static final BigDecimal ZERO = new BigDecimal("0.000", CONTEXT);
+    private static final BigDecimal ZERO = new BigDecimal("0.000000", CONTEXT);
+    private static final BigDecimal ONE = new BigDecimal("1.000000", CONTEXT);
 
     public static MathContext context() {
         return CONTEXT;
@@ -14,6 +14,10 @@ public class MathUtils {
 
     public static BigDecimal zero() {
         return ZERO;
+    }
+
+    public static BigDecimal one() {
+        return ONE;
     }
 
     public static BigDecimal valueOf(String value) {
@@ -39,5 +43,9 @@ public class MathUtils {
 
     public static BigDecimal divide(BigDecimal a, BigDecimal b) {
         return a.divide(b, CONTEXT);
+    }
+
+    public static BigDecimal scaleFactor(BigDecimal original, BigDecimal requested) {
+        return ONE.add(requested.subtract(original).divide(original, CONTEXT));
     }
 }
