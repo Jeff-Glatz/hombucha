@@ -18,7 +18,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:store-context.xml")
+@ContextConfiguration("classpath:store-context.xml")
 @TransactionConfiguration(defaultRollback = false)
 @Transactional(readOnly = false)
 @TestExecutionListeners({

@@ -3,6 +3,7 @@ package ruffkat.hombucha.store;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Transactional;
 import ruffkat.hombucha.measure.Measurements;
 import ruffkat.hombucha.model.Ferment;
@@ -24,6 +25,7 @@ import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 import static ruffkat.hombucha.measure.MeasureAssert.assertMeasureEquals;
 
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class AcceptanceTest extends FunctionalTest {
 
     @Autowired
@@ -84,7 +86,7 @@ public class AcceptanceTest extends FunctionalTest {
         Ingredient<?> tea = ingredients.get(2);
         assertEquals(tea.getAmount(), Measurements.mass("5 g"));
 
-        assertEquals(new Money("2.462"), recipe.price());
+        assertEquals(new Money("2.461956"), recipe.price());
     }
 
     @Test
@@ -109,7 +111,7 @@ public class AcceptanceTest extends FunctionalTest {
         Ingredient<?> tea = ingredients.get(2);
         assertEquals(tea.getAmount(), Measurements.mass("5 g"));
 
-        assertEquals(new Money("1.485"), recipe.price());
+        assertEquals(new Money("1.485366"), recipe.price());
     }
 
     @Test
@@ -153,21 +155,21 @@ public class AcceptanceTest extends FunctionalTest {
 
         Recipe scaled = recipe.scale(Measurements.volume("3.785 l"));
         assertFalse(scaled.persisted());
-        assertMeasureEquals(Measurements.volume("3.785 l"), scaled.getVolume());
+        assertMeasureEquals(Measurements.volume("3.785000 l"), scaled.getVolume());
 
         List<Ingredient<?>> ingredients = scaled.getIngredients();
         assertEquals(3, ingredients.size());
 
         Ingredient<Volume> water = scaled.ingredient("Distilled Water");
-        assertMeasureEquals(Measurements.volume("3.785 l"), water.getAmount());
+        assertMeasureEquals(Measurements.volume("3.785000 l"), water.getAmount());
 
         Ingredient<Mass> sugar = scaled.ingredient("Sugar in the Raw");
-        assertMeasureEquals(Measurements.mass("321.725 g"), sugar.getAmount());
+        assertMeasureEquals(Measurements.mass("321.7250 g"), sugar.getAmount());
 
         Ingredient<Mass> tea = scaled.ingredient("Organic Ancient Emerald Lily");
-        assertMeasureEquals(Measurements.mass("18.925 g"), tea.getAmount());
+        assertMeasureEquals(Measurements.mass("18.92500 g"), tea.getAmount());
 
-        assertEquals(new Money("5.623"), scaled.price());
+        assertEquals(new Money("5.622109"), scaled.price());
     }
 
     @Test
@@ -176,25 +178,25 @@ public class AcceptanceTest extends FunctionalTest {
             throws Exception {
         Recipes recipes = recipeMaker.repository();
         Recipe recipe = Searches.first(recipes, "Feeder Solution");
-        assertEquals(new Money("1.485"), recipe.price());
+        assertEquals(new Money("1.485366"), recipe.price());
 
         Recipe scaled = recipe.scale(Measurements.volume("0.5 l"));
         assertFalse(scaled.persisted());
-        assertMeasureEquals(Measurements.volume("0.500 l"), scaled.getVolume());
+        assertMeasureEquals(Measurements.volume("0.50 l"), scaled.getVolume());
 
         List<Ingredient<?>> ingredients = scaled.getIngredients();
         assertEquals(3, ingredients.size());
 
         Ingredient<Volume> water = scaled.ingredient("Distilled Water");
-        assertMeasureEquals(Measurements.volume("0.500 l"), water.getAmount());
+        assertMeasureEquals(Measurements.volume("0.50 l"), water.getAmount());
 
         Ingredient<Mass> sugar = scaled.ingredient("Sugar in the Raw");
-        assertMeasureEquals(Measurements.mass("42.500 g"), sugar.getAmount());
+        assertMeasureEquals(Measurements.mass("42.5 g"), sugar.getAmount());
 
         Ingredient<Mass> tea = scaled.ingredient("Organic Ancient Emerald Lily");
-        assertMeasureEquals(Measurements.mass("2.500 g"), tea.getAmount());
+        assertMeasureEquals(Measurements.mass("2.5 g"), tea.getAmount());
 
-        assertEquals(new Money("0.7427"), scaled.price());
+        assertEquals(new Money("0.7426829"), scaled.price());
     }
 
     @Test
@@ -206,20 +208,20 @@ public class AcceptanceTest extends FunctionalTest {
 
         Recipe scaled = recipe.scale("Sugar in the Raw", Measurements.mass("103 g"));
         assertFalse(scaled.persisted());
-        assertMeasureEquals(Measurements.volume("1.211 l"), scaled.getVolume());
+        assertMeasureEquals(Measurements.volume("1.211765 l"), scaled.getVolume());
 
         List<Ingredient<?>> ingredients = scaled.getIngredients();
         assertEquals(3, ingredients.size());
 
         Ingredient<Volume> water = scaled.ingredient("Distilled Water");
-        assertMeasureEquals(Measurements.volume("1.211 l"), water.getAmount());
+        assertMeasureEquals(Measurements.volume("1.211765 l"), water.getAmount());
 
         Ingredient<Mass> sugar = scaled.ingredient("Sugar in the Raw");
-        assertMeasureEquals(Measurements.mass("103.000 g"), sugar.getAmount());
+        assertMeasureEquals(Measurements.mass("103.0000 g"), sugar.getAmount());
 
         Ingredient<Mass> tea = scaled.ingredient("Organic Ancient Emerald Lily");
-        assertMeasureEquals(Measurements.mass("6.058 g"), tea.getAmount());
+        assertMeasureEquals(Measurements.mass("6.058823 g"), tea.getAmount());
 
-        assertEquals(new Money("1.800"), scaled.price());
+        assertEquals(new Money("1.799914"), scaled.price());
     }
 }
