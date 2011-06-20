@@ -257,7 +257,7 @@ public class HombuchaFrame
         return new File(preferences.get("directory", "."));
     }
 
-    private void recordLastDirectory(File directory) {
+    private void lastDirectory(File directory) {
         preferences.put("directory", directory.getAbsolutePath());
     }
 }
