@@ -7,7 +7,7 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
     <context:annotation-config/>
+    <import resource="classpath:store-context.xml"/>
+    <import resource="classpath:user-interface.xml"/>
     <context:component-scan base-package="ruffkat.hombucha.swing"/>
-    <bean id="timeSource"
-          class="javax.time.TimeSource$SystemTimeSource"/>
 </beans>

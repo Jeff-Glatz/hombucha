@@ -17,13 +17,26 @@
     <dependencies>
         <dependency>
             <groupId>org.ruffkat</groupId>
-            <artifactId>hombucha-model</artifactId>
+            <artifactId>hombucha-store</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
             <version>3.0.3.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.swinglabs</groupId>
+            <artifactId>swingx</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.ruffkat</groupId>
+            <artifactId>hombucha-store</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <type>test-jar</type>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

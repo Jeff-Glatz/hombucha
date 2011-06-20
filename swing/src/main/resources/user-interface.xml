@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean class="ruffkat.swing.ui.UserInterface"
+          init-method="initialize">
+        <property name="mappings">
+            <map>
+                <!-- Strings -->
+                <entry key="HombuchaFrame.title" value="Hombucha :: Homebrew Kombucha"/>
+
+                <entry key="SearchField.clearRecentsText" value="Clear Recent"/>
+                <entry key="SearchField.recentsMenuTitle" value="Recent Searches"/>
+                <entry key="SearchField.noRecentsText" value="No Recent Searches"/>
+
+                <entry key="HombuchaFrame.FermentsPanel.title" value="Ferments"/>
+                <entry key="HombuchaFrame.DesktopPanel.title" value="Desktop"/>
+
+                <entry key="FileFilter.xml" value="XML Files"/>
+                <entry key="FileFilter.png" value="PNG Files"/>
+
+                <entry key="TaskListPanel.toolTipText" value="Background Tasks"/>
+                <entry key="TaskListPanel.PrototypeTask.description" value="Might be a long running background task"/>
+
+                <entry key="TaskPanel.IDLE.text" value="There are no active background tasks"/>
+                <entry key="TaskPanel.PENDING.text" value="Pending"/>
+                <entry key="TaskPanel.STARTED.text" value="Started"/>
+                <entry key="TaskPanel.DONE.text" value="Done"/>
+
+                <entry key="StatusBar.ready" value="Ready"/>
+                <entry key="CloseableTab.TabButton.toolTipText" value="Close"/>
+                <entry key="ModuleView.deactivatedText" value="Module not activated"/>
+                <entry key="ModuleButton.disabledText" value="Click to enable module"/>
+                <entry key="ModuleButton.failedText" value="Click to enable module"/>
+
+                <!-- Mnemonics -->
+                <entry key="OpenDialog.approveButtonMnemonic">
+                    <util:constant static-field="java.awt.event.KeyEvent.VK_O"/>
+                </entry>
+                <entry key="SaveDialog.approveButtonMnemonic">
+                    <util:constant static-field="java.awt.event.KeyEvent.VK_S"/>
+                </entry>
+
+                <!-- Colors -->
+                <entry key="TaskListPanel.BusyLabel.highlightColor">
+                    <bean class="java.awt.Color">
+                        <constructor-arg value="103" type="int"/>
+                        <constructor-arg value="133" type="int"/>
+                        <constructor-arg value="193" type="int"/>
+                    </bean>
+                </entry>
+                <entry key="ListCellRenderer.selectionBackground">
+                    <bean class="java.awt.Color">
+                        <constructor-arg value="145" type="int"/>
+                        <constructor-arg value="172" type="int"/>
+                        <constructor-arg value="212" type="int"/>
+                    </bean>
+                </entry>
+                <entry key="MemoryMeter.fillColor">
+                    <bean class="java.awt.Color">
+                        <constructor-arg value="145" type="int"/>
+                        <constructor-arg value="172" type="int"/>
+                        <constructor-arg value="212" type="int"/>
+                    </bean>
+                </entry>
+
+                <!-- Images -->
+                <entry key="InspectorFrame.image">
+                    <bean class="ruffkat.swing.ui.Media" factory-method="iconImage">
+                        <constructor-arg value="homebucha.png"/>
+                    </bean>
+                </entry>
+                
+
+                <!-- Icons -->
+                <entry key="menu.save.icon">
+                    <bean class="ruffkat.swing.ui.Media" factory-method="icon">
+                        <constructor-arg value="menu-save.png"/>
+                    </bean>
+                </entry>
+                <entry key="menu.print.icon">
+                    <bean class="ruffkat.swing.ui.Media" factory-method="icon">
+                        <constructor-arg value="menu-print.png"/>
+                    </bean>
+                </entry>
+                <entry key="menu.cut.icon">
+                    <bean class="ruffkat.swing.ui.Media" factory-method="icon">
+                        <constructor-arg value="menu-cut.png"/>
+                    </bean>
+                </entry>
+                <entry key="menu.copy.icon">
+                    <bean class="ruffkat.swing.ui.Media" factory-method="icon">
+                        <constructor-arg value="menu-copy.png"/>
+                    </bean>
+                </entry>
+                <entry key="menu.paste.icon">
+                    <bean class="ruffkat.swing.ui.Media" factory-method="icon">
+                        <constructor-arg value="menu-paste.png"/>
+                    </bean>
+                </entry>
+                <entry key="menu.undo.icon">
+                    <bean class="ruffkat.swing.ui.Media" factory-method="icon">
+                        <constructor-arg value="menu-undo.png"/>
+                    </bean>
+                </entry>
+                <entry key="menu.redo.icon">
+                    <bean class="ruffkat.swing.ui.Media" factory-method="icon">
+                        <constructor-arg value="menu-redo.png"/>
+                    </bean>
+                </entry>
+                <entry key="find.icon">
+                    <bean class="ruffkat.swing.ui.Media" factory-method="icon">
+                        <constructor-arg value="find.png"/>
+                    </bean>
+                </entry>
+                <entry key="find.next.icon">
+                    <bean class="ruffkat.swing.ui.Media" factory-method="icon">
+                        <constructor-arg value="find-next.png"/>
+                    </bean>
+                </entry>
+                <entry key="find.previous.icon">
+                    <bean class="ruffkat.swing.ui.Media" factory-method="icon">
+                        <constructor-arg value="find-previous.png"/>
+                    </bean>
+                </entry>
+                <entry key="find.recent.icon">
+                    <bean class="ruffkat.swing.ui.Media" factory-method="icon">
+                        <constructor-arg value="find-recent.png"/>
+                    </bean>
+                </entry>
+                <entry key="close.normal.icon">
+                    <bean class="ruffkat.swing.ui.Media" factory-method="icon">
+                        <constructor-arg value="close-normal.png"/>
+                    </bean>
+                </entry>
+                <entry key="close.rollover.icon">
+                    <bean class="ruffkat.swing.ui.Media" factory-method="icon">
+                        <constructor-arg value="close-rollover.png"/>
+                    </bean>
+                </entry>
+                <entry key="close.pressed.icon">
+                    <bean class="ruffkat.swing.ui.Media" factory-method="icon">
+                        <constructor-arg value="close-pressed.png"/>
+                    </bean>
+                </entry>
+                <entry key="zoom.in.icon">
+                    <bean class="ruffkat.swing.ui.Media" factory-method="icon">
+                        <constructor-arg value="zoom-in.png"/>
+                    </bean>
+                </entry>
+                <entry key="zoom.out.icon">
+                    <bean class="ruffkat.swing.ui.Media" factory-method="icon">
+                        <constructor-arg value="zoom-out.png"/>
+                    </bean>
+                </entry>
+                <entry key="zoom.actual.icon">
+                    <bean class="ruffkat.swing.ui.Media" factory-method="icon">
+                        <constructor-arg value="zoom-actual.png"/>
+                    </bean>
+                </entry>
+
+                <entry key="activate.disabled.icon">
+                    <bean class="ruffkat.swing.ui.Media" factory-method="icon">
+                        <constructor-arg value="activate-disabled.png"/>
+                    </bean>
+                </entry>
+                <entry key="activate.failed.icon">
+                    <bean class="ruffkat.swing.ui.Media" factory-method="icon">
+                        <constructor-arg value="activate-failed.png"/>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+</beans>
