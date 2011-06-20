@@ -9,57 +9,6 @@
     <context:annotation-config/>
     <import resource="classpath:store-context.xml"/>
     <import resource="classpath:user-interface.xml"/>
+    <import resource="classpath:user-actions.xml"/>
     <context:component-scan base-package="ruffkat.hombucha.swing"/>
-    <bean id="actionDescriptors"
-          class="ruffkat.swing.action.ActionDescriptors">
-        <constructor-arg>
-            <list>
-                <!-- Application Actions -->
-                <bean class="ruffkat.swing.action.ActionDescriptor">
-                    <property name="command" value="application.exit"/>
-                    <property name="name" value="Exit"/>
-                    <property name="accelerator" value="ctrl alt X"/>
-                    <property name="toolTip" value="Exit Space Inspector"/>
-                    <property name="mnemonic">
-                        <util:constant static-field="java.awt.event.KeyEvent.VK_X"/>
-                    </property>
-                </bean>
-                <bean class="ruffkat.swing.action.ActionDescriptor">
-                    <property name="command" value="task.cancel"/>
-                    <property name="name" value="Cancel"/>
-                    <property name="accelerator" value="ctrl alt C"/>
-                    <property name="toolTip" value="Cancel Background Task"/>
-                    <property name="smallIcon" value="close.normal.icon"/>
-                    <property name="mnemonic">
-                        <util:constant static-field="java.awt.event.KeyEvent.VK_X"/>
-                    </property>
-                </bean>
-            </list>
-        </constructor-arg>
-    </bean>
-    <bean id="globalActions"
-          class="ruffkat.swing.action.Actions"
-          scope="singleton">
-        <constructor-arg ref="actionDescriptors"/>
-        <constructor-arg>
-            <bean class="org.jdesktop.swingx.action.ActionContainerFactory">
-                <constructor-arg>
-                    <bean class="org.jdesktop.swingx.action.ActionManager" factory-method="getInstance"/>
-                </constructor-arg>
-            </bean>
-        </constructor-arg>
-    </bean>
-
-    <bean id="localActions"
-          class="ruffkat.swing.action.Actions"
-          scope="prototype">
-        <constructor-arg ref="actionDescriptors"/>
-        <constructor-arg>
-            <bean class="org.jdesktop.swingx.action.ActionContainerFactory">
-                <constructor-arg>
-                    <bean class="org.jdesktop.swingx.action.ActionManager"/>
-                </constructor-arg>
-            </bean>
-        </constructor-arg>
-    </bean>
 </beans>

@@ -71,7 +71,7 @@
                 <!-- Images -->
                 <entry key="HombuchaFrame.image">
                     <bean class="ruffkat.swing.ui.Media" factory-method="iconImage">
-                        <constructor-arg value="homebucha.png"/>
+                        <constructor-arg value="ruffkat.png"/>
                     </bean>
                 </entry>
 

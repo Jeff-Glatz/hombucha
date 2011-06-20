@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <bean id="actionDescriptors"
+          class="ruffkat.swing.action.ActionDescriptors">
+        <constructor-arg>
+            <list>
+                <!-- Application Actions -->
+                <bean class="ruffkat.swing.action.ActionDescriptor">
+                    <property name="command" value="application.exit"/>
+                    <property name="name" value="Exit"/>
+                    <property name="accelerator" value="ctrl alt X"/>
+                    <property name="toolTip" value="Exit Hombucha"/>
+                    <property name="mnemonic">
+                        <util:constant static-field="java.awt.event.KeyEvent.VK_X"/>
+                    </property>
+                </bean>
+                <bean class="ruffkat.swing.action.ActionDescriptor">
+                    <property name="command" value="task.cancel"/>
+                    <property name="name" value="Cancel"/>
+                    <property name="accelerator" value="ctrl alt C"/>
+                    <property name="toolTip" value="Cancel Background Task"/>
+                    <property name="smallIcon" value="close.normal.icon"/>
+                    <property name="mnemonic">
+                        <util:constant static-field="java.awt.event.KeyEvent.VK_X"/>
+                    </property>
+                </bean>
+                <!-- Top level menu actions -->
+                <bean class="ruffkat.swing.action.ActionDescriptor">
+                    <property name="command" value="menu.file"/>
+                    <property name="name" value="File"/>
+                    <property name="mnemonic">
+                        <util:constant static-field="java.awt.event.KeyEvent.VK_F"/>
+                    </property>
+                </bean>
+                <bean class="ruffkat.swing.action.ActionDescriptor">
+                    <property name="command" value="menu.edit"/>
+                    <property name="name" value="Edit"/>
+                    <property name="mnemonic">
+                        <util:constant static-field="java.awt.event.KeyEvent.VK_E"/>
+                    </property>
+                </bean>
+                <bean class="ruffkat.swing.action.ActionDescriptor">
+                    <property name="command" value="menu.search"/>
+                    <property name="name" value="Search"/>
+                    <property name="mnemonic">
+                        <util:constant static-field="java.awt.event.KeyEvent.VK_S"/>
+                    </property>
+                </bean>
+                <bean class="ruffkat.swing.action.ActionDescriptor">
+                    <property name="command" value="menu.image"/>
+                    <property name="name" value="Images"/>
+                    <property name="mnemonic">
+                        <util:constant static-field="java.awt.event.KeyEvent.VK_I"/>
+                    </property>
+                </bean>
+                <bean class="ruffkat.swing.action.ActionDescriptor">
+                    <property name="command" value="menu.modules"/>
+                    <property name="name" value="Modules"/>
+                    <property name="mnemonic">
+                        <util:constant static-field="java.awt.event.KeyEvent.VK_M"/>
+                    </property>
+                </bean>
+                <!-- Second level menu items -->
+                <bean class="ruffkat.swing.action.ActionDescriptor">
+                    <property name="command" value="menu.close"/>
+                    <property name="name" value="Close"/>
+                    <property name="accelerator" value="ctrl Q"/>
+                    <property name="mnemonic">
+                        <util:constant static-field="java.awt.event.KeyEvent.VK_C"/>
+                    </property>
+                </bean>
+                <bean class="ruffkat.swing.action.ActionDescriptor">
+                    <property name="command" value="menu.save"/>
+                    <property name="name" value="Save"/>
+                    <property name="accelerator" value="ctrl S"/>
+                    <property name="mnemonic">
+                        <util:constant static-field="java.awt.event.KeyEvent.VK_S"/>
+                    </property>
+                    <property name="smallIcon" value="menu.save.icon"/>
+                </bean>
+                <bean class="ruffkat.swing.action.ActionDescriptor">
+                    <property name="command" value="menu.print"/>
+                    <property name="name" value="Print"/>
+                    <property name="accelerator" value="ctrl P"/>
+                    <property name="mnemonic">
+                        <util:constant static-field="java.awt.event.KeyEvent.VK_P"/>
+                    </property>
+                    <property name="smallIcon" value="menu.print.icon"/>
+                </bean>
+                <!-- Find actions -->
+                <bean class="ruffkat.swing.action.ActionDescriptor">
+                    <property name="command" value="find.show"/>
+                    <property name="name" value="Find"/>
+                    <property name="accelerator" value="ctrl F"/>
+                    <property name="smallIcon" value="find.icon"/>
+                    <property name="mnemonic">
+                        <util:constant static-field="java.awt.event.KeyEvent.VK_F"/>
+                    </property>
+                </bean>
+                <bean class="ruffkat.swing.action.ActionDescriptor">
+                    <property name="command" value="find.next"/>
+                    <property name="name" value="Next"/>
+                    <property name="accelerator" value="F3"/>
+                    <property name="toolTip" value="Next Occurrence"/>
+                    <property name="smallIcon" value="find.next.icon"/>
+                    <property name="mnemonic">
+                        <util:constant static-field="java.awt.event.KeyEvent.VK_N"/>
+                    </property>
+                </bean>
+                <bean class="ruffkat.swing.action.ActionDescriptor">
+                    <property name="command" value="find.previous"/>
+                    <property name="name" value="Previous"/>
+                    <property name="accelerator" value="shift F3"/>
+                    <property name="toolTip" value="Previous Occurrence"/>
+                    <property name="smallIcon" value="find.previous.icon"/>
+                    <property name="mnemonic">
+                        <util:constant static-field="java.awt.event.KeyEvent.VK_P"/>
+                    </property>
+                </bean>
+                <bean class="ruffkat.swing.action.ActionDescriptor">
+                    <property name="command" value="find.recent"/>
+                    <property name="name" value="Recent"/>
+                    <property name="accelerator" value="ctrl F"/>
+                    <property name="toolTip" value="Recent Searches"/>
+                    <property name="smallIcon" value="find.recent.icon"/>
+                    <property name="mnemonic">
+                        <util:constant static-field="java.awt.event.KeyEvent.VK_R"/>
+                    </property>
+                </bean>
+                <bean class="ruffkat.swing.action.ActionDescriptor">
+                    <property name="command" value="find.case"/>
+                    <property name="name" value="Case sensitive"/>
+                    <property name="toolTip" value="Case Sensitive Search"/>
+                    <property name="mnemonic">
+                        <util:constant static-field="java.awt.event.KeyEvent.VK_C"/>
+                    </property>
+                </bean>
+                <bean class="ruffkat.swing.action.ActionDescriptor">
+                    <property name="command" value="find.incremental"/>
+                    <property name="name" value="Incremental"/>
+                    <property name="toolTip" value="Incremental Search"/>
+                    <property name="mnemonic">
+                        <util:constant static-field="java.awt.event.KeyEvent.VK_I"/>
+                    </property>
+                </bean>
+                <bean class="ruffkat.swing.action.ActionDescriptor">
+                    <property name="command" value="find.close"/>
+                    <property name="name" value="Close"/>
+                    <property name="accelerator" value="ESC"/>
+                    <property name="toolTip" value="Close Search Bar"/>
+                    <property name="smallIcon" value="close.normal.icon"/>
+                    <property name="mnemonic">
+                        <util:constant static-field="java.awt.event.KeyEvent.VK_X"/>
+                    </property>
+                </bean>
+                <!-- Rendering actions -->
+                <bean class="ruffkat.swing.action.ActionDescriptor">
+                    <property name="command" value="image.zoom-in"/>
+                    <property name="name" value="Zoom In"/>
+                    <property name="accelerator" value="ctrl PLUS"/>
+                    <property name="toolTip" value="Zoom In"/>
+                    <property name="smallIcon" value="zoom.in.icon"/>
+                    <property name="mnemonic">
+                        <util:constant static-field="java.awt.event.KeyEvent.VK_Z"/>
+                    </property>
+                </bean>
+                <bean class="ruffkat.swing.action.ActionDescriptor">
+                    <property name="command" value="image.zoom-out"/>
+                    <property name="name" value="Zoom Out"/>
+                    <property name="accelerator" value="ctrl MINUS"/>
+                    <property name="toolTip" value="Zoom Out"/>
+                    <property name="smallIcon" value="zoom.out.icon"/>
+                    <property name="mnemonic">
+                        <util:constant static-field="java.awt.event.KeyEvent.VK_O"/>
+                    </property>
+                </bean>
+                <bean class="ruffkat.swing.action.ActionDescriptor">
+                    <property name="command" value="image.zoom-actual"/>
+                    <property name="name" value="Actual Size"/>
+                    <property name="accelerator" value="ctrl shift A"/>
+                    <property name="toolTip" value="View Actual Size"/>
+                    <property name="smallIcon" value="zoom.actual.icon"/>
+                    <property name="mnemonic">
+                        <util:constant static-field="java.awt.event.KeyEvent.VK_A"/>
+                    </property>
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+    <bean id="globalActions"
+          class="ruffkat.swing.action.Actions"
+          scope="singleton">
+        <constructor-arg ref="actionDescriptors"/>
+        <constructor-arg>
+            <bean class="org.jdesktop.swingx.action.ActionContainerFactory">
+                <constructor-arg>
+                    <bean class="org.jdesktop.swingx.action.ActionManager" factory-method="getInstance"/>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+    </bean>
+    <bean id="localActions"
+          class="ruffkat.swing.action.Actions"
+          scope="prototype">
+        <constructor-arg ref="actionDescriptors"/>
+        <constructor-arg>
+            <bean class="org.jdesktop.swingx.action.ActionContainerFactory">
+                <constructor-arg>
+                    <bean class="org.jdesktop.swingx.action.ActionManager"/>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+    </bean>
+</beans>

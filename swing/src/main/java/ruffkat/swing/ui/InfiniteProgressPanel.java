@@ -65,7 +65,7 @@ import java.awt.image.BufferedImage;
  * @version 1.0
  */
 
-public class HiPerfInfiniteProgressPanel extends JComponent implements
+public class InfiniteProgressPanel extends JComponent implements
 		ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -100,7 +100,7 @@ public class HiPerfInfiniteProgressPanel extends JComponent implements
 	private boolean m_bUseBackBuffer;
 	private boolean m_bTempHide = false;
 
-	public HiPerfInfiniteProgressPanel(boolean i_bUseBackBuffer) {
+	public InfiniteProgressPanel(boolean i_bUseBackBuffer) {
 		m_bUseBackBuffer = i_bUseBackBuffer;
 		// build bars
 		m_oBars = buildTicker(NUMBER_OF_BARS);
@@ -306,7 +306,7 @@ public class HiPerfInfiniteProgressPanel extends JComponent implements
 		JButton oButton = new JButton("Start!");
 		oButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				final HiPerfInfiniteProgressPanel oWaitingPane = new HiPerfInfiniteProgressPanel(
+				final InfiniteProgressPanel oWaitingPane = new InfiniteProgressPanel(
 						false);
 				oTestFrame.setGlassPane(oWaitingPane);
 				oWaitingPane.setVisible(true);
@@ -330,7 +330,7 @@ public class HiPerfInfiniteProgressPanel extends JComponent implements
 		JButton oBufferedButton = new JButton("Start Back Buffered!");
 		oBufferedButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				final HiPerfInfiniteProgressPanel oWaitingPane = new HiPerfInfiniteProgressPanel(
+				final InfiniteProgressPanel oWaitingPane = new InfiniteProgressPanel(
 						true);
 				oTestFrame.setGlassPane(oWaitingPane);
 				oWaitingPane.setVisible(true);

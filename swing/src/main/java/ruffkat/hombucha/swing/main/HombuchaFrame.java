@@ -8,17 +8,23 @@ import org.jdesktop.swingx.JXStatusBar;
 import org.jdesktop.swingx.MultiSplitLayout;
 import org.jdesktop.swingx.action.AbstractActionExt;
 import org.jdesktop.swingx.error.ErrorInfo;
+import org.jdesktop.swingx.search.RecentSearches;
+import org.jdesktop.swingx.search.Searchable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ruffkat.swing.action.ActionRepository;
+import ruffkat.swing.action.EmptyAction;
 import ruffkat.swing.module.ModulePanel;
 import ruffkat.swing.module.ModuleView;
 import ruffkat.swing.statusbar.MemoryMeter;
+import ruffkat.swing.statusbar.StatusDisplay;
+import ruffkat.swing.task.ModalHandler;
 import ruffkat.swing.task.TaskListModel;
 import ruffkat.swing.task.TaskListPanel;
-import ruffkat.swing.ui.HiPerfInfiniteProgressPanel;
+import ruffkat.swing.ui.FindBar;
+import ruffkat.swing.ui.InfiniteProgressPanel;
 import ruffkat.swing.ui.UserInterface;
 
 import javax.swing.BorderFactory;
@@ -29,7 +35,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -44,7 +49,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.prefs.Preferences;
 
-public class HombuchaFrame extends JXFrame {
+public class HombuchaFrame extends JXFrame implements ModalHandler, StatusDisplay, Runnable {
     private final Logger log = LoggerFactory.getLogger(getClass());
     private final Preferences preferences = Preferences.userNodeForPackage(getClass());
 
@@ -52,9 +57,10 @@ public class HombuchaFrame extends JXFrame {
     private UserInterface ui;
     private ActionRepository actions;
     private TaskListModel taskListModel;
-    private HiPerfInfiniteProgressPanel glassPaneProgress;
+    private InfiniteProgressPanel glassPaneProgress;
     private JLabel statusBarMessage;
     private JFileChooser fileChooser;
+    private FindBar findBar;
 
     public final void run() {
         try {
@@ -148,6 +154,16 @@ public class HombuchaFrame extends JXFrame {
                 triggerShutdown();
             }
         });
+        // Menu actions
+        actions.register("menu.file", new EmptyAction());
+        actions.register("menu.edit", new EmptyAction());
+        actions.register("menu.search", new EmptyAction());
+        // Search actions
+        actions.register("find.show", new AbstractActionExt() {
+            public void actionPerformed(ActionEvent e) {
+                findBar.setVisible(!findBar.isVisible());
+            }
+        });
     }
 
     private void prepareSharedComponents() {
@@ -157,18 +173,18 @@ public class HombuchaFrame extends JXFrame {
 
         taskListModel = new TaskListModel();
 
+        Searchable searchable = context.getBean("searchableSchema", Searchable.class);
+        findBar = new FindBar(actions.getConfiguration(), searchable,
+                new RecentSearches(preferences, "searches.recent"));
+        findBar.setVisible(false);
+
         fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle(ui.string("OpenSpaceDialog.title"));
-        fileChooser.setApproveButtonText(ui.string("OpenSpaceDialog.approveButtonText"));
-        fileChooser.setApproveButtonMnemonic(ui.integer("OpenSpaceDialog.approveButtonMnemonic"));
-        fileChooser.setMultiSelectionEnabled(false);
         fileChooser.setAcceptAllFileFilterUsed(true);
-        fileChooser.setFileFilter(new FileNameExtensionFilter(ui.string("FileFilter.xml"), "xml"));
         fileChooser.setCurrentDirectory(lastDirectory());
     }
 
     private Component buildGlassPane() {
-        glassPaneProgress = new HiPerfInfiniteProgressPanel(false);
+        glassPaneProgress = new InfiniteProgressPanel(false);
         return glassPaneProgress;
     }
 
@@ -232,10 +248,9 @@ public class HombuchaFrame extends JXFrame {
 
     private JMenuBar buildMenuBar() {
         List<List<String>> structure = new ArrayList<List<String>>();
-        structure.add(Arrays.asList("menu.file", "space.new", "space.load", "space.open", null, "application.exit"));
-        structure.add(Arrays.asList("menu.edit", "editor.undo", "editor.redo", null, "editor.cut", "editor.copy", "editor.paste"));
+        structure.add(Arrays.asList("menu.file", null, "application.exit"));
+        structure.add(Arrays.asList("menu.edit"));
         structure.add(Arrays.asList("menu.search", "find.show"));
-        structure.add(Arrays.asList("menu.modules", "module.renderer.activate", "module.teardown.activate", "module.blackbox.activate"));
         return actions.getContainerFactory().createMenuBar(structure);
     }
 
