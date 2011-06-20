@@ -76,9 +76,9 @@ public class Ingredient<Q extends Quantity>
 
     public Ingredient<Q> scale(UnitConverter converter) {
         Ingredient<Q> ingredient = new Ingredient<Q>();
-        ingredient.setInstructions(getInstructions());
         ingredient.setItem(getItem());
         ingredient.setAmount(Measurements.convert(getAmount(), converter));
+        ingredient.setInstructions(getInstructions());
         return ingredient;
     }
 
