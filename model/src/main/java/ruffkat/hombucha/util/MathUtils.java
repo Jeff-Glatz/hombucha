@@ -46,6 +46,6 @@ public class MathUtils {
     }
 
     public static BigDecimal scaleFactor(BigDecimal original, BigDecimal requested) {
-        return ONE.add(requested.subtract(original).divide(original, CONTEXT));
+        return ONE.add(requested.subtract(original, CONTEXT).divide(original, CONTEXT), CONTEXT);
     }
 }
