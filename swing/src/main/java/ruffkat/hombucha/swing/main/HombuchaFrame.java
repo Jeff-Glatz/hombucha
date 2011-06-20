@@ -120,12 +120,6 @@ public class HombuchaFrame extends JXFrame implements ModalHandler, StatusDispla
         }
     }
 
-    public final void disposeComponent() {
-        log.info("Shutting down ...");
-        context.close();
-        log.info("Shut down.");
-    }
-
     public void onError(String message, Throwable error) {
         log.error(message, error);
         JXErrorPane.showDialog(this, new ErrorInfo("Error", message, error.getMessage(), null, error, null, null));
