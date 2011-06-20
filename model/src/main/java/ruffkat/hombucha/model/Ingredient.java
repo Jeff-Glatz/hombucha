@@ -5,6 +5,7 @@ import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.FieldBridge;
 import org.hibernate.search.annotations.IndexedEmbedded;
 import ruffkat.hombucha.measure.MeasureBridge;
+import ruffkat.hombucha.measure.Measurements;
 import ruffkat.hombucha.money.Money;
 import ruffkat.hombucha.money.Priced;
 
@@ -77,9 +78,7 @@ public class Ingredient<Q extends Quantity>
         Ingredient<Q> ingredient = new Ingredient<Q>();
         ingredient.setInstructions(getInstructions());
         ingredient.setItem(getItem());
-        ingredient.setAmount(Measure.valueOf(
-                converter.convert(amount.getValue().doubleValue()),
-                amount.getUnit()));
+        ingredient.setAmount(Measurements.convert(getAmount(), converter));
         return ingredient;
     }
 
