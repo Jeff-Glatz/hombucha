@@ -22,7 +22,7 @@ public class MathUtils {
 
     public static BigDecimal valueOf(String value) {
         return (value != null && value.length() > 0) ?
-                new BigDecimal(value, CONTEXT) : zero();
+                new BigDecimal(value, CONTEXT) : ZERO;
     }
 
     public static BigDecimal valueOf(Number value) {
