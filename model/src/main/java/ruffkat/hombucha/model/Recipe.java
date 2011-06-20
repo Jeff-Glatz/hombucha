@@ -6,13 +6,17 @@ import org.hibernate.search.annotations.FieldBridge;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
 import ruffkat.hombucha.measure.MeasureBridge;
+import ruffkat.hombucha.measure.Measurements;
 import ruffkat.hombucha.measure.Volumetric;
 import ruffkat.hombucha.money.Money;
 import ruffkat.hombucha.money.Priced;
+import ruffkat.hombucha.util.PropertyUtils;
 
 import javax.measure.Measure;
 import javax.measure.converter.MultiplyConverter;
+import javax.measure.quantity.Quantity;
 import javax.measure.quantity.Volume;
+import javax.measure.unit.Unit;
 import javax.persistence.Basic;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -57,6 +61,23 @@ public class Recipe
         return ingredients.size();
     }
 
+    /**
+     * Locates and returns the {@link Ingredient} with the specified name
+     *
+     * @param name The name of the ingredient
+     * @param <Q>  The ingredients {@link Quantity} of measure
+     * @return The named {@link Ingredient}; {@code null} if not found
+     */
+    public <Q extends Quantity> Ingredient<Q> ingredient(String name) {
+        for (Ingredient<?> ingredient : ingredients) {
+            Item<? extends Quantity> item = ingredient.getItem();
+            if (PropertyUtils.same(name, item.getName())) {
+                return (Ingredient<Q>) ingredient;
+            }
+        }
+        return null;
+    }
+
     public String getInstructions() {
         return instructions;
     }
@@ -73,16 +94,25 @@ public class Recipe
         this.volume = volume;
     }
 
-    public Recipe scale(Measure<Volume> newVolume) {
-        float requested = newVolume.floatValue(volume.getUnit());
-        float current = volume.floatValue(volume.getUnit());
-        float scale = 1.0f + ((requested - current) / current);
-        MultiplyConverter converter = new MultiplyConverter(scale);
-
+    /**
+     * Scales this {@link Recipe recipe} by the specified factor. For
+     * example:
+     * <p/>
+     * <ul>
+     * <li>To halve a recipe, the factor would be {@code 0.5}</li>
+     * <li>To double a recipe, the factor would be {@code 2.0}</li>
+     * </ul>
+     *
+     * @param factor The factor by which this recipe should be
+     *               scaled.
+     * @return The scaled {@link Recipe}
+     */
+    public Recipe scale(float factor) {
+        MultiplyConverter converter = new MultiplyConverter(factor);
         Recipe recipe = new Recipe();
         recipe.setInstructions(getInstructions());
         recipe.setName(getName());
-        recipe.setVolume(newVolume);
+        recipe.setVolume(Measurements.convert(getVolume(), converter));
         recipe.setReceived(getReceived());
         recipe.setSource(getSource());
         List<Ingredient<?>> scaled = new ArrayList<Ingredient<?>>(ingredientCount());
@@ -91,6 +121,36 @@ public class Recipe
         }
         recipe.setIngredients(scaled);
         return recipe;
+    }
+
+    /**
+     * Scales this {@link Recipe} to yield the desired volume
+     *
+     * @param yield The desired output of the recipe, in terms of volume
+     * @return The scaled {@link Recipe}
+     */
+    public Recipe scale(Measure<Volume> yield) {
+        Unit<Volume> unit = volume.getUnit();
+        float current = volume.floatValue(unit);
+        float requested = yield.floatValue(unit);
+        return scale(1.0f + ((requested - current) / current));
+    }
+
+    /**
+     * Scales this {@link Recipe} according to the specified amount of a
+     * specific ingredient
+     *
+     * @param name   The ingredient upon which the scaled recipe will be derived
+     * @param amount The new amount of the ingredient
+     * @param <Q>    The {@link Quantity} being measured
+     * @return The scaled {@link Recipe}
+     */
+    public <Q extends Quantity> Recipe scale(String name, Measure<Q> amount) {
+        Ingredient<Q> ingredient = ingredient(name);
+        Unit<Q> unit = ingredient.getAmount().getUnit();
+        float current = ingredient.getAmount().floatValue(unit);
+        float requested = amount.floatValue(unit);
+        return scale(1.0f + ((requested - current) / current));
     }
 
     public Money price() {
