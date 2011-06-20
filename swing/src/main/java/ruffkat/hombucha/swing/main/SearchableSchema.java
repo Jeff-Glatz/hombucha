@@ -13,7 +13,8 @@ import ruffkat.hombucha.store.Vessels;
 import java.util.regex.Pattern;
 
 @Component
-public class SearchableSchema implements Searchable {
+public class SearchableSchema
+        implements Searchable {
 
     @Autowired
     private Sources sources;

@@ -1,13 +1,22 @@
 package ruffkat.hombucha.swing.main;
 
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
-public class Launcher implements Runnable {
+public class Launcher
+        implements Runnable {
 
     @Override
     public void run() {
+        configureSystemSettings();
+        launchApplication();
+    }
+
+    private void configureSystemSettings() {
         try {
             System.setProperty("awt.useSystemAAFontSettings", "on");
             System.setProperty("swing.aatext", "true");
@@ -17,7 +26,13 @@ public class Launcher implements Runnable {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        HombuchaFrame frame = new HombuchaFrame();
+    }
+
+    private void launchApplication() {
+        ConfigurableApplicationContext context =
+                new ClassPathXmlApplicationContext("classpath:swing-context.xml");
+        context.registerShutdownHook();
+        HombuchaFrame frame = context.getBean(HombuchaFrame.class);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.run();
     }

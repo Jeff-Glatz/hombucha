@@ -12,8 +12,8 @@ import org.jdesktop.swingx.search.RecentSearches;
 import org.jdesktop.swingx.search.Searchable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import ruffkat.swing.action.ActionRepository;
 import ruffkat.swing.action.EmptyAction;
 import ruffkat.swing.module.ModulePanel;
@@ -49,13 +49,23 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.prefs.Preferences;
 
-public class HombuchaFrame extends JXFrame implements ModalHandler, StatusDisplay, Runnable {
+@org.springframework.stereotype.Component
+public class HombuchaFrame
+        extends JXFrame
+        implements ModalHandler, StatusDisplay, Runnable {
     private final Logger log = LoggerFactory.getLogger(getClass());
     private final Preferences preferences = Preferences.userNodeForPackage(getClass());
 
-    private ConfigurableApplicationContext context;
+    @Autowired
     private UserInterface ui;
+
+    @Autowired
+    @Qualifier("globalActions")
     private ActionRepository actions;
+
+    @Autowired
+    private Searchable searchable;
+
     private TaskListModel taskListModel;
     private InfiniteProgressPanel glassPaneProgress;
     private JLabel statusBarMessage;
@@ -161,13 +171,8 @@ public class HombuchaFrame extends JXFrame implements ModalHandler, StatusDispla
     }
 
     private void prepareSharedComponents() {
-        context = new ClassPathXmlApplicationContext("classpath:swing-context.xml");
-        ui = context.getBean(UserInterface.class);
-        actions = context.getBean("globalActions", ActionRepository.class);
-
         taskListModel = new TaskListModel();
 
-        Searchable searchable = context.getBean("searchableSchema", Searchable.class);
         findBar = new FindBar(actions.getConfiguration(), searchable,
                 new RecentSearches(preferences, "searches.recent"));
         findBar.setVisible(false);
