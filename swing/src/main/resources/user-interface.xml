@@ -69,11 +69,11 @@
                 </entry>
 
                 <!-- Images -->
-                <!--<entry key="HombuchaFrame.image">-->
-                    <!--<bean class="ruffkat.swing.ui.Media" factory-method="iconImage">-->
-                        <!--<constructor-arg value="homebucha.png"/>-->
-                    <!--</bean>-->
-                <!--</entry>-->
+                <entry key="HombuchaFrame.image">
+                    <bean class="ruffkat.swing.ui.Media" factory-method="iconImage">
+                        <constructor-arg value="homebucha.png"/>
+                    </bean>
+                </entry>
 
                 <!-- Icons -->
                 <entry key="menu.save.icon">

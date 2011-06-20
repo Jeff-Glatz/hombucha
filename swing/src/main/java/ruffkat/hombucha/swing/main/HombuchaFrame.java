@@ -76,7 +76,7 @@ public class HombuchaFrame extends JXFrame {
         rootPane.setJMenuBar(buildMenuBar());
         pack();
         setTitle(ui.string("HombuchaFrame.title"));
-//        setIconImage(ui.image("HombuchaFrame.image"));
+        setIconImage(ui.image("HombuchaFrame.image"));
         setLocationRelativeTo(null);
         addComponentListener(new ComponentAdapter() {
             public void componentShown(ComponentEvent e) {
