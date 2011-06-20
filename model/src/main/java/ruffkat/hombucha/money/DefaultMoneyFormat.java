@@ -1,9 +1,12 @@
 package ruffkat.hombucha.money;
 
+import ruffkat.hombucha.util.MathUtils;
+
 import java.math.BigDecimal;
 import java.util.Currency;
 
-public class DefaultMoneyFormat implements MoneyFormat {
+public class DefaultMoneyFormat
+        implements MoneyFormat {
     private static final String[] EMPTY = new String[0];
     private static final DefaultMoneyFormat INSTANCE = new DefaultMoneyFormat();
 
@@ -22,9 +25,9 @@ public class DefaultMoneyFormat implements MoneyFormat {
         String[] parts = value != null ? value.split(" ") : EMPTY;
         switch (parts.length) {
             case 1:
-                return new Money(Money.amount(parts[0]));
+                return new Money(MathUtils.valueOf(parts[0]));
             case 2:
-                return new Money(Money.amount(parts[0]), Currency.getInstance(parts[1]));
+                return new Money(MathUtils.valueOf(parts[0]), Currency.getInstance(parts[1]));
             default:
                 return Money.ZERO;
         }

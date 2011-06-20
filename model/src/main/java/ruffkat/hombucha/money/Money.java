@@ -1,29 +1,28 @@
 package ruffkat.hombucha.money;
 
+import ruffkat.hombucha.util.MathUtils;
+import ruffkat.hombucha.util.PropertyUtils;
+
 import javax.measure.Measure;
 import javax.measure.quantity.Quantity;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 import java.util.Currency;
 import java.util.Locale;
 
 public class Money
         implements Serializable {
-    private static final MathContext CONTEXT = new MathContext(4, RoundingMode.HALF_UP);
-    private static final BigDecimal ZERO_AMOUNT = new BigDecimal("0.000", CONTEXT);
     public static final Money ZERO = new Money();
 
     private final BigDecimal amount;
     private final Currency currency;
 
     public Money() {
-        this(ZERO_AMOUNT, defaultCurrency());
+        this(MathUtils.zero(), defaultCurrency());
     }
 
     public Money(String amount) {
-        this(new BigDecimal(amount, CONTEXT), defaultCurrency());
+        this(MathUtils.valueOf(amount), defaultCurrency());
     }
 
     public Money(BigDecimal amount) {
@@ -43,30 +42,36 @@ public class Money
         return currency;
     }
 
-    public Money add(BigDecimal amount) {
-        return new Money(this.amount.add(amount, CONTEXT), currency);
+    public Money add(BigDecimal that) {
+        return new Money(MathUtils.add(amount, that), currency);
     }
 
     public Money add(Money that) {
+        if (PropertyUtils.changed(currency, that.currency)) {
+            throw new MismatchedCurrencyException(currency, that.currency);
+        }
         return add(that.amount);
     }
 
-    public Money subtract(BigDecimal amount) {
-        return new Money(this.amount.subtract(amount, CONTEXT), currency);
+    public Money subtract(BigDecimal that) {
+        return new Money(MathUtils.subtract(amount, that), currency);
     }
 
     public Money subtract(Money that) {
+        if (PropertyUtils.changed(currency, that.currency)) {
+            throw new MismatchedCurrencyException(currency, that.currency);
+        }
         return subtract(that.amount);
     }
 
-    public <Q extends Quantity> Money divide(Measure<Q> measure) {
-        BigDecimal value = new BigDecimal(measure.getValue().doubleValue(), CONTEXT);
-        return new Money(amount.divide(value, CONTEXT), currency);
+    public <Q extends Quantity> Money multiply(Measure<Q> measure) {
+        BigDecimal value = MathUtils.valueOf(measure.getValue());
+        return new Money(MathUtils.multiply(amount, value), currency);
     }
 
-    public <Q extends Quantity> Money multiply(Measure<Q> measure) {
-        BigDecimal value = new BigDecimal(measure.getValue().doubleValue(), CONTEXT);
-        return new Money(amount.multiply(value, CONTEXT), currency);
+    public <Q extends Quantity> Money divide(Measure<Q> measure) {
+        BigDecimal value = MathUtils.valueOf(measure.getValue());
+        return new Money(MathUtils.divide(amount, value), currency);
     }
 
     @Override
@@ -99,10 +104,5 @@ public class Money
 
     public static Currency defaultCurrency() {
         return Currency.getInstance(Locale.getDefault());
-    }
-
-    public static BigDecimal amount(String value) {
-        return (value != null && value.length() > 0) ?
-                new BigDecimal(value, CONTEXT) : ZERO_AMOUNT;
     }
 }

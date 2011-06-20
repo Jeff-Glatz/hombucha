@@ -2,7 +2,8 @@ package ruffkat.hombucha.money;
 
 import org.hibernate.search.bridge.TwoWayStringBridge;
 
-public class MoneyBridge implements TwoWayStringBridge {
+public class MoneyBridge
+        implements TwoWayStringBridge {
     private final MoneyFormat format = new DefaultMoneyFormat();
 
     @Override

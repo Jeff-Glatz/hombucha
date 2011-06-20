@@ -12,7 +12,8 @@ import javax.measure.unit.Unit;
  * @see <a href="http://en.wikipedia.org/wiki/Molar_concentration">
  *      Wikipedia: Molar Concentration</a>
  */
-public interface Molarity extends Quantity {
+public interface Molarity
+        extends Quantity {
 
     /**
      * Holds the SI unit (Système International d'Unités) for this quantity.

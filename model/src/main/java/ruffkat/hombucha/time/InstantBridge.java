@@ -7,7 +7,8 @@ import org.hibernate.search.bridge.TwoWayStringBridge;
 import javax.time.Instant;
 import java.text.ParseException;
 
-public class InstantBridge implements TwoWayStringBridge {
+public class InstantBridge
+        implements TwoWayStringBridge {
 
     @Override
     public Object stringToObject(String value) {

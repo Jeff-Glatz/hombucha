@@ -5,7 +5,8 @@ import org.hibernate.search.bridge.TwoWayStringBridge;
 import javax.measure.MeasureFormat;
 import java.text.ParsePosition;
 
-public class MeasureBridge implements TwoWayStringBridge {
+public class MeasureBridge
+        implements TwoWayStringBridge {
     private final MeasureFormat format = MeasureFormat.getStandard();
 
     @Override
