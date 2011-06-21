@@ -7,10 +7,12 @@ import org.hibernate.search.annotations.FieldBridge;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
 import ruffkat.hombucha.measure.MeasureBridge;
+import ruffkat.hombucha.measure.Measurements;
 import ruffkat.hombucha.measure.Volumetric;
 import ruffkat.hombucha.util.PropertyUtils;
 
 import javax.measure.Measure;
+import javax.measure.converter.MultiplyConverter;
 import javax.measure.quantity.Volume;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -164,6 +166,10 @@ public class Ferment
 
     public void setStop(Date end) {
         this.stop = end;
+    }
+
+    public Measure<Volume> dailyDraw() {
+        return Measurements.convert(volume, new MultiplyConverter(new Double("0.200")));
     }
 
     @Override
