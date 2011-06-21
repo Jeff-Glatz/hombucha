@@ -169,7 +169,7 @@ public class Ferment
     }
 
     public Measure<Volume> dailyDraw() {
-        return Measurements.convert(volume, new MultiplyConverter(new Double("0.200")));
+        return Measurements.convert(volume, new MultiplyConverter(new Double("0.20")));
     }
 
     @Override
