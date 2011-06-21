@@ -280,7 +280,7 @@ public class HombuchaFrame
     }
 
     private Task<Void> populateFermentsTree() {
-        Task<Void> task = new BackgroundTask<Void, Void>("Activating Renderer Module", this) {
+        Task<Void> task = new BackgroundTask<Void, Void>("Loading Brews", this) {
             protected Void doInBackground() {
                 fermentTreeModel.initialize();
                 return null;
