@@ -172,6 +172,12 @@
                         <constructor-arg value="activate-failed.png"/>
                     </bean>
                 </entry>
+
+                <entry key="domain.ferment.icon">
+                    <bean class="ruffkat.swing.ui.Media" factory-method="icon">
+                        <constructor-arg value="ferment.png"/>
+                    </bean>
+                </entry>
             </map>
         </property>
     </bean>

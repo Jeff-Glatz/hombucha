@@ -5,6 +5,7 @@ import org.jdesktop.swingx.JXFrame;
 import org.jdesktop.swingx.JXMultiSplitPane;
 import org.jdesktop.swingx.JXRootPane;
 import org.jdesktop.swingx.JXStatusBar;
+import org.jdesktop.swingx.JXTree;
 import org.jdesktop.swingx.MultiSplitLayout;
 import org.jdesktop.swingx.action.AbstractActionExt;
 import org.jdesktop.swingx.error.ErrorInfo;
@@ -14,13 +15,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import ruffkat.hombucha.swing.ferments.FermentTreeModel;
 import ruffkat.swing.action.ActionRepository;
 import ruffkat.swing.action.EmptyAction;
 import ruffkat.swing.module.ModulePanel;
 import ruffkat.swing.module.ModuleView;
 import ruffkat.swing.statusbar.MemoryMeter;
 import ruffkat.swing.statusbar.StatusDisplay;
+import ruffkat.swing.task.BackgroundTask;
 import ruffkat.swing.task.ModalHandler;
+import ruffkat.swing.task.Task;
 import ruffkat.swing.task.TaskListModel;
 import ruffkat.swing.task.TaskListPanel;
 import ruffkat.swing.ui.FindBar;
@@ -34,7 +38,9 @@ import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
+import javax.swing.TransferHandler;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -66,6 +72,9 @@ public class HombuchaFrame
     @Autowired
     private Searchable searchable;
 
+    @Autowired
+    private FermentTreeModel fermentTreeModel;
+
     private TaskListModel taskListModel;
     private InfiniteProgressPanel glassPaneProgress;
     private JLabel statusBarMessage;
@@ -96,7 +105,7 @@ public class HombuchaFrame
         setLocationRelativeTo(null);
         addComponentListener(new ComponentAdapter() {
             public void componentShown(ComponentEvent e) {
-                // TODO: do something
+                populateFermentsTree();
             }
         });
         setVisible(true);
@@ -218,16 +227,33 @@ public class HombuchaFrame
     }
 
     private ModulePanel buildFermentsPanel() {
+        JXTree fermentsTree = new JXTree();
+        fermentsTree.setModel(fermentTreeModel);
+        fermentsTree.setLeafIcon(ui.icon("domain.ferment.icon"));
+        fermentsTree.setDragEnabled(true);
+        fermentsTree.setExpandsSelectedPaths(true);
+        fermentsTree.setLargeModel(true);
+        fermentsTree.setRootVisible(false);
+        fermentsTree.setShowsRootHandles(true);
+        fermentsTree.setTransferHandler(new TransferHandler() {
+        });
+
         ModulePanel modulePanel = new ModulePanel(ui, "HombuchaFrame.FermentsPanel.title");
-        JScrollPane scrollPane = new JScrollPane();
-        modulePanel.add(scrollPane, BorderLayout.CENTER);
+        modulePanel.add(new JScrollPane(fermentsTree), BorderLayout.CENTER);
         return modulePanel;
     }
 
     private ModulePanel buildDesktopPanel() {
+        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.addTab("Sources", new JPanel());
+        tabbedPane.addTab("Mothers", new JPanel());
+        tabbedPane.addTab("Items", new JPanel());
+        tabbedPane.addTab("Recipes", new JPanel());
+        tabbedPane.addTab("Vessels", new JPanel());
+        tabbedPane.addTab("Ferments", new JPanel());
+
         ModulePanel modulePanel = new ModulePanel(ui, "HombuchaFrame.DesktopPanel.title");
-        JScrollPane scrollPane = new JScrollPane();
-        modulePanel.add(scrollPane, BorderLayout.CENTER);
+        modulePanel.add(tabbedPane, BorderLayout.CENTER);
         return modulePanel;
     }
 
@@ -251,6 +277,18 @@ public class HombuchaFrame
         structure.add(Arrays.asList("menu.edit"));
         structure.add(Arrays.asList("menu.search", "find.show"));
         return actions.getContainerFactory().createMenuBar(structure);
+    }
+
+    private Task<Void> populateFermentsTree() {
+        Task<Void> task = new BackgroundTask<Void, Void>("Activating Renderer Module", this) {
+            protected Void doInBackground() {
+                fermentTreeModel.initialize();
+                return null;
+            }
+        };
+        taskListModel.register(task);
+        task.execute();
+        return task;
     }
 
     private File lastDirectory() {
