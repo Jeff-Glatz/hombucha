@@ -12,4 +12,9 @@ public class FermentTreeNode {
     public Ferment getFerment() {
         return ferment;
     }
+
+    @Override
+    public String toString() {
+        return ferment.getName();
+    }
 }

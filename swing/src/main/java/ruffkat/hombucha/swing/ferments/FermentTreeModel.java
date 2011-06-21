@@ -18,6 +18,8 @@ public class FermentTreeModel implements TreeModel {
     private EventListenerList listeners = new EventListenerList();
     private List<FermentTreeNode> brewing = new ArrayList<FermentTreeNode>();
 
+    public static final Object ROOT = new Object();
+
     @Autowired
     private Ferments ferments;
 
@@ -48,37 +50,46 @@ public class FermentTreeModel implements TreeModel {
 
     @Override
     public Object getRoot() {
-        return null;
+        return ROOT;
     }
 
     @Override
     public boolean isLeaf(Object o) {
-        return true;
+        return o != ROOT;
     }
 
     @Override
     public Object getChild(Object o, int i) {
-        return brewing.get(i);
+        if (o == ROOT) {
+            return brewing.get(i);
+        }
+        return null;
     }
 
     @Override
     public int getChildCount(Object o) {
-        return brewing.size();
+        if (o == ROOT) {
+            return brewing.size();
+        }
+        return 0;
     }
 
     @Override
     public int getIndexOfChild(Object o, Object child) {
-        return brewing.indexOf(child);
+        if (o == ROOT) {
+            return brewing.indexOf(child);
+        }
+        return -1;
     }
 
     @Override
     public void valueForPathChanged(TreePath treePath, Object o) {
     }
 
-    protected void fireTreeStructureChanged(FermentTreeNode node) {
+    public void fireTreeStructureChanged() {
         TreeModelListener[] treeModelListeners = listeners.getListeners(TreeModelListener.class);
         if (treeModelListeners.length > 0) {
-            TreeModelEvent event = new TreeModelEvent(this, new TreePath(node));
+            TreeModelEvent event = new TreeModelEvent(this, new TreePath(getRoot()));
             for (TreeModelListener listener : treeModelListeners) {
                 listener.treeStructureChanged(event);
             }

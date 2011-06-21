@@ -228,15 +228,14 @@ public class HombuchaFrame
 
     private ModulePanel buildFermentsPanel() {
         JXTree fermentsTree = new JXTree();
-        fermentsTree.setModel(fermentTreeModel);
         fermentsTree.setLeafIcon(ui.icon("domain.ferment.icon"));
         fermentsTree.setDragEnabled(true);
         fermentsTree.setExpandsSelectedPaths(true);
-        fermentsTree.setLargeModel(true);
         fermentsTree.setRootVisible(false);
         fermentsTree.setShowsRootHandles(true);
         fermentsTree.setTransferHandler(new TransferHandler() {
         });
+        fermentsTree.setModel(fermentTreeModel);
 
         ModulePanel modulePanel = new ModulePanel(ui, "HombuchaFrame.FermentsPanel.title");
         modulePanel.add(new JScrollPane(fermentsTree), BorderLayout.CENTER);
@@ -281,9 +280,15 @@ public class HombuchaFrame
 
     private Task<Void> populateFermentsTree() {
         Task<Void> task = new BackgroundTask<Void, Void>("Loading Brews", this) {
+            @Override
             protected Void doInBackground() {
                 fermentTreeModel.initialize();
                 return null;
+            }
+
+            @Override
+            protected void completed(Void result) {
+                fermentTreeModel.fireTreeStructureChanged();
             }
         };
         taskListModel.register(task);
