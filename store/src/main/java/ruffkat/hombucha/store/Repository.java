@@ -5,9 +5,11 @@ import ruffkat.hombucha.model.Persistent;
 import java.util.Set;
 
 public interface Repository<P extends Persistent> {
-    void save(P item);
+    void addRepositoryListener(RepositoryListener<P> listener);
+    void removeRepositoryListener(RepositoryListener<P> listener);
+    void save(P persistent);
     P load(Long oid);
     Set<P> search(String criteria);
-    void delete(P item);
+    void delete(P persistent);
     void flush();
 }
