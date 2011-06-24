@@ -11,5 +11,7 @@ public interface Repository<P extends Persistent> {
     P load(Long oid);
     Set<P> search(String criteria);
     void delete(P persistent);
+    Set<P> all();
+    long count();
     void flush();
 }

@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import ruffkat.hombucha.swing.ferments.FermentTreeModel;
 import ruffkat.hombucha.swing.ferments.FermentsPanel;
 import ruffkat.hombucha.swing.items.ItemsPanel;
@@ -48,7 +49,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 import javax.swing.TransferHandler;
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
@@ -61,7 +61,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.prefs.Preferences;
 
-@org.springframework.stereotype.Component
+@Component
 public class HombuchaFrame
         extends JXFrame
         implements ModalHandler, StatusDisplay, Runnable {
@@ -215,7 +215,7 @@ public class HombuchaFrame
         fileChooser.setCurrentDirectory(lastDirectory());
     }
 
-    private Component buildGlassPane() {
+    private JComponent buildGlassPane() {
         glassPaneProgress = new InfiniteProgressPanel(false);
         return glassPaneProgress;
     }

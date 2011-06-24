@@ -64,6 +64,23 @@ public abstract class AbstractRepository<P extends Persistent>
     }
 
     @Override
+    public Set<P> all() {
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
+        CriteriaQuery<P> criteriaQuery = criteriaBuilder.createQuery(type);
+        criteriaQuery.from(type);
+        TypedQuery<P> query = manager.createQuery(criteriaQuery);
+        return new HashSet<P>(query.getResultList());
+    }
+
+    @Override
+    public long count() {
+        CriteriaBuilder qb = manager.getCriteriaBuilder();
+        CriteriaQuery<Long> cq = qb.createQuery(Long.class);
+        cq.select(qb.count(cq.from(type)));
+        return manager.createQuery(cq).getSingleResult();
+    }
+
+    @Override
     public void delete(P persistent) {
         manager.remove(persistent);
         fireDeleted(persistent);
