@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ruffkat.hombucha.model.Ferment;
 import ruffkat.hombucha.store.Ferments;
+import ruffkat.hombucha.store.RepositoryEvent;
+import ruffkat.hombucha.store.RepositoryListener;
 
+import javax.annotation.PostConstruct;
 import javax.swing.event.EventListenerList;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
@@ -14,7 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class FermentTreeModel implements TreeModel {
+public class FermentTreeModel
+        implements TreeModel, RepositoryListener<Ferment> {
     private EventListenerList listeners = new EventListenerList();
     private List<FermentTreeNode> brewing = new ArrayList<FermentTreeNode>();
 
@@ -41,11 +45,20 @@ public class FermentTreeModel implements TreeModel {
         listeners.remove(TreeModelListener.class, listener);
     }
 
+    @PostConstruct
     public void initialize() {
-        brewing.clear();
-        for (Ferment ferment : ferments.brewing()) {
-            brewing.add(new FermentTreeNode(ferment));
-        }
+        ferments.addRepositoryListener(this);
+        populateTreeModel();
+    }
+
+    @Override
+    public void saved(RepositoryEvent<Ferment> event) {
+        populateTreeModel();
+    }
+
+    @Override
+    public void deleted(RepositoryEvent<Ferment> event) {
+        populateTreeModel();
     }
 
     @Override
@@ -94,5 +107,13 @@ public class FermentTreeModel implements TreeModel {
                 listener.treeStructureChanged(event);
             }
         }
+    }
+
+    private void populateTreeModel() {
+        brewing.clear();
+        for (Ferment ferment : ferments.brewing()) {
+            brewing.add(new FermentTreeNode(ferment));
+        }
+        fireTreeStructureChanged();
     }
 }
