@@ -35,6 +35,12 @@ public class FermentTreeModel
         this.ferments = ferments;
     }
 
+    @PostConstruct
+    public void initialize() {
+        ferments.addRepositoryListener(this);
+        populateTreeModel();
+    }
+
     @Override
     public void addTreeModelListener(TreeModelListener listener) {
         listeners.add(TreeModelListener.class, listener);
@@ -43,12 +49,6 @@ public class FermentTreeModel
     @Override
     public void removeTreeModelListener(TreeModelListener listener) {
         listeners.remove(TreeModelListener.class, listener);
-    }
-
-    @PostConstruct
-    public void initialize() {
-        ferments.addRepositoryListener(this);
-        populateTreeModel();
     }
 
     @Override

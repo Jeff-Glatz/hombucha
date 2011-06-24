@@ -81,6 +81,24 @@ public class HombuchaFrame
     @Autowired
     private FermentTreeModel fermentTreeModel;
 
+    @Autowired
+    private SourcesPanel sourcesPanel;
+
+    @Autowired
+    private MothersPanel mothersPanel;
+
+    @Autowired
+    private ItemsPanel itemsPanel;
+
+    @Autowired
+    private VesselsPanel vesselsPanel;
+
+    @Autowired
+    private RecipesPanel recipesPanel;
+
+    @Autowired
+    private FermentsPanel fermentsPanel;
+
     private TaskListModel taskListModel;
     private InfiniteProgressPanel glassPaneProgress;
     private JLabel statusBarMessage;
@@ -250,12 +268,12 @@ public class HombuchaFrame
 
     private ModulePanel buildDesktopPanel() {
         JTabbedPane tabbedPane = new JTabbedPane();
-        tabbedPane.addTab("Sources", new SourcesPanel());
-        tabbedPane.addTab("Mothers", new MothersPanel());
-        tabbedPane.addTab("Items", new ItemsPanel());
-        tabbedPane.addTab("Vessels", new VesselsPanel());
-        tabbedPane.addTab("Recipes", new RecipesPanel());
-        tabbedPane.addTab("Ferments", new FermentsPanel());
+        tabbedPane.addTab("Sources", sourcesPanel);
+        tabbedPane.addTab("Mothers", mothersPanel);
+        tabbedPane.addTab("Items", itemsPanel);
+        tabbedPane.addTab("Vessels", vesselsPanel);
+        tabbedPane.addTab("Recipes", recipesPanel);
+        tabbedPane.addTab("Ferments", fermentsPanel);
 
         ModulePanel modulePanel = new ModulePanel(ui, "HombuchaFrame.DesktopPanel.title");
         modulePanel.add(tabbedPane, BorderLayout.CENTER);
