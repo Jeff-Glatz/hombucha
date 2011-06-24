@@ -2,14 +2,15 @@ package ruffkat.hombucha.measure;
 
 import javax.measure.Measure;
 import javax.measure.quantity.Quantity;
+import javax.measure.unit.Unit;
 
 public class Range<Q extends Quantity> {
-    private final Measure<Q> high;
     private final Measure<Q> low;
+    private final Measure<Q> high;
 
     public Range(Measure<Q> low, Measure<Q> high) {
-        this.high = high;
         this.low = low;
+        this.high = high;
     }
 
     public Measure<Q> getLow() {
@@ -18,6 +19,10 @@ public class Range<Q extends Quantity> {
 
     public Measure<Q> getHigh() {
         return high;
+    }
+
+    public Range<Q> to(Unit<Q> unit) {
+        return new Range<Q>(low.to(unit), high.to(unit));
     }
 
     @Override
