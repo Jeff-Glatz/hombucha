@@ -8,6 +8,7 @@ import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
 import ruffkat.hombucha.measure.MeasureBridge;
 import ruffkat.hombucha.measure.Measurements;
+import ruffkat.hombucha.measure.Range;
 import ruffkat.hombucha.measure.Volumetric;
 import ruffkat.hombucha.util.PropertyUtils;
 
@@ -168,8 +169,10 @@ public class Ferment
         this.stop = end;
     }
 
-    public Measure<Volume> dailyDraw() {
-        return Measurements.convert(volume, new MultiplyConverter(new Double("0.20")));
+    public Range<Volume> dailyDraw() {
+        return new Range<Volume>(
+                Measurements.convert(volume, new MultiplyConverter(new Double("0.10"))),
+                Measurements.convert(volume, new MultiplyConverter(new Double("0.20"))));
     }
 
     @Override

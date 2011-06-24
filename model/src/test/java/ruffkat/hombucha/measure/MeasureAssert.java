@@ -11,4 +11,9 @@ public class MeasureAssert extends Assert {
         assertEquals(expected.getUnit(), observed.getUnit());
         assertEquals(Measurements.decimalValue(expected), Measurements.decimalValue(observed));
     }
+
+    public static <Q extends Quantity> void assertRangeEquals(Range<Q> expected, Range<Q> observed) {
+        assertMeasureEquals(expected.getLow(), observed.getLow());
+        assertMeasureEquals(expected.getHigh(), observed.getHigh());
+    }
 }
