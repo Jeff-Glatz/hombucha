@@ -16,6 +16,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import ruffkat.hombucha.swing.ferments.FermentTreeModel;
+import ruffkat.hombucha.swing.ferments.FermentsPanel;
+import ruffkat.hombucha.swing.items.ItemsPanel;
+import ruffkat.hombucha.swing.mothers.MothersPanel;
+import ruffkat.hombucha.swing.recipes.RecipesPanel;
+import ruffkat.hombucha.swing.sources.SourcesPanel;
+import ruffkat.hombucha.swing.vessels.VesselsPanel;
 import ruffkat.swing.action.ActionRepository;
 import ruffkat.swing.action.EmptyAction;
 import ruffkat.swing.module.ModulePanel;
@@ -244,12 +250,12 @@ public class HombuchaFrame
 
     private ModulePanel buildDesktopPanel() {
         JTabbedPane tabbedPane = new JTabbedPane();
-        tabbedPane.addTab("Sources", new JPanel());
-        tabbedPane.addTab("Mothers", new JPanel());
-        tabbedPane.addTab("Items", new JPanel());
-        tabbedPane.addTab("Recipes", new JPanel());
-        tabbedPane.addTab("Vessels", new JPanel());
-        tabbedPane.addTab("Ferments", new JPanel());
+        tabbedPane.addTab("Sources", new SourcesPanel());
+        tabbedPane.addTab("Mothers", new MothersPanel());
+        tabbedPane.addTab("Items", new ItemsPanel());
+        tabbedPane.addTab("Vessels", new VesselsPanel());
+        tabbedPane.addTab("Recipes", new RecipesPanel());
+        tabbedPane.addTab("Ferments", new FermentsPanel());
 
         ModulePanel modulePanel = new ModulePanel(ui, "HombuchaFrame.DesktopPanel.title");
         modulePanel.add(tabbedPane, BorderLayout.CENTER);
