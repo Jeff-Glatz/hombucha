@@ -60,8 +60,15 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>3.0.3.RELEASE</version>
+            <version>${spring.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.swinglabs</groupId>
