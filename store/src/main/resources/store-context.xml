@@ -8,16 +8,17 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+    <context:property-placeholder/>
+
     <context:annotation-config/>
 
     <context:component-scan base-package="ruffkat.hombucha.store"/>
 
     <bean id="dataSource"
-          class="org.apache.derby.jdbc.EmbeddedDataSource">
-        <property name="createDatabase" value="create"/>
-        <property name="databaseName" value="~/HombuchaDB"/>
-        <property name="user" value="hombucha"/>
-        <property name="password" value="hombucha"/>
+          class="org.h2.jdbcx.JdbcDataSource">
+        <property name="url" value="jdbc:h2:~/hombucha/store/database;AUTO_SERVER=TRUE"/>
+        <property name="user" value="sa"/>
+        <property name="password" value="sa"/>
     </bean>
 
     <bean id="entityManagerFactory"
@@ -29,8 +30,14 @@
         </property>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="database" value="DERBY"/>
+                <property name="database" value="H2"/>
             </bean>
+        </property>
+        <property name="jpaProperties">
+            <map>
+                <entry key="hibernate.search.default.indexBase"
+                       value="${user.home}/hombucha/search"/>
+            </map>
         </property>
     </bean>
 
