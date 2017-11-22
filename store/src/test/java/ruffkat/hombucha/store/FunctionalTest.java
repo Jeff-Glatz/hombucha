@@ -20,8 +20,7 @@ import javax.time.TimeSource;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:store-context.xml")
-@Transactional(readOnly = false)
-@Commit
+@Transactional
 @TestExecutionListeners({
         DependencyInjectionTestExecutionListener.class,
         DirtiesContextTestExecutionListener.class,
