@@ -15,7 +15,7 @@
     <bean id="dataSource"
           class="org.apache.derby.jdbc.EmbeddedDataSource">
         <property name="createDatabase" value="create"/>
-        <property name="databaseName" value="/Users/jeff/HombuchaDB"/>
+        <property name="databaseName" value="~/HombuchaDB"/>
         <property name="user" value="hombucha"/>
         <property name="password" value="hombucha"/>
     </bean>

@@ -9,9 +9,12 @@ import ruffkat.hombucha.model.Processing;
 import ruffkat.hombucha.time.Dates;
 
 import javax.persistence.EntityNotFoundException;
+import javax.time.Instant;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Set;
 
+import static javax.time.Duration.standardDays;
 import static junit.framework.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -65,10 +68,12 @@ public class FermentsTest extends FunctionalTest {
     @Test
     @Rollback(false)
     public void testActive() {
+        Instant now = timeSource.instant();
+
         Ferment ferment = ferments.create();
         ferment.setProcessing(Processing.BATCH);
-        ferment.setStart(Dates.date(Calendar.MAY, 12, 2011));
-        ferment.setStop(Dates.date(Calendar.MAY, 24, 2012));
+        ferment.setStart(new Date(now.minus(standardDays(7)).toEpochMillisLong()));
+        ferment.setStop(new Date(now.plus(standardDays(7)).toEpochMillisLong()));
 
         Set<Ferment> active = ferments.brewing();
         assertFalse(active.contains(ferment));
