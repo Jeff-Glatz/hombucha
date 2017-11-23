@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ruffkat.hombucha.model.Friend;
 import ruffkat.hombucha.model.Local;
-import ruffkat.hombucha.model.Online;
+import ruffkat.hombucha.model.Website;
 import ruffkat.hombucha.model.Source;
 
 import java.net.MalformedURLException;
@@ -31,7 +31,7 @@ public class SourceMaker
             throws Exception {
         makeFriendSources();
         makeLocalSources();
-        makeOnlineSources();
+        makeWebsiteSources();
     }
 
     private void makeFriendSources() {
@@ -52,19 +52,19 @@ public class SourceMaker
         sources.save(cvs);
     }
 
-    private void makeOnlineSources()
+    private void makeWebsiteSources()
             throws MalformedURLException {
-        Online rishi = new Online();
+        Website rishi = new Website();
         rishi.setName("Rishi Tea");
         rishi.setUrl(new URL("http://www.rishi-tea.com"));
         sources.save(rishi);
 
-        Online westelm = sources.create(Online.class);
+        Website westelm = sources.create(Website.class);
         westelm.setName("West Elm");
         westelm.setUrl(new URL("http://www.westelm.com"));
         sources.save(westelm);
 
-        Online naturalGrocers = sources.create(Online.class);
+        Website naturalGrocers = sources.create(Website.class);
         naturalGrocers.setName("Natural Grocers");
         naturalGrocers.setUrl(new URL("http://www.naturalgrocers.com"));
         sources.save(naturalGrocers);

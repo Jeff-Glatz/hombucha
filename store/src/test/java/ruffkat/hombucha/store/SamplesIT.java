@@ -10,7 +10,7 @@ import ruffkat.hombucha.measure.Molarity;
 import ruffkat.hombucha.model.Ferment;
 import ruffkat.hombucha.model.Friend;
 import ruffkat.hombucha.model.Mother;
-import ruffkat.hombucha.model.Online;
+import ruffkat.hombucha.model.Website;
 import ruffkat.hombucha.model.Sample;
 import ruffkat.hombucha.model.Vessel;
 import ruffkat.hombucha.time.Dates;
@@ -83,9 +83,9 @@ public class SamplesIT
         Friend friend = new Friend("Christina Toyota");
         entityManager.persist(friend);
 
-        Online online = new Online("Recycled Glass Dispenser",
+        Website website = new Website("Recycled Glass Dispenser",
                 new URL("http://www.westelm.com"));
-        entityManager.persist(online);
+        entityManager.persist(website);
 
         // Create a mother
         Mother mother = new Mother();
@@ -112,14 +112,14 @@ public class SamplesIT
 
         // Create a reactor to hold the brew
         Vessel vesselA = new Vessel();
-        vesselA.setSource(online);
+        vesselA.setSource(website);
         vesselA.setName("A");
         vesselA.setReceived(Dates.date(Calendar.JUNE, 11, 2011));
         entityManager.persist(vesselA);
 
         // Create another reactor to hold the brew
         Vessel vesselB = new Vessel();
-        vesselB.setSource(online);
+        vesselB.setSource(website);
         vesselB.setName("B");
         vesselB.setReceived(Dates.date(Calendar.JUNE, 11, 2011));
         entityManager.persist(vesselB);

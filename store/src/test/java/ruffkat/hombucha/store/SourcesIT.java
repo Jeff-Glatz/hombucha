@@ -6,7 +6,7 @@ import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 import org.springframework.test.annotation.Rollback;
 import ruffkat.hombucha.model.Friend;
 import ruffkat.hombucha.model.Local;
-import ruffkat.hombucha.model.Online;
+import ruffkat.hombucha.model.Website;
 import ruffkat.hombucha.model.Source;
 
 import java.net.URL;
@@ -46,13 +46,13 @@ public class SourcesIT
     @Rollback
     public void testSaveAndDelete()
             throws Exception {
-        Online online = sources.create(Online.class);
-        online.setName("SCOBY DO");
-        online.setUrl(new URL("http://www.www.com"));
+        Website website = sources.create(Website.class);
+        website.setName("SCOBY DO");
+        website.setUrl(new URL("http://www.www.com"));
 
-        entityManager.persist(online);
+        entityManager.persist(website);
 
-        Long id = online.getOid();
+        Long id = website.getOid();
 
         Source source = sources.load(id);
         sources.delete(source);
@@ -78,7 +78,7 @@ public class SourcesIT
         sources.save(cvs);
         assertTrue(cvs.persisted());
 
-        Online rishi = new Online();
+        Website rishi = new Website();
         rishi.setName("Rishi Tea");
         rishi.setUrl(new URL("http://www.rishi-tea.com"));
 

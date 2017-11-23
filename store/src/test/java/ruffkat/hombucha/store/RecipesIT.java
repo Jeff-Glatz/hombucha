@@ -8,7 +8,7 @@ import ruffkat.hombucha.measure.Measurements;
 import ruffkat.hombucha.model.Friend;
 import ruffkat.hombucha.model.Ingredient;
 import ruffkat.hombucha.model.Item;
-import ruffkat.hombucha.model.Online;
+import ruffkat.hombucha.model.Website;
 import ruffkat.hombucha.model.Recipe;
 import ruffkat.hombucha.money.Money;
 import ruffkat.hombucha.time.Dates;
@@ -34,11 +34,11 @@ public class RecipesIT
         friend.setEmail("foo@bar.com");
         entityManager.persist(friend);
 
-        Online westelm = new Online("Recycled Glass Beverage Dispenser",
+        Website westelm = new Website("Recycled Glass Beverage Dispenser",
                 new URL("http://www.westelm.com"));
         entityManager.persist(westelm);
 
-        Online rishi = new Online("Rishi Tea Company",
+        Website rishi = new Website("Rishi Tea Company",
                 new URL("http://www.rishi.com"));
         entityManager.persist(rishi);
 
