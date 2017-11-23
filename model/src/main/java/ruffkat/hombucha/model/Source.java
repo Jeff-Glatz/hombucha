@@ -16,7 +16,8 @@ import javax.persistence.NamedQuery;
 
 @NamedQuery(
         name = "Sources.all",
-        query = "from Source source")
+        query = "select source " +
+                "from Source source")
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "kind")

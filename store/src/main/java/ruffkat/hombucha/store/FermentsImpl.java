@@ -26,6 +26,6 @@ public class FermentsImpl
     public Set<Ferment> brewing() {
         TypedQuery<Ferment> query = manager.createNamedQuery(
                 "Ferments.brewing", Ferment.class);
-        return new HashSet<Ferment>(query.getResultList());
+        return new HashSet<>(query.getResultList());
     }
 }

@@ -19,12 +19,14 @@ import javax.persistence.OneToOne;
 @NamedQueries({
         @NamedQuery(
                 name = "Vessels.available",
-                query = "from Vessel vessel " +
+                query = "select vessel " +
+                        "from Vessel vessel " +
                         "where vessel.ferment is null " +
                         "order by vessel.volume"),
         @NamedQuery(
                 name = "Vessels.pick",
-                query = "from Vessel vessel " +
+                query = "select vessel " +
+                        "from Vessel vessel " +
                         "where vessel.ferment is null " +
                         "and vessel.volume >= :minimum " +
                         "order by vessel.volume")})

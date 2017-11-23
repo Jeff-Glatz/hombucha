@@ -29,7 +29,7 @@ public class Launcher
     private void launchApplication() {
         ConfigurableApplicationContext context =
                 new SpringApplicationBuilder()
-                        .main(HombuchaApplication.class)
+                        .sources(HombuchaApplication.class)
                         .registerShutdownHook(true)
                         .headless(false)
                         .web(false)

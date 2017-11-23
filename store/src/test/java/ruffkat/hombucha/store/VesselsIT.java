@@ -54,7 +54,6 @@ public class VesselsIT
             vessels.load(id);
             fail("expected an exception");
         } catch (JpaObjectRetrievalFailureException e) {
-            e.printStackTrace();
         }
     }
 }

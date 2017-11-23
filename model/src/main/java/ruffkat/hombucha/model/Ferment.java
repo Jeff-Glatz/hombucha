@@ -32,8 +32,9 @@ import java.util.Date;
 
 @NamedQuery(
         name = "Ferments.brewing",
-        query = "from Ferment ferment " +
-                "where current_timestamp() " +
+        query = "select ferment " +
+                "from Ferment ferment " +
+                "where current_timestamp " +
                 "between ferment.start and ferment.stop")
 @Entity
 @Indexed
