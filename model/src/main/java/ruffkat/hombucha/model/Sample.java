@@ -12,7 +12,6 @@ import ruffkat.hombucha.time.InstantBridge;
 import javax.measure.Measure;
 import javax.measure.quantity.Quantity;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -38,13 +37,12 @@ public class Sample<Q extends Quantity>
     @Basic
     @Field
     @FieldBridge(impl = InstantBridge.class)
-    @Type(type = "instant")
     private Instant taken;
 
     @Basic
     @Field
     @FieldBridge(impl = MeasureBridge.class)
-    @Type(type = "measure")
+    @Type(type = "ruffkat.hombucha.measure.MeasureType")
     private Measure<Q> measurement;
 
     @Basic(fetch = FetchType.LAZY)

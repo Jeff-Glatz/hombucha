@@ -7,12 +7,12 @@ public class MoneyBridge
     private final MoneyFormat format = new DefaultMoneyFormat();
 
     @Override
-    public Object stringToObject(String value) {
-        return value != null ? format.parse(value) : null;
+    public String objectToString(Object object) {
+        return object != null ? format.format((Money) object) : null;
     }
 
     @Override
-    public String objectToString(Object object) {
-        return object != null ? format.format((Money) object) : null;
+    public Object stringToObject(String value) {
+        return value != null ? format.parse(value) : null;
     }
 }

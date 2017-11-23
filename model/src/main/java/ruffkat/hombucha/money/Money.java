@@ -10,6 +10,8 @@ import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.Locale;
 
+import static ruffkat.hombucha.util.MathUtils.valueOf;
+
 public class Money
         implements Serializable {
     public static final Money ZERO = new Money();
@@ -22,11 +24,19 @@ public class Money
     }
 
     public Money(String amount) {
-        this(MathUtils.valueOf(amount), defaultCurrency());
+        this(valueOf(amount), defaultCurrency());
     }
 
     public Money(BigDecimal amount) {
         this(amount, defaultCurrency());
+    }
+
+    public Money(String amount, String currency) {
+        this(valueOf(amount), Currency.getInstance(currency));
+    }
+
+    public Money(BigDecimal amount, String currency) {
+        this(amount, Currency.getInstance(currency));
     }
 
     public Money(BigDecimal amount, Currency currency) {
@@ -65,12 +75,12 @@ public class Money
     }
 
     public <Q extends Quantity> Money multiply(Measure<Q> measure) {
-        BigDecimal value = MathUtils.valueOf(measure.getValue());
+        BigDecimal value = valueOf(measure.getValue());
         return new Money(MathUtils.multiply(amount, value), currency);
     }
 
     public <Q extends Quantity> Money divide(Measure<Q> measure) {
-        BigDecimal value = MathUtils.valueOf(measure.getValue());
+        BigDecimal value = valueOf(measure.getValue());
         return new Money(MathUtils.divide(amount, value), currency);
     }
 

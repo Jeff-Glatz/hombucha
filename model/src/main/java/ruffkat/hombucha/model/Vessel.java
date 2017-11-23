@@ -11,6 +11,7 @@ import ruffkat.hombucha.util.PropertyUtils;
 
 import javax.measure.Measure;
 import javax.measure.quantity.Volume;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -36,9 +37,10 @@ public class Vessel
         extends Item<Volume>
         implements Volumetric {
 
+    @Basic
     @Field
     @FieldBridge(impl = MeasureBridge.class)
-    @Type(type = "measure")
+    @Type(type = "ruffkat.hombucha.measure.MeasureType")
     private Measure<Volume> volume;
 
     @OneToOne(mappedBy = "vessel")

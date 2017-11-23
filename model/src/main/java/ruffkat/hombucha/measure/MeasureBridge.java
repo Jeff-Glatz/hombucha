@@ -10,12 +10,12 @@ public class MeasureBridge
     private final MeasureFormat format = MeasureFormat.getStandard();
 
     @Override
-    public Object stringToObject(String value) {
-        return value != null ? format.parse(value, new ParsePosition(0)) : null;
+    public String objectToString(Object object) {
+        return object != null ? format.format(object) : null;
     }
 
     @Override
-    public String objectToString(Object object) {
-        return object != null ? format.format(object) : null;
+    public Object stringToObject(String value) {
+        return value != null ? format.parse(value, new ParsePosition(0)) : null;
     }
 }

@@ -30,13 +30,13 @@ public class Item<Q extends Quantity>
     @Basic
     @Field
     @FieldBridge(impl = MoneyBridge.class)
-    @Type(type = "money")
+    @Type(type = "ruffkat.hombucha.money.MoneyType")
     private Money price;
 
     @Basic
     @Field
     @FieldBridge(impl = MeasureBridge.class)
-    @Type(type = "measure")
+    @Type(type = "ruffkat.hombucha.measure.MeasureType")
     private Measure<Q> unit;
 
     public String getReference() {

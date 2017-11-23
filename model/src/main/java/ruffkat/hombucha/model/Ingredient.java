@@ -28,7 +28,7 @@ public class Ingredient<Q extends Quantity>
     @Basic
     @Field
     @FieldBridge(impl = MeasureBridge.class)
-    @Type(type = "measure")
+    @Type(type = "ruffkat.hombucha.measure.MeasureType")
     private Measure<Q> amount;
 
     @Basic

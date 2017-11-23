@@ -44,7 +44,7 @@ public class Recipe
     @Basic
     @Field
     @FieldBridge(impl = MeasureBridge.class)
-    @Type(type = "measure")
+    @Type(type = "ruffkat.hombucha.measure.MeasureType")
     private Measure<Volume> volume;
 
     public List<Ingredient<?>> getIngredients() {

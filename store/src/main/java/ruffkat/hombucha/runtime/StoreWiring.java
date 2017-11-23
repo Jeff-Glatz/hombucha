@@ -14,14 +14,12 @@ import java.time.Clock;
         "ruffkat.hombucha.measure",
         "ruffkat.hombucha.model",
         "ruffkat.hombucha.money",
-        "ruffkat.hombucha.store",
-        "ruffkat.hombucha.time"})
+        "ruffkat.hombucha.store"})
 @EntityScan({
         "ruffkat.hombucha.measure",
         "ruffkat.hombucha.model",
         "ruffkat.hombucha.money",
-        "ruffkat.hombucha.store",
-        "ruffkat.hombucha.time"})
+        "ruffkat.hombucha.store"})
 @EnableAutoConfiguration
 @EnableTransactionManagement
 @EnableJpaRepositories
