@@ -1,1 +1,0 @@
--- when spring.datasource.initialize: true
