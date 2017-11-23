@@ -1,11 +1,9 @@
 package ruffkat.hombucha.swing.main;
 
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 public class Launcher
         implements Runnable {
@@ -30,8 +28,12 @@ public class Launcher
 
     private void launchApplication() {
         ConfigurableApplicationContext context =
-                new ClassPathXmlApplicationContext("classpath:swing-context.xml");
-        context.registerShutdownHook();
+                new SpringApplicationBuilder()
+                        .main(HombuchaApplication.class)
+                        .registerShutdownHook(true)
+                        .headless(false)
+                        .web(false)
+                        .run();
         HombuchaFrame frame = context.getBean(HombuchaFrame.class);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.run();

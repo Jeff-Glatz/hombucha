@@ -2,19 +2,19 @@ package ruffkat.hombucha.store;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 import org.springframework.test.annotation.Rollback;
 import ruffkat.hombucha.measure.Measurements;
 import ruffkat.hombucha.model.Ferment;
 import ruffkat.hombucha.model.Processing;
 import ruffkat.hombucha.time.Dates;
 
-import javax.persistence.EntityNotFoundException;
-import javax.time.Instant;
+import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
 
-import static javax.time.Duration.standardDays;
+import static java.time.Duration.ofDays;
 import static junit.framework.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -43,7 +43,7 @@ public class FermentsTest extends FunctionalTest {
     }
 
     @Test
-    @Rollback(false)
+    @Rollback
     public void testSaveAndDelete() {
         Ferment ferment = ferments.create();
         ferment.setVolume(Measurements.volume("6.0 l"));
@@ -61,19 +61,19 @@ public class FermentsTest extends FunctionalTest {
         try {
             ferments.load(id);
             fail("expected an exception");
-        } catch (EntityNotFoundException e) {
+        } catch (JpaObjectRetrievalFailureException e) {
         }
     }
 
     @Test
     @Rollback(false)
     public void testActive() {
-        Instant now = timeSource.instant();
+        Instant now = clock.instant();
 
         Ferment ferment = ferments.create();
         ferment.setProcessing(Processing.BATCH);
-        ferment.setStart(new Date(now.minus(standardDays(7)).toEpochMillisLong()));
-        ferment.setStop(new Date(now.plus(standardDays(7)).toEpochMillisLong()));
+        ferment.setStart(new Date(now.minus(ofDays(7)).toEpochMilli()));
+        ferment.setStop(new Date(now.plus(ofDays(7)).toEpochMilli()));
 
         Set<Ferment> active = ferments.brewing();
         assertFalse(active.contains(ferment));

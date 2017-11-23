@@ -2,16 +2,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.8.RELEASE</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>org.ruffkat</groupId>
     <artifactId>hombucha-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-
     <packaging>pom</packaging>
 
     <properties>
-        <spring.version>4.3.0.RELEASE</spring.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <hibernate.version>5.2.11.Final</hibernate.version>
+        <hsqldb.version>2.4.0</hsqldb.version>
     </properties>
 
     <modules>
@@ -49,6 +55,54 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>javax.measure</groupId>
+                <artifactId>jsr-275</artifactId>
+                <version>0.9.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.swinglabs</groupId>
+                <artifactId>swingx</artifactId>
+                <version>1.6.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ruffkat</groupId>
+                <artifactId>hombucha-model</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ruffkat</groupId>
+                <artifactId>hombucha-model</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+                <type>test-jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.ruffkat</groupId>
+                <artifactId>hombucha-store</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ruffkat</groupId>
+                <artifactId>hombucha-store</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+                <type>test-jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.ruffkat</groupId>
+                <artifactId>hombucha-swing</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ruffkat</groupId>
+                <artifactId>hombucha-swing</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+                <type>test-jar</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <build>
         <plugins>
             <plugin>
@@ -64,5 +118,5 @@
             </plugin>
         </plugins>
     </build>
-
+    
 </project>

@@ -1,7 +1,9 @@
 package ruffkat.hombucha.store;
 
+import org.springframework.stereotype.Repository;
 import ruffkat.hombucha.model.Recipe;
 
+@Repository
 public class RecipesImpl
         extends AbstractRepository<Recipe>
         implements Recipes {

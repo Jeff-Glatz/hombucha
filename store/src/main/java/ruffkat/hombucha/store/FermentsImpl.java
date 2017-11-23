@@ -1,11 +1,14 @@
 package ruffkat.hombucha.store;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ruffkat.hombucha.model.Ferment;
 
 import javax.persistence.TypedQuery;
 import java.util.HashSet;
 import java.util.Set;
 
+@Repository
 public class FermentsImpl
         extends AbstractRepository<Ferment>
         implements Ferments {

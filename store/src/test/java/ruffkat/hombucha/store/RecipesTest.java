@@ -2,6 +2,7 @@ package ruffkat.hombucha.store;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 import org.springframework.test.annotation.Rollback;
 import ruffkat.hombucha.measure.Measurements;
 import ruffkat.hombucha.model.Friend;
@@ -13,7 +14,6 @@ import ruffkat.hombucha.money.Money;
 import ruffkat.hombucha.time.Dates;
 
 import javax.measure.quantity.Mass;
-import javax.persistence.EntityNotFoundException;
 import java.net.URL;
 import java.util.Calendar;
 
@@ -71,7 +71,7 @@ public class RecipesTest extends FunctionalTest {
     }
 
     @Test
-    @Rollback(false)
+    @Rollback
     public void testSaveAndDelete() {
         Recipe recipe = recipes.create();
         recipe.setName("SCOBY DO");
@@ -88,7 +88,7 @@ public class RecipesTest extends FunctionalTest {
         try {
             recipes.load(id);
             fail("expected an exception");
-        } catch (EntityNotFoundException e) {
+        } catch (JpaObjectRetrievalFailureException e) {
         }
     }
 

@@ -2,12 +2,12 @@ package ruffkat.hombucha.store;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 import org.springframework.test.annotation.Rollback;
+import ruffkat.hombucha.measure.Measurements;
 import ruffkat.hombucha.model.Vessel;
 import ruffkat.hombucha.time.Dates;
-import ruffkat.hombucha.measure.Measurements;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.Calendar;
 
 import static org.junit.Assert.assertEquals;
@@ -35,7 +35,7 @@ public class VesselsTest extends FunctionalTest {
     }
 
     @Test
-    @Rollback(false)
+    @Rollback
     public void testSaveAndDelete() {
         Vessel vessel = vessels.create();
         vessel.setName("SCOBY DO");
@@ -52,7 +52,8 @@ public class VesselsTest extends FunctionalTest {
         try {
             vessels.load(id);
             fail("expected an exception");
-        } catch (EntityNotFoundException e) {
+        } catch (JpaObjectRetrievalFailureException e) {
+            e.printStackTrace();
         }
     }
 }

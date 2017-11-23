@@ -1,11 +1,14 @@
 package ruffkat.hombucha.time;
 
 import org.apache.lucene.document.DateTools;
-import org.hibernate.search.SearchException;
+import org.hibernate.search.exception.SearchException;
 import org.hibernate.search.bridge.TwoWayStringBridge;
 
-import javax.time.Instant;
+import java.time.Instant;
 import java.text.ParseException;
+
+import static org.apache.lucene.document.DateTools.Resolution.MILLISECOND;
+import static org.apache.lucene.document.DateTools.timeToString;
 
 public class InstantBridge
         implements TwoWayStringBridge {
@@ -25,8 +28,7 @@ public class InstantBridge
     public String objectToString(Object object) {
         Instant instant = (Instant) object;
         return object != null ?
-                DateTools.timeToString(instant.toEpochMillisLong(),
-                        DateTools.Resolution.MILLISECOND) :
+                timeToString(instant.toEpochMilli(), MILLISECOND) :
                 null;
     }
 }

@@ -14,22 +14,23 @@ import ruffkat.hombucha.money.Money;
 
 import javax.measure.quantity.Mass;
 import javax.measure.quantity.Volume;
-import javax.time.Duration;
-import javax.time.Instant;
-import javax.time.TimeSource;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.Clock;
 import java.util.Date;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
+import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD;
 import static ruffkat.hombucha.measure.MeasureAssert.assertMeasureEquals;
 
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@DirtiesContext(classMode = AFTER_EACH_TEST_METHOD)
 public class AcceptanceTest extends FunctionalTest {
 
     @Autowired
-    private TimeSource timeSource;
+    private Clock clock;
 
     @Autowired
     private SourceMaker sourceMaker;
@@ -139,10 +140,10 @@ public class AcceptanceTest extends FunctionalTest {
         Ferment batch = Searches.first(ferments, "MaltBrewCha Run 1");
 
         // TODO: Begin fermentation
-        Instant now = timeSource.instant();
-        Instant later = now.plus(Duration.standardDays(10));
-        batch.setStart(new Date(now.toEpochMillisLong()));
-        batch.setStop(new Date(later.toEpochMillisLong()));
+        Instant now = clock.instant();
+        Instant later = now.plus(Duration.ofDays(10));
+        batch.setStart(new Date(now.toEpochMilli()));
+        batch.setStop(new Date(later.toEpochMilli()));
         ferments.save(batch);
     }
 

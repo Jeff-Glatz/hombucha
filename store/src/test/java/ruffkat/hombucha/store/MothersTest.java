@@ -2,11 +2,11 @@ package ruffkat.hombucha.store;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 import org.springframework.test.annotation.Rollback;
-import ruffkat.hombucha.time.Dates;
 import ruffkat.hombucha.model.Mother;
+import ruffkat.hombucha.time.Dates;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.Calendar;
 
 import static org.junit.Assert.assertEquals;
@@ -33,7 +33,7 @@ public class MothersTest extends FunctionalTest {
     }
 
     @Test
-    @Rollback(false)
+    @Rollback
     public void testSaveAndDelete() {
         Mother mother = mothers.create();
         mother.setName("SCOBY DO");
@@ -49,7 +49,7 @@ public class MothersTest extends FunctionalTest {
         try {
             mothers.load(id);
             fail("expected an exception");
-        } catch (EntityNotFoundException e) {
+        } catch (JpaObjectRetrievalFailureException e) {
         }
     }
 }

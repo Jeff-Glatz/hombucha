@@ -12,8 +12,22 @@ import ruffkat.hombucha.util.PropertyUtils;
 import javax.measure.Measure;
 import javax.measure.quantity.Volume;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
+@NamedQueries({
+        @NamedQuery(
+                name = "Vessels.available",
+                query = "from Vessel vessel " +
+                        "where vessel.ferment is null " +
+                        "order by vessel.volume"),
+        @NamedQuery(
+                name = "Vessels.pick",
+                query = "from Vessel vessel " +
+                        "where vessel.ferment is null " +
+                        "and vessel.volume >= :minimum " +
+                        "order by vessel.volume")})
 @Entity
 @Indexed
 public class Vessel

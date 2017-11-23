@@ -1,5 +1,6 @@
 package ruffkat.hombucha.store;
 
+import org.springframework.transaction.annotation.Transactional;
 import ruffkat.hombucha.model.Persistent;
 import ruffkat.hombucha.util.ListenerList;
 
@@ -12,6 +13,7 @@ import javax.persistence.criteria.Root;
 import java.util.HashSet;
 import java.util.Set;
 
+@Transactional
 public abstract class AbstractRepository<P extends Persistent>
         implements Repository<P> {
     protected final ListenerList<RepositoryListener> listeners =

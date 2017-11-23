@@ -1,6 +1,7 @@
 package ruffkat.hombucha.money;
 
 import org.hibernate.HibernateException;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.usertype.ParameterizedType;
 import org.hibernate.usertype.UserType;
 
@@ -39,7 +40,7 @@ public class MoneyType implements
         return new int[]{Types.VARCHAR};
     }
 
-    public void nullSafeSet(PreparedStatement st, Object value, int index)
+    public void nullSafeSet(PreparedStatement st, Object value, int index, SharedSessionContractImplementor implementor)
             throws HibernateException, SQLException {
         if (value == null) {
             st.setNull(index, Types.VARCHAR);
@@ -49,9 +50,8 @@ public class MoneyType implements
         }
     }
 
-    public Object nullSafeGet(ResultSet resultSet, String[] names, Object owner)
-            throws HibernateException,
-            SQLException {
+    public Object nullSafeGet(ResultSet resultSet, String[] names, SharedSessionContractImplementor implementor, Object owner)
+            throws HibernateException, SQLException {
         if (!resultSet.wasNull()) {
             String money = resultSet.getString(names[0]);
             if (money != null) {

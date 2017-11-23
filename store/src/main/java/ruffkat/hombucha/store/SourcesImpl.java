@@ -1,7 +1,9 @@
 package ruffkat.hombucha.store;
 
+import org.springframework.stereotype.Repository;
 import ruffkat.hombucha.model.Source;
 
+@Repository
 public class SourcesImpl
         extends AbstractRepository<Source>
         implements Sources {

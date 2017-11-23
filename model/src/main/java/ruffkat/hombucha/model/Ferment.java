@@ -24,11 +24,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
 
+@NamedQuery(
+        name = "Ferments.brewing",
+        query = "from Ferment ferment " +
+                "where current_timestamp() " +
+                "between ferment.start and ferment.stop")
 @Entity
 @Indexed
 public class Ferment

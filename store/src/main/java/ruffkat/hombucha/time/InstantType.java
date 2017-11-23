@@ -1,18 +1,19 @@
 package ruffkat.hombucha.time;
 
 import org.hibernate.HibernateException;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.usertype.UserType;
 
-import javax.time.Instant;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.sql.Types;
+import java.time.Instant;
 
 /**
- * Persists instances of {@code JSR-310} {@link javax.time.Instant}
+ * Persists instances of {@code JSR-310} {@link java.time.Instant}
  */
 public class InstantType
         implements UserType {
@@ -35,24 +36,25 @@ public class InstantType
         return new int[]{Types.TIMESTAMP};
     }
 
-    public void nullSafeSet(PreparedStatement st, Object value, int index)
+    @Override
+    public void nullSafeSet(PreparedStatement statement, Object value, int index, SharedSessionContractImplementor implementor)
             throws HibernateException, SQLException {
         if (value == null) {
-            st.setNull(index, Types.TIMESTAMP);
+            statement.setNull(index, Types.TIMESTAMP);
         } else {
             Instant instant = (Instant) value;
-            Timestamp timestamp = new Timestamp(instant.toEpochMillisLong());
-            st.setObject(index, timestamp, Types.TIMESTAMP);
+            Timestamp timestamp = new Timestamp(instant.toEpochMilli());
+            statement.setObject(index, timestamp, Types.TIMESTAMP);
         }
     }
 
-    public Object nullSafeGet(ResultSet resultSet, String[] names, Object owner)
-            throws HibernateException,
-            SQLException {
+    @Override
+    public Object nullSafeGet(ResultSet resultSet, String[] names, SharedSessionContractImplementor implementor, Object owner)
+            throws HibernateException, SQLException {
         if (!resultSet.wasNull()) {
             Timestamp timestamp = resultSet.getTimestamp(names[0]);
             if (timestamp != null) {
-                return Instant.millis(timestamp.getTime());
+                return Instant.ofEpochMilli(timestamp.getTime());
             }
         }
         return null;

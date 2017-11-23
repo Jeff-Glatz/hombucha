@@ -1,27 +1,29 @@
 package ruffkat.hombucha.store;
 
+import org.springframework.stereotype.Repository;
 import ruffkat.hombucha.model.Ferment;
 import ruffkat.hombucha.model.Sample;
 
 import javax.measure.Measure;
 import javax.measure.quantity.Quantity;
-import javax.time.TimeSource;
+import java.time.Clock;
 
+@Repository
 public class SamplesImpl
         extends AbstractRepository<Sample>
         implements Samples {
-    private final TimeSource timeSource;
+    private final Clock clock;
 
-    public SamplesImpl(TimeSource timeSource) {
+    public SamplesImpl(Clock clock) {
         super(Sample.class);
-        this.timeSource = timeSource;
+        this.clock = clock;
     }
 
     @Override
     public <Q extends Quantity> Sample<Q> create(Ferment ferment, Measure<Q> measurement) {
         Sample<Q> sample = new Sample<Q>();
         sample.setFerment(ferment);
-        sample.setTaken(timeSource.instant());
+        sample.setTaken(clock.instant());
         sample.setMeasurement(measurement);
         return sample;
     }

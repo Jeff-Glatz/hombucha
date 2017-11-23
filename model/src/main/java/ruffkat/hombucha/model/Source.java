@@ -2,9 +2,7 @@ package ruffkat.hombucha.model;
 
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.Store;
 
 import javax.persistence.Basic;
 import javax.persistence.DiscriminatorColumn;
@@ -14,7 +12,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.NamedQuery;
 
+@NamedQuery(
+        name = "Sources.all",
+        query = "from Source source")
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "kind")

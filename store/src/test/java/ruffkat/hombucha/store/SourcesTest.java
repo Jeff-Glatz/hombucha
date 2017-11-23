@@ -2,13 +2,13 @@ package ruffkat.hombucha.store;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 import org.springframework.test.annotation.Rollback;
 import ruffkat.hombucha.model.Friend;
 import ruffkat.hombucha.model.Local;
 import ruffkat.hombucha.model.Online;
 import ruffkat.hombucha.model.Source;
 
-import javax.persistence.EntityNotFoundException;
 import java.net.URL;
 
 import static junit.framework.Assert.assertEquals;
@@ -42,7 +42,7 @@ public class SourcesTest extends FunctionalTest {
     }
 
     @Test
-    @Rollback(false)
+    @Rollback
     public void testSaveAndDelete()
             throws Exception {
         Online online = sources.create(Online.class);
@@ -59,7 +59,7 @@ public class SourcesTest extends FunctionalTest {
         try {
             sources.load(id);
             fail("expected an exception");
-        } catch (EntityNotFoundException e) {
+        } catch (JpaObjectRetrievalFailureException e) {
         }
     }
 
