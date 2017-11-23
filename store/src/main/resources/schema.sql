@@ -1,3 +1,5 @@
+-- when spring.datasource.initialize: true
+
 CREATE SEQUENCE SOURCE_ID_SEQ;
 CREATE TABLE SOURCE
 (

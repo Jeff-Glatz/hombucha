@@ -27,7 +27,8 @@ import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER
 import static ruffkat.hombucha.measure.MeasureAssert.assertMeasureEquals;
 
 @DirtiesContext(classMode = AFTER_EACH_TEST_METHOD)
-public class AcceptanceTest extends FunctionalTest {
+public class AcceptanceIT
+        extends IntegrationTest {
 
     @Autowired
     private Clock clock;

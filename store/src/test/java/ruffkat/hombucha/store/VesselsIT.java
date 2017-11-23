@@ -14,7 +14,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
-public class VesselsTest extends FunctionalTest {
+public class VesselsIT
+        extends IntegrationTest {
     @Autowired
     private Vessels vessels;
 

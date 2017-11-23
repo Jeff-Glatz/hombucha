@@ -17,7 +17,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-public class SourcesTest extends FunctionalTest {
+public class SourcesIT
+        extends IntegrationTest {
 
     @Autowired
     private Sources sources;

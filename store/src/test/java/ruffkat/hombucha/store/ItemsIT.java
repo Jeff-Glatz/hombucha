@@ -19,7 +19,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-public class ItemsTest extends FunctionalTest {
+public class ItemsIT
+        extends IntegrationTest {
 
     @Autowired
     private Items items;

@@ -26,7 +26,7 @@ import java.time.Clock;
         DependencyInjectionTestExecutionListener.class,
         DirtiesContextTestExecutionListener.class,
         TransactionalTestExecutionListener.class})
-public abstract class FunctionalTest {
+public abstract class IntegrationTest {
 
     @Autowired
     protected Clock clock;

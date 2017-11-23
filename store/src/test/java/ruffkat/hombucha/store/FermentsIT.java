@@ -21,7 +21,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-public class FermentsTest extends FunctionalTest {
+public class FermentsIT
+        extends IntegrationTest {
     @Autowired
     private Ferments ferments;
 
